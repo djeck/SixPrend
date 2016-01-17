@@ -35,9 +35,6 @@ void init()
 
 void quit()
 {
-  printf("quit: quit\n");
-
-  freeLoginRender();
 
   TTF_Quit();
   SDL_DestroyRenderer(renderer);

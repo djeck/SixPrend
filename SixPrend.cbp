@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-lSDL2 -lSDL2_ttf" />
+		</Linker>
 		<Unit filename="Game/inc.h" />
 		<Unit filename="Game/init.c">
 			<Option compilerVar="CC" />
