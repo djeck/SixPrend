@@ -6,7 +6,7 @@ static char text[200];
 void eventLogin()
 {
 	SDL_Event event;
-
+    int havetoup=0;
 	while (SDL_PollEvent(&event))
 	{
 		switch(event.type)
@@ -16,20 +16,24 @@ void eventLogin()
 				terminer = 1;
 			break;
 			case SDL_KEYUP:
-				if ( event.key.keysym.sym == SDLK_DELETE )
+				if ( event.key.keysym.sym == SDLK_DELETE || event.key.keysym.sym == SDLK_BACKSPACE )
 				{
 					text[strlen(text)-1]='\0';
 					printf("eventLogin: character erased\n");
+					havetoup=1;
 				}
 				break;
 			case SDL_TEXTINPUT:
 				if(strlen(text)<199)
 					strcat(text, event.text.text);
 				printf("eventLogin: buffer = %s\n",text);
+				havetoup=1;
                   break;
 
 		}
 	}
+	if(havetoup==1)
+        updateText(text);
 }
 
 extern SDL_Renderer* renderer;
@@ -37,12 +41,13 @@ static int renderinitialised = 0;
 
 static SDL_Texture* tBackground;
 static SDL_Surface* sBackground;
-static SDL_Rect dest= { 0,0, 800, 600};
+static SDL_Rect rBackground= { 0,0, 800, 600};
 
-static SDL_Texture* text_texture;
-static SDL_Surface *text_surface;
+static SDL_Texture* ttext;
+static SDL_Surface *stext;
 static SDL_Color color = {0,0,0};
 static TTF_Font* font;
+static SDL_Rect rtext= { 100,200, 300, 50};
 
 void initLoginRender()
 {
@@ -74,31 +79,41 @@ void initLoginRender()
 		return;
 	}
 
-	text_surface = TTF_RenderText_Solid(font,"Welcome !",color);
-	if (! text_surface )
+	updateText("enter your username");
+
+	renderinitialised=1;
+}
+
+void updateText(char str[])
+{
+
+
+    stext = TTF_RenderText_Solid(font,str,color);
+	if (! stext )
 	{
 		printf("initLoginRender: impossible de cree la surface du text\n");
 		terminer=1;
 		return;
 	}
 
-	text_texture = SDL_CreateTextureFromSurface(renderer,text_surface);
-	if (! text_texture )
+	ttext = SDL_CreateTextureFromSurface(renderer,stext);
+	if (! ttext )
 	{
 		printf("initLoginRender: impossible de cree la texture du text\n");
 		terminer=1;
 		return;
 	}
 
-	renderinitialised=1;
+	rtext.h = stext->h/5;
+    rtext.w= stext->w/5;
 }
 
 void renderLogin()
 {
 	if(renderinitialised==0)
 		return;
-	SDL_RenderCopy(renderer,tBackground,NULL,&dest); // Copie du sprite grâce au SDL_Renderer
-	SDL_RenderCopy(renderer,text_texture,NULL,&dest);
+	SDL_RenderCopy(renderer,tBackground,NULL,&rBackground); // Copie du sprite grâce au SDL_Renderer
+	SDL_RenderCopy(renderer,ttext,NULL,&rtext);
 }
 
 void freeLoginRender()
@@ -109,10 +124,10 @@ void freeLoginRender()
 		return;
 	}
 
-	SDL_FreeSurface(text_surface);
-	renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
+    renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
+    SDL_DestroyTexture(ttext);
+	SDL_FreeSurface(stext);
 	TTF_CloseFont(font);
-	printf("test\n");
 	SDL_DestroyTexture(tBackground); // Libération de la mémoire associée à la texture
 	SDL_FreeSurface(sBackground);
 	printf("freeLoginRender: liberation des ressources\n");

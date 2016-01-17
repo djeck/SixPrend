@@ -1,3 +1,7 @@
+/*
+ *  Entrée du programme, comprend uniquement la fonction main
+ *
+ */
 #include "Game/inc.h"
 #include "Game/init.h"
 #include "Game/login.h"
@@ -5,18 +9,18 @@
 int terminer = 0;
 extern SDL_Renderer *renderer;
 
-int main(int argc, char ** argv) 
+int main(int argc, char ** argv)
 {
 	SDL_Event event;
-  
+
 	init();
-	
+
 	printf("main: initialisation des ressources graphiques\n");
 	initLoginRender();
 
 
 	printf("main: début de la boucle de rendu\n");
-	while (terminer==0) 
+	while (terminer==0)
 	{
 		eventLogin();
 		SDL_RenderClear(renderer);
@@ -24,7 +28,7 @@ int main(int argc, char ** argv)
 		SDL_RenderPresent(renderer);
 		SDL_Delay(1);
 	}
-	
+
 	//free ressource
 	printf("main: liberation des ressources\n");
 	quit();

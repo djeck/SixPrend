@@ -10,6 +10,7 @@
 
 void eventLogin();
 void initLoginRender();
+void updateText(char str[]);
 void renderLogin();
 void freeLoginRender();
 

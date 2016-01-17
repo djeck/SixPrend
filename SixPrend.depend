@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1453048335 source:/home/djeck/projects/SixPrend/Game/init.c
+1453053279 source:/home/djeck/projects/SixPrend/Game/init.c
 	"init.h"
 
 1453051932 /home/djeck/projects/SixPrend/Game/init.h
@@ -7,7 +7,7 @@
 	<SDL2/SDL_ttf.h>
 	"login.h"
 
-1453052474 /home/djeck/projects/SixPrend/Game/login.h
+1453052955 /home/djeck/projects/SixPrend/Game/login.h
 	<SDL2/SDL_ttf.h>
 	"inc.h"
 
@@ -19,7 +19,7 @@
 	<SDL2/SDL.h>
 	<SDL/SDL.h>
 
-1453049528 source:/home/djeck/projects/SixPrend/Game/login.c
+1453053105 source:/home/djeck/projects/SixPrend/Game/login.c
 	"login.h"
 
 1453048172 source:/home/djeck/projects/SixPrend/main.c
