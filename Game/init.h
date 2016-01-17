@@ -1,5 +1,5 @@
 /*
- * Comprend L'initialisation de la SDL
+ * Comprend L'initialisation de la SDL, et la liberation des ressources
  */
 
 #ifndef INIT_H
@@ -10,8 +10,14 @@
 
 #include "login.h"
 
+/*
+ * initialisation des ressources 'globales'
+ */
 void init();
 
+/*
+ * libere les ressources 'globales'
+ */
 void quit();
 
 #endif
