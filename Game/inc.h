@@ -8,8 +8,7 @@
 #include <SDL2/SDL.h>
 
 
-#include <SDL_image.h>
-#include <SDL_mixer.h>
+#include <SDL/SDL.h>
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 480

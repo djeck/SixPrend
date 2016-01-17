@@ -5,7 +5,7 @@
 #ifndef INIT_H
 #define INIT_H
 
-#include <SDL.h>
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "login.h"

@@ -6,7 +6,7 @@ static char text[200];
 void eventLogin()
 {
 	SDL_Event event;
-	
+
 	while (SDL_PollEvent(&event))
 	{
 		switch(event.type)
@@ -46,13 +46,13 @@ static TTF_Font* font;
 
 void initLoginRender()
 {
-  
+
 	/*****************  Image de fond   ***********************/
-	 
+
 	sBackground = SDL_LoadBMP(BACKGROUNDPATH);
 	if ( !sBackground )
 	{
-		printf("initLoginRender: impossible de creer le sprite de l'image de fond\n");
+		printf("initLoginRender: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
 		terminer=1;
 		return;
 	}
@@ -63,9 +63,9 @@ void initLoginRender()
 		terminer=1;
 		return;
 	}
-	
+
 	/*****************  TEXT   ***********************/
-	
+
 	font = TTF_OpenFont(FONTPATH, FONTSIZE);
 	if (font == NULL)
 	{
@@ -81,7 +81,7 @@ void initLoginRender()
 		terminer=1;
 		return;
 	}
-	
+
 	text_texture = SDL_CreateTextureFromSurface(renderer,text_surface);
 	if (! text_texture )
 	{
@@ -89,7 +89,7 @@ void initLoginRender()
 		terminer=1;
 		return;
 	}
-	
+
 	renderinitialised=1;
 }
 
@@ -108,7 +108,7 @@ void freeLoginRender()
 	  printf("freeLoginRender: ne peut pas liberer les ressources car elles n'ont pas etaient inititialisé\n");
 		return;
 	}
-	
+
 	SDL_FreeSurface(text_surface);
 	renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
 	TTF_CloseFont(font);
