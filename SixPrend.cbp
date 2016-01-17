@@ -40,7 +40,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Game/login.h" />
-		<Unit filename="README.md" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
