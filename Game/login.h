@@ -2,7 +2,7 @@
 #define LOGIN_H
 
 #define BACKGROUNDPATH "../media/background.bmp"
-#define FONTPATH "../media/DK Prince Frog.otf"
+#define FONTPATH "../media/DKPrinceFrog.otf"
 #define FONTSIZE 256
 
 #include <SDL2/SDL_ttf.h>

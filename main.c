@@ -11,10 +11,10 @@ SDL_Renderer * renderer;
 
 int main(int argc, char ** argv) 
 {
-	SDL_Event event;
+	//SDL_Event event;
   
 
-	unsigned int frameLimit = SDL_GetTicks() + 16;
+	//unsigned int frameLimit = SDL_GetTicks() + 16;
 	SDL_Init(SDL_INIT_EVERYTHING);
   
 	init();

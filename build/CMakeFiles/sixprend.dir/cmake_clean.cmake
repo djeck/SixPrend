@@ -1,4 +1,4 @@
-file(REMOVE_RECURSE
+FILE(REMOVE_RECURSE
   "CMakeFiles/sixprend.dir/main.c.o"
   "CMakeFiles/sixprend.dir/Game/init.c.o"
   "CMakeFiles/sixprend.dir/Game/login.c.o"
@@ -7,6 +7,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang C)
-  include(CMakeFiles/sixprend.dir/cmake_clean_${lang}.cmake OPTIONAL)
-endforeach()
+FOREACH(lang C)
+  INCLUDE(CMakeFiles/sixprend.dir/cmake_clean_${lang}.cmake OPTIONAL)
+ENDFOREACH(lang)

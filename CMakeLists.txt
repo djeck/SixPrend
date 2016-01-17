@@ -13,4 +13,4 @@ include_directories(${SDL2_INCLUDE_DIR})
 
 add_executable(sixprend main.c Game/init.c Game/login.c)
 install(TARGETS sixprend DESTINATION bin)
-target_link_libraries(sixprend ${SDL2_LIBRARIES} -lSDL2_ttf)
+target_link_libraries(sixprend -lSDL2 -lSDL2_ttf)
