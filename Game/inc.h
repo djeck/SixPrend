@@ -1,3 +1,6 @@
+/*
+ * centralise les macros et inclusions utilisees dans plusieurs parties du projet
+ */
 #ifndef INC_H
 #define INC_H
 
@@ -10,7 +13,7 @@
 
 #include <SDL/SDL.h>
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 800 // largeur par default de la fenetre
+#define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
 
 #endif
