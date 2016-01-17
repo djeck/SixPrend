@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="SixPrend" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/SixPrend" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/SixPrend" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Game/inc.h" />
+		<Unit filename="Game/init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/init.h" />
+		<Unit filename="Game/login.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/login.h" />
+		<Unit filename="README.md" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="media/1.gif" />
+		<Unit filename="media/10.gif" />
+		<Unit filename="media/100.gif" />
+		<Unit filename="media/101.gif" />
+		<Unit filename="media/102.gif" />
+		<Unit filename="media/103.gif" />
+		<Unit filename="media/104.gif" />
+		<Unit filename="media/11.gif" />
+		<Unit filename="media/12.gif" />
+		<Unit filename="media/13.gif" />
+		<Unit filename="media/14.gif" />
+		<Unit filename="media/15.gif" />
+		<Unit filename="media/16.gif" />
+		<Unit filename="media/17.gif" />
+		<Unit filename="media/18.gif" />
+		<Unit filename="media/19.gif" />
+		<Unit filename="media/2.gif" />
+		<Unit filename="media/20.gif" />
+		<Unit filename="media/21.gif" />
+		<Unit filename="media/22.gif" />
+		<Unit filename="media/23.gif" />
+		<Unit filename="media/24.gif" />
+		<Unit filename="media/25.gif" />
+		<Unit filename="media/26.gif" />
+		<Unit filename="media/27.gif" />
+		<Unit filename="media/28.gif" />
+		<Unit filename="media/29.gif" />
+		<Unit filename="media/3.gif" />
+		<Unit filename="media/30.gif" />
+		<Unit filename="media/31.gif" />
+		<Unit filename="media/32.gif" />
+		<Unit filename="media/33.gif" />
+		<Unit filename="media/34.gif" />
+		<Unit filename="media/35.gif" />
+		<Unit filename="media/36.gif" />
+		<Unit filename="media/37.gif" />
+		<Unit filename="media/38.gif" />
+		<Unit filename="media/39.gif" />
+		<Unit filename="media/4.gif" />
+		<Unit filename="media/40.gif" />
+		<Unit filename="media/41.gif" />
+		<Unit filename="media/42.gif" />
+		<Unit filename="media/43.gif" />
+		<Unit filename="media/44.gif" />
+		<Unit filename="media/45.gif" />
+		<Unit filename="media/46.gif" />
+		<Unit filename="media/47.gif" />
+		<Unit filename="media/48.gif" />
+		<Unit filename="media/49.gif" />
+		<Unit filename="media/5.gif" />
+		<Unit filename="media/50.gif" />
+		<Unit filename="media/51.gif" />
+		<Unit filename="media/52.gif" />
+		<Unit filename="media/53.gif" />
+		<Unit filename="media/54.gif" />
+		<Unit filename="media/55.gif" />
+		<Unit filename="media/56.gif" />
+		<Unit filename="media/57.gif" />
+		<Unit filename="media/58.gif" />
+		<Unit filename="media/59.gif" />
+		<Unit filename="media/6.gif" />
+		<Unit filename="media/60.gif" />
+		<Unit filename="media/61.gif" />
+		<Unit filename="media/62.gif" />
+		<Unit filename="media/63.gif" />
+		<Unit filename="media/64.gif" />
+		<Unit filename="media/65.gif" />
+		<Unit filename="media/66.gif" />
+		<Unit filename="media/67.gif" />
+		<Unit filename="media/68.gif" />
+		<Unit filename="media/69.gif" />
+		<Unit filename="media/7.gif" />
+		<Unit filename="media/70.gif" />
+		<Unit filename="media/71.gif" />
+		<Unit filename="media/72.gif" />
+		<Unit filename="media/73.gif" />
+		<Unit filename="media/74.gif" />
+		<Unit filename="media/75.gif" />
+		<Unit filename="media/76.gif" />
+		<Unit filename="media/77.gif" />
+		<Unit filename="media/78.gif" />
+		<Unit filename="media/79.gif" />
+		<Unit filename="media/8.gif" />
+		<Unit filename="media/80.gif" />
+		<Unit filename="media/81.gif" />
+		<Unit filename="media/82.gif" />
+		<Unit filename="media/83.gif" />
+		<Unit filename="media/84.gif" />
+		<Unit filename="media/85.gif" />
+		<Unit filename="media/86.gif" />
+		<Unit filename="media/87.gif" />
+		<Unit filename="media/88.gif" />
+		<Unit filename="media/89.gif" />
+		<Unit filename="media/9.gif" />
+		<Unit filename="media/90.gif" />
+		<Unit filename="media/91.gif" />
+		<Unit filename="media/92.gif" />
+		<Unit filename="media/93.gif" />
+		<Unit filename="media/94.gif" />
+		<Unit filename="media/95.gif" />
+		<Unit filename="media/96.gif" />
+		<Unit filename="media/97.gif" />
+		<Unit filename="media/98.gif" />
+		<Unit filename="media/99.gif" />
+		<Unit filename="media/arial.ttf" />
+		<Unit filename="media/background.bmp" />
+		<Unit filename="media/sixty.fon" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

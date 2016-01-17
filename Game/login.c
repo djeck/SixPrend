@@ -39,11 +39,16 @@ static SDL_Texture* tBackground;
 static SDL_Surface* sBackground;
 static SDL_Rect dest= { 0,0, 800, 600};
 
-static SDL_Color color = {127,255,0,0};
+static SDL_Texture* text_texture;
+static SDL_Surface *text_surface;
+static SDL_Color color = {0,0,0};
 static TTF_Font* font;
 
 void initLoginRender()
 {
+  
+	/*****************  Image de fond   ***********************/
+	 
 	sBackground = SDL_LoadBMP(BACKGROUNDPATH);
 	if ( !sBackground )
 	{
@@ -59,6 +64,8 @@ void initLoginRender()
 		return;
 	}
 	
+	/*****************  TEXT   ***********************/
+	
 	font = TTF_OpenFont(FONTPATH, FONTSIZE);
 	if (font == NULL)
 	{
@@ -67,6 +74,22 @@ void initLoginRender()
 		return;
 	}
 
+	text_surface = TTF_RenderText_Solid(font,"Welcome !",color);
+	if (! text_surface )
+	{
+		printf("initLoginRender: impossible de cree la surface du text\n");
+		terminer=1;
+		return;
+	}
+	
+	text_texture = SDL_CreateTextureFromSurface(renderer,text_surface);
+	if (! text_texture )
+	{
+		printf("initLoginRender: impossible de cree la texture du text\n");
+		terminer=1;
+		return;
+	}
+	
 	renderinitialised=1;
 }
 
@@ -75,16 +98,22 @@ void renderLogin()
 	if(renderinitialised==0)
 		return;
 	SDL_RenderCopy(renderer,tBackground,NULL,&dest); // Copie du sprite grâce au SDL_Renderer
-	TTF_RenderText_Solid(font,text,color);
+	SDL_RenderCopy(renderer,text_texture,NULL,&dest);
 }
 
 void freeLoginRender()
 {
 	if(renderinitialised==0)
+	{
+	  printf("freeLoginRender: ne peut pas liberer les ressources car elles n'ont pas etaient inititialisé\n");
 		return;
+	}
 	
-	printf("freeLoginRender: liberation des ressources\n");
+	SDL_FreeSurface(text_surface);
+	renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
 	TTF_CloseFont(font);
+	printf("test\n");
 	SDL_DestroyTexture(tBackground); // Libération de la mémoire associée à la texture
 	SDL_FreeSurface(sBackground);
+	printf("freeLoginRender: liberation des ressources\n");
 }
