@@ -43,6 +43,6 @@ void freeLoginRender();
  * return 1 si l'utilisateur est bien loguer
  * return 2 si un nouveaux compte est créé
  */
-int register(char username[],char passwd[]);
+int identifier(char username[],char password[]);
 
 #endif
