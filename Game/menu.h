@@ -23,10 +23,6 @@ void eventMenu();
  */
 void initMenuRender();
 /*
- * Met à jour la texture du texte avec la chaine de charactere str
- */
-void updateText(char str[]);
-/*
  * dessine ressources graphiques spécifique au rendu du menu
  * necessite la variable renderer
  */

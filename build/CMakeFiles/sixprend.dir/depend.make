@@ -4,18 +4,27 @@
 CMakeFiles/sixprend.dir/Game/inc.c.o: ../Game/inc.c
 CMakeFiles/sixprend.dir/Game/inc.c.o: ../Game/inc.h
 CMakeFiles/sixprend.dir/Game/inc.c.o: ../Game/login.h
+CMakeFiles/sixprend.dir/Game/inc.c.o: ../Game/menu.h
 
 CMakeFiles/sixprend.dir/Game/init.c.o: ../Game/inc.h
 CMakeFiles/sixprend.dir/Game/init.c.o: ../Game/init.c
 CMakeFiles/sixprend.dir/Game/init.c.o: ../Game/init.h
 CMakeFiles/sixprend.dir/Game/init.c.o: ../Game/login.h
+CMakeFiles/sixprend.dir/Game/init.c.o: ../Game/menu.h
 
 CMakeFiles/sixprend.dir/Game/login.c.o: ../Game/inc.h
 CMakeFiles/sixprend.dir/Game/login.c.o: ../Game/login.c
 CMakeFiles/sixprend.dir/Game/login.c.o: ../Game/login.h
+CMakeFiles/sixprend.dir/Game/login.c.o: ../Game/menu.h
+
+CMakeFiles/sixprend.dir/Game/menu.c.o: ../Game/inc.h
+CMakeFiles/sixprend.dir/Game/menu.c.o: ../Game/login.h
+CMakeFiles/sixprend.dir/Game/menu.c.o: ../Game/menu.c
+CMakeFiles/sixprend.dir/Game/menu.c.o: ../Game/menu.h
 
 CMakeFiles/sixprend.dir/main.c.o: ../Game/inc.h
 CMakeFiles/sixprend.dir/main.c.o: ../Game/init.h
 CMakeFiles/sixprend.dir/main.c.o: ../Game/login.h
+CMakeFiles/sixprend.dir/main.c.o: ../Game/menu.h
 CMakeFiles/sixprend.dir/main.c.o: ../main.c
 

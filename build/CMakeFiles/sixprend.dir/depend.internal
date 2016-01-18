@@ -5,17 +5,26 @@ CMakeFiles/sixprend.dir/Game/inc.c.o
  /home/djeck/projects/SixPrend/Game/inc.c
  /home/djeck/projects/SixPrend/Game/inc.h
  /home/djeck/projects/SixPrend/Game/login.h
+ /home/djeck/projects/SixPrend/Game/menu.h
 CMakeFiles/sixprend.dir/Game/init.c.o
  /home/djeck/projects/SixPrend/Game/inc.h
  /home/djeck/projects/SixPrend/Game/init.c
  /home/djeck/projects/SixPrend/Game/init.h
  /home/djeck/projects/SixPrend/Game/login.h
+ /home/djeck/projects/SixPrend/Game/menu.h
 CMakeFiles/sixprend.dir/Game/login.c.o
  /home/djeck/projects/SixPrend/Game/inc.h
  /home/djeck/projects/SixPrend/Game/login.c
  /home/djeck/projects/SixPrend/Game/login.h
+ /home/djeck/projects/SixPrend/Game/menu.h
+CMakeFiles/sixprend.dir/Game/menu.c.o
+ /home/djeck/projects/SixPrend/Game/inc.h
+ /home/djeck/projects/SixPrend/Game/login.h
+ /home/djeck/projects/SixPrend/Game/menu.c
+ /home/djeck/projects/SixPrend/Game/menu.h
 CMakeFiles/sixprend.dir/main.c.o
  /home/djeck/projects/SixPrend/Game/inc.h
  /home/djeck/projects/SixPrend/Game/init.h
  /home/djeck/projects/SixPrend/Game/login.h
+ /home/djeck/projects/SixPrend/Game/menu.h
  /home/djeck/projects/SixPrend/main.c

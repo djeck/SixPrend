@@ -16,9 +16,18 @@
 #define SIZESTR 21 // taille par default du nom
 
 #include "login.h"
+#include "menu.h"
 
+TTF_Font* font; // initialisé par init()
 
 typedef enum{none,login,menu,mode,stat,game,end} MainStep; // étapes principales du jeu
+
+typedef struct
+{
+  SDL_Texture* texture;
+  SDL_Rect rect;
+} Image;
+
 
 /*
  * stoque le nom de l'utilisateur bien identifié
@@ -35,5 +44,7 @@ MainStep globalStep;
  * initialise et libere les ressources
  */
 void changeStep(MainStep nextStep);
+Image getText(char str[],int x,int y,int size);
+Image getPicture(char* path, int x, int y,int size);
 
 #endif

@@ -10,7 +10,7 @@ extern SDL_Renderer *renderer;
 
 int main(int argc, char ** argv)
 {
-
+	printf("main: lancement du jeu\n");
 
 	init(); // initialisation des ressources communes à toute partie du jeu
 
@@ -27,7 +27,7 @@ int main(int argc, char ** argv)
 		    renderLogin();// on dessine le login
 		  break;
 		  case menu:
-		    //renderMenu();
+		    renderMenu();
 		  break;
 		  case mode:
 		    //renderMode();

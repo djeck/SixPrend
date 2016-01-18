@@ -21,12 +21,22 @@ SDL/SDL.h
 -
 login.h
 /home/djeck/projects/SixPrend/Game/login.h
+menu.h
+/home/djeck/projects/SixPrend/Game/menu.h
 
 /home/djeck/projects/SixPrend/Game/login.c
 login.h
 /home/djeck/projects/SixPrend/Game/login.h
 
 /home/djeck/projects/SixPrend/Game/login.h
+SDL2/SDL_ttf.h
+-
+string.h
+-
+inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
+
+/home/djeck/projects/SixPrend/Game/menu.h
 SDL2/SDL_ttf.h
 -
 string.h

@@ -3,6 +3,8 @@
 static char username[SIZESTR];
 static char password[SIZESTR];
 
+static Image imgtext;
+
 void eventLogin()
 {
 	SDL_Event event;
@@ -28,7 +30,7 @@ void eventLogin()
 					if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur
 					{
 					  strcpy(username,text); // on garde le nom d'utilisateur de côté
-					  updateText("Enter your password");
+					  imgtext = getText("Enter your password",100,200,5);
 					  text[0]='\0';
 					  step = rPass; // on lui demande le mot de passe
 					}
@@ -40,7 +42,7 @@ void eventLogin()
 					   {
 					     case 0: // mot de passe faux
 					       printf("eventLogin: bad password\n");
-					       updateText("Try again...");
+					       imgtext = getText("Try again...",100,200,5);
 					       text[0]='\0';//on efface tout
 					       step=rLog; // il doit tout ressaisir
 					       break;
@@ -54,7 +56,7 @@ void eventLogin()
 					       break;
 					     default:
 					      printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
-					      updateText("Error  try again...");
+					      imgtext = getText("Error  try again...",100,200,5);
 					      text[0]='\0';//on efface tout
 					      step=rLog; // il doit tout ressaisir
 					   }
@@ -71,96 +73,34 @@ void eventLogin()
 		}
 	}
 	if(havetoup==1)
-        updateText(text);
+        imgtext = getText(text,100,200,5);;
 }
 
 extern SDL_Renderer* renderer;
 static int renderinitialised = 0;
 
-static SDL_Texture* tBackground;
-static SDL_Rect rBackground= { 0,0, 800, 600};
+static Image Background;
 
-static SDL_Texture* ttext;
-static TTF_Font* font;
-static SDL_Rect rtext= { 100,200, 300, 50};
 
 void initLoginRender()
 {
+  printf("initLoginRender: debut\n");
 	
-	/*****************  Image de fond   ***********************/
-
-	SDL_Surface* sBackground = SDL_LoadBMP(BACKGROUNDPATH);
-	if ( !sBackground )
-	{
-		printf("initLoginRender: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
-		changeStep(end);
-		return;
-	}
-	tBackground = SDL_CreateTextureFromSurface(renderer,sBackground); // Préparation du sprite
-	if (! tBackground )
-	{
-		printf("initLoginRender: impossible de cree la texture de l'image de fond\n");
-		changeStep(end);
-		return;
-	}
-
-	/*****************  TEXT   ***********************/
-
-	font = TTF_OpenFont(FONTPATH, FONTSIZE);
-	if (font == NULL)
-	{
-		printf("initLoginRender: impossible de d'ouvrir le fichier de font\n");
-		changeStep(end);
-		return;
-	}
+	Background = getPicture(BACKGROUNDPATH,0,0,1);
 	
-	SDL_FreeSurface(sBackground);
+	imgtext = getText("Enter your username",100,200,5);
 	
 	step=rLog; // on va commencer par lui demander le nom d'utilisateur
-	updateText("Enter your username");
-
 	renderinitialised=1;
 }
 
-void updateText(char str[])
-{
-	SDL_Surface *stext;
-	SDL_Color color = {0,0,0};
-	
-	if(strlen(str)==0)
-	{
-	  printf("updateText: chaine vide\n");
-	  stext = TTF_RenderText_Solid(font," ",color);
-	}
-	else
-	  stext = TTF_RenderText_Solid(font,str,color);
-	if (! stext )
-	{
-		printf("updateText: impossible de cree la surface du text\n");
-		printf("updateText: taille de la chaine: %d\n",strlen(str));
-		changeStep(end);
-		return;
-	}
-	
-	ttext = SDL_CreateTextureFromSurface(renderer,stext);
-	if (! ttext )
-	{
-		printf("updateText: impossible de cree la texture du text\n");
-		changeStep(end);
-		return;
-	}
-
-	rtext.h = stext->h/5;
-	rtext.w= stext->w/5;
-    SDL_FreeSurface(stext);
-}
 
 void renderLogin()
 {
 	if(renderinitialised==0)
 		return;
-	SDL_RenderCopy(renderer,tBackground,NULL,&rBackground); // Copie du sprite grâce au SDL_Renderer
-	SDL_RenderCopy(renderer,ttext,NULL,&rtext);
+	SDL_RenderCopy(renderer,Background.texture,NULL,&Background.rect); // Copie du sprite grâce au SDL_Renderer
+	SDL_RenderCopy(renderer,imgtext.texture,NULL,&imgtext.rect);
 }
 
 void freeLoginRender()
@@ -172,14 +112,13 @@ void freeLoginRender()
 	}
 
     renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
-    SDL_DestroyTexture(ttext);
-	TTF_CloseFont(font);
-	SDL_DestroyTexture(tBackground); // Libération de la mémoire associée à la texture
+    SDL_DestroyTexture(imgtext.texture);
+	SDL_DestroyTexture(Background.texture); // Libération de la mémoire associée à la texture
 
 	printf("freeLoginRender: liberation des ressources\n");
 }
 
 int identifier(char usernm[], char passwd[])
 {
- return 0;
+ return 1;
 }

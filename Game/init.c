@@ -33,11 +33,19 @@ void init()
 	exit(2);
 	}
 
+	font = TTF_OpenFont(FONTPATH, FONTSIZE);
+	if (!font)
+	{
+		printf("init: impossible de d'ouvrir le fichier de font\n");
+		exit(2);
+		return;
+	}
+      printf("init: effectue avec succes\n");
 }
 
 void quit()
 {
-
+  TTF_CloseFont(font);
   TTF_Quit();
   SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
