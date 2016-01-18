@@ -19,6 +19,8 @@ SDL2/SDL.h
 -
 SDL/SDL.h
 -
+login.h
+/home/djeck/projects/SixPrend/Game/login.h
 
 /home/djeck/projects/SixPrend/Game/login.c
 login.h

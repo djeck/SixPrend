@@ -118,11 +118,35 @@ CMakeFiles/sixprend.dir/Game/login.c.o.provides: CMakeFiles/sixprend.dir/Game/lo
 
 CMakeFiles/sixprend.dir/Game/login.c.o.provides.build: CMakeFiles/sixprend.dir/Game/login.c.o
 
+CMakeFiles/sixprend.dir/Game/inc.c.o: CMakeFiles/sixprend.dir/flags.make
+CMakeFiles/sixprend.dir/Game/inc.c.o: ../Game/inc.c
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/djeck/projects/SixPrend/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/sixprend.dir/Game/inc.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/sixprend.dir/Game/inc.c.o   -c /home/djeck/projects/SixPrend/Game/inc.c
+
+CMakeFiles/sixprend.dir/Game/inc.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sixprend.dir/Game/inc.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -E /home/djeck/projects/SixPrend/Game/inc.c > CMakeFiles/sixprend.dir/Game/inc.c.i
+
+CMakeFiles/sixprend.dir/Game/inc.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sixprend.dir/Game/inc.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_FLAGS) -S /home/djeck/projects/SixPrend/Game/inc.c -o CMakeFiles/sixprend.dir/Game/inc.c.s
+
+CMakeFiles/sixprend.dir/Game/inc.c.o.requires:
+.PHONY : CMakeFiles/sixprend.dir/Game/inc.c.o.requires
+
+CMakeFiles/sixprend.dir/Game/inc.c.o.provides: CMakeFiles/sixprend.dir/Game/inc.c.o.requires
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/inc.c.o.provides.build
+.PHONY : CMakeFiles/sixprend.dir/Game/inc.c.o.provides
+
+CMakeFiles/sixprend.dir/Game/inc.c.o.provides.build: CMakeFiles/sixprend.dir/Game/inc.c.o
+
 # Object files for target sixprend
 sixprend_OBJECTS = \
 "CMakeFiles/sixprend.dir/main.c.o" \
 "CMakeFiles/sixprend.dir/Game/init.c.o" \
-"CMakeFiles/sixprend.dir/Game/login.c.o"
+"CMakeFiles/sixprend.dir/Game/login.c.o" \
+"CMakeFiles/sixprend.dir/Game/inc.c.o"
 
 # External object files for target sixprend
 sixprend_EXTERNAL_OBJECTS =
@@ -130,6 +154,7 @@ sixprend_EXTERNAL_OBJECTS =
 sixprend: CMakeFiles/sixprend.dir/main.c.o
 sixprend: CMakeFiles/sixprend.dir/Game/init.c.o
 sixprend: CMakeFiles/sixprend.dir/Game/login.c.o
+sixprend: CMakeFiles/sixprend.dir/Game/inc.c.o
 sixprend: CMakeFiles/sixprend.dir/build.make
 sixprend: CMakeFiles/sixprend.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking C executable sixprend"
@@ -142,6 +167,7 @@ CMakeFiles/sixprend.dir/build: sixprend
 CMakeFiles/sixprend.dir/requires: CMakeFiles/sixprend.dir/main.c.o.requires
 CMakeFiles/sixprend.dir/requires: CMakeFiles/sixprend.dir/Game/init.c.o.requires
 CMakeFiles/sixprend.dir/requires: CMakeFiles/sixprend.dir/Game/login.c.o.requires
+CMakeFiles/sixprend.dir/requires: CMakeFiles/sixprend.dir/Game/inc.c.o.requires
 .PHONY : CMakeFiles/sixprend.dir/requires
 
 CMakeFiles/sixprend.dir/clean:

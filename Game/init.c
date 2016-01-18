@@ -8,6 +8,7 @@ SDL_Renderer * renderer;
 
 void init()
 {
+	globalStep=none;
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	window = SDL_CreateWindow("SixPrend",

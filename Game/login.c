@@ -16,7 +16,7 @@ void eventLogin()
 		{
 			case SDL_QUIT:
 				printf("eventLogin: event quit received\n");
-				terminer = 1;
+				changeStep(end);
 			break;
 			case SDL_KEYUP:
 				if ( event.key.keysym.sym == SDLK_DELETE || event.key.keysym.sym == SDLK_BACKSPACE )
@@ -38,7 +38,7 @@ void eventLogin()
 					else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
 					{
 					  //on hash le mot de passe pour plus de securité
- 					  int resultat = identifier(username,cocoa::SHA1(password).str().c_str());
+ 					  int resultat = identifier(username,password);
 					   switch(resultat)
 					   {
 					     case 0: // mot de passe faux
@@ -49,6 +49,8 @@ void eventLogin()
 					       break;
 					     case 1: // bien identifier
 					       printf("eventLogin: successfully identified\n");
+					       strcpy(utilisateur,username);
+					       changeStep(menu);
 					       break;
 					     case 2: // nouveau compte
 					       printf("eventLogin: new user registred\n");
@@ -97,14 +99,14 @@ void initLoginRender()
 	if ( !sBackground )
 	{
 		printf("initLoginRender: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
-		terminer=1;
+		changeStep(end);
 		return;
 	}
 	tBackground = SDL_CreateTextureFromSurface(renderer,sBackground); // Préparation du sprite
 	if (! tBackground )
 	{
 		printf("initLoginRender: impossible de cree la texture de l'image de fond\n");
-		terminer=1;
+		changeStep(end);
 		return;
 	}
 
@@ -114,7 +116,7 @@ void initLoginRender()
 	if (font == NULL)
 	{
 		printf("initLoginRender: impossible de d'ouvrir le fichier de font\n");
-		terminer=1;
+		changeStep(end);
 		return;
 	}
 	
@@ -138,7 +140,7 @@ void updateText(char str[])
 	{
 		printf("updateText: impossible de cree la surface du text\n");
 		printf("updateText: taille de la chaine: %d\n",strlen(str));
-		terminer=1;
+		changeStep(end);
 		return;
 	}
 	
@@ -146,7 +148,7 @@ void updateText(char str[])
 	if (! ttext )
 	{
 		printf("updateText: impossible de cree la texture du text\n");
-		terminer=1;
+		changeStep(end);
 		return;
 	}
 
