@@ -7,6 +7,8 @@
 
 #define BACKGROUNDPATH "./media/background.bmp" // fond d'ecran
 #define FONTPATH "./media/sixty.fon" // fichier de fnnt
+#define FILELOGIN "./media/login.txt"
+#define SIZESTR 21
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 
 #include <SDL2/SDL_ttf.h>
