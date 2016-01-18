@@ -8,7 +8,8 @@ SDL_Renderer * renderer;
 
 void init()
 {
-	globalStep=none;
+	globalStep=none;// important pour dire qu'il n'y a pas de ressources à liberer
+	
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	window = SDL_CreateWindow("SixPrend",
