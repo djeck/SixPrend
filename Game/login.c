@@ -120,5 +120,71 @@ void freeLoginRender()
 
 int identifier(char usernm[], char passwd[])
 {
- return 1;
-}
+    FILE *fic;
+    char tot[100];
+    char ch[100];
+    char user[50];
+    char pass[50];
+    char nwuser[50];
+    char nwpass[50];
+    char nwtot[100];
+    int i,j,c=0;
+    fic=fopen("nom_de_fichier","r+");
+    if(fic==NULL)
+    {
+        printf("l'ouverture n'est pas bonne");
+    }
+    else
+    {
+        for(i=0; i<strlen(usernm); i++)
+        {
+            ch[i]=usernm[i];
+        }
+        ch[i]='';
+        i=i+1;
+        for(j=i; j<i+strlen(passwd); j++)
+        {
+            ch[j]=passwd[j-strlen(usernm)-1];
+        }
+        ch[j]='\0';
+        while(fread(&tot,sizeof(tot),1,fic)&&!eof(fic))
+        {
+            if(strcmp(ch,tot)==0)
+            {
+                return 1;
+            }
+            else
+            {
+                while(fread(&user,sizeof(user),1,fic)&&!eof(fic))
+                {
+                    if(strcmp(usernm,user)==0)
+                    {
+                        return 0;
+                    }
+                }
+                fclose(fic);
+                printf("le compte n'existe pas, veillez creer un compte\n");
+                getchar();
+                gets(nwuser);
+                printf("entrer le mot de passe\n");
+                getchar();
+                gets(nwpass);
+                for(i=0; i<strlen(nwuser); i++)
+                {
+                    nwtot[i]=nwuser[i];
+                }
+                nwtot[i]='';
+                i=i+1;
+                for(j=i; j<i+strlen(nwpass); j++)
+                {
+                    nwtot[j]=nwpass[j-strlen(nwuser)-1];
+                }
+                nwtot[j]='\0';
+                fic=fopen("nom_de_fichier","r+");
+                fwrite(&nwtot,sizeof(nwtot),1,fic);
+                fclose(fic);
+                return 2
+            }
+        }
+    }
+
