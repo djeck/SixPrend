@@ -37,7 +37,8 @@ void eventLogin()
 					}
 					else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
 					{
-					  int resultat = identifier(username,password);
+					  //on hash le mot de passe pour plus de securité
+ 					  int resultat = identifier(username,cocoa::SHA1(password).str().c_str());
 					   switch(resultat)
 					   {
 					     case 0: // mot de passe faux

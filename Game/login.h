@@ -14,6 +14,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <string.h>
 #include "inc.h"
+#include "cocoa.h"
 
 /*
  * deux etapes du login:
