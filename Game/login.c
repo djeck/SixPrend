@@ -78,21 +78,18 @@ extern SDL_Renderer* renderer;
 static int renderinitialised = 0;
 
 static SDL_Texture* tBackground;
-static SDL_Surface* sBackground;
 static SDL_Rect rBackground= { 0,0, 800, 600};
 
 static SDL_Texture* ttext;
-static SDL_Surface *stext;
-static SDL_Color color = {0,0,0};
 static TTF_Font* font;
 static SDL_Rect rtext= { 100,200, 300, 50};
 
 void initLoginRender()
 {
-
+	
 	/*****************  Image de fond   ***********************/
 
-	sBackground = SDL_LoadBMP(BACKGROUNDPATH);
+	SDL_Surface* sBackground = SDL_LoadBMP(BACKGROUNDPATH);
 	if ( !sBackground )
 	{
 		printf("initLoginRender: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
@@ -117,6 +114,8 @@ void initLoginRender()
 		return;
 	}
 	
+	SDL_FreeSurface(sBackground);
+	
 	step=rLog; // on va commencer par lui demander le nom d'utilisateur
 	updateText("Enter your username");
 
@@ -125,7 +124,9 @@ void initLoginRender()
 
 void updateText(char str[])
 {
-    
+	SDL_Surface *stext;
+	SDL_Color color = {0,0,0};
+	
 	if(strlen(str)==0)
 	{
 	  printf("updateText: chaine vide\n");
@@ -150,7 +151,8 @@ void updateText(char str[])
 	}
 
 	rtext.h = stext->h/5;
-    rtext.w= stext->w/5;
+	rtext.w= stext->w/5;
+    SDL_FreeSurface(stext);
 }
 
 void renderLogin()
@@ -171,10 +173,9 @@ void freeLoginRender()
 
     renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
     SDL_DestroyTexture(ttext);
-	SDL_FreeSurface(stext);
 	TTF_CloseFont(font);
 	SDL_DestroyTexture(tBackground); // Libération de la mémoire associée à la texture
-	SDL_FreeSurface(sBackground);
+
 	printf("freeLoginRender: liberation des ressources\n");
 }
 
