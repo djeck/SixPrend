@@ -35,5 +35,12 @@ void renderLogin();
  * Libere les ressources graphiques initialisees par initLoginRender
  */
 void freeLoginRender();
+/*
+ * Cherche dans le fichier si l'utilisateur à un compte et si le mot de passe est juste
+ * retourn 0 si le mot de passe est faux
+ * return 1 si l'utilisateur est bien loguer
+ * return 2 si un nouveaux compte est créé
+ */
+int register(char username[],char passwd[]);
 
 #endif
