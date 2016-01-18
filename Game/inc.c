@@ -50,9 +50,18 @@ void changeStep(MainStep nextStep)
   printf("changeStep: changement d'etat effectue avec succes\n");
 }
 
-extern renderer;
 
-static SDL_Color black = {0,0,0};
+
+static SDL_Color color = {0,0,0};
+
+void setTextColor(int r, int g, int b)
+{
+  color.r=r;
+  color.g=g;
+  color.b=b;
+}
+
+extern renderer;
 Image getText(char str[],int x,int y,int size)
 {
   printf("getText: debut\n");
@@ -67,11 +76,11 @@ Image getText(char str[],int x,int y,int size)
 	if(strlen(str)==0)
 	{
 	  printf("getText: chaine vide\n");
-	  stext = TTF_RenderText_Solid(font," ",black);
+	  stext = TTF_RenderText_Solid(font," ",color);
 	}
 	else
 	{
-	  stext = TTF_RenderText_Solid(font,str,black);/**/
+	  stext = TTF_RenderText_Solid(font,str,color);/**/
 	}
 	if (! stext )
 	{

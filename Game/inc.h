@@ -45,6 +45,7 @@ MainStep globalStep;
  */
 void changeStep(MainStep nextStep);
 Image getText(char str[],int x,int y,int size);
+void setTextColor(int r,int g,int b);
 Image getPicture(char* path, int x, int y,int size);
 
 #endif
