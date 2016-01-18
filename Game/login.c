@@ -1,8 +1,5 @@
 #include "login.h"
 
-
-
-extern int terminer;
 static char username[SIZESTR];
 static char password[SIZESTR];
 
@@ -43,7 +40,7 @@ void eventLogin()
 					   {
 					     case 0: // mot de passe faux
 					       printf("eventLogin: bad password\n");
-					       updateText("Try again");
+					       updateText("Try again...");
 					       text[0]='\0';//on efface tout
 					       step=rLog; // il doit tout ressaisir
 					       break;
@@ -57,7 +54,7 @@ void eventLogin()
 					       break;
 					     default:
 					      printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
-					      updateText("Error  try again");
+					      updateText("Error  try again...");
 					      text[0]='\0';//on efface tout
 					      step=rLog; // il doit tout ressaisir
 					   }
@@ -183,5 +180,5 @@ void freeLoginRender()
 
 int identifier(char usernm[], char passwd[])
 {
- return 3;
+ return 0;
 }

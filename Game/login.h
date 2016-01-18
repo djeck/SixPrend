@@ -1,5 +1,5 @@
 /*
- * Fichier correspondant à l'affichage et la gestion du login dun jeu
+ * Fichier correspondant à l'affichage et la gestion du login du jeu
  */
 
 #ifndef LOGIN_H
@@ -28,7 +28,6 @@ static char text[SIZESTR];
 
 /*
  * Gestion des evenements spécifique au login
- * agis sur la variable globale terminer
  */
 void eventLogin();
 /*
