@@ -1,5 +1,7 @@
 #include "login.h"
 
+
+
 extern int terminer;
 static char text[200];
 
@@ -78,7 +80,8 @@ void initLoginRender()
 		terminer=1;
 		return;
 	}
-
+	
+	step=rLog; // on va commencer par lui demander le nom d'utilisateur
 	updateText("enter your username");
 
 	renderinitialised=1;

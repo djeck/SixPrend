@@ -15,6 +15,15 @@
 #include "inc.h"
 
 /*
+ * deux etapes du login:
+ * rLog : rensseigner le nom d'utilisateur
+ * rPass : rensseigner le mot de passe
+ */
+enum Etapes {rLog,rPass};
+
+static Etapes step;
+
+/*
  * Gestion des evenements spécifique au login
  * agis sur la variable globale terminer
  */
