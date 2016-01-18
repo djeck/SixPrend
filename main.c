@@ -21,7 +21,25 @@ int main(int argc, char ** argv)
 	while (globalStep!=end)
 	{
 		SDL_RenderClear(renderer);
-		renderLogin(); // on dessine le login
+		switch(globalStep)
+		{
+		  case login:
+		    renderLogin();// on dessine le login
+		  break;
+		  case menu:
+		    //renderMenu();
+		  break;
+		  case mode:
+		    //renderMode();
+		  break;
+		  case stat:
+		    //renderStat();
+		  break;
+		  case game:
+		  //renderGame();
+		  break;
+		}
+		
 		SDL_RenderPresent(renderer);
 		SDL_Delay(1); // provisoire afin de ne pas utiliser tout le cpu
 		
