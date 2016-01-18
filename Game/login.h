@@ -12,6 +12,7 @@
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 
 #include <SDL2/SDL_ttf.h>
+#include <string.h>
 #include "inc.h"
 
 /*
@@ -19,9 +20,12 @@
  * rLog : rensseigner le nom d'utilisateur
  * rPass : rensseigner le mot de passe
  */
-enum Etapes {rLog,rPass};
+typedef enum{rLog,rPass} Etapes;
 
 static Etapes step;
+
+// donnees à afficher
+static char text[SIZESTR];
 
 /*
  * Gestion des evenements spécifique au login
@@ -52,6 +56,6 @@ void freeLoginRender();
  * return 1 si l'utilisateur est bien loguer
  * return 2 si un nouveaux compte est créé
  */
-int identifier(char username[],char password[]);
+int identifier(char usernm[],char passwd[]);
 
 #endif

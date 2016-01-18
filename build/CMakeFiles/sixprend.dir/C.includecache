@@ -20,18 +20,6 @@ SDL2/SDL.h
 SDL/SDL.h
 -
 
-/home/djeck/projects/SixPrend/Game/init.c
-init.h
-/home/djeck/projects/SixPrend/Game/init.h
-
-/home/djeck/projects/SixPrend/Game/init.h
-SDL2/SDL_image.h
--
-SDL2/SDL_ttf.h
--
-login.h
-/home/djeck/projects/SixPrend/Game/login.h
-
 /home/djeck/projects/SixPrend/Game/login.c
 login.h
 /home/djeck/projects/SixPrend/Game/login.h
@@ -39,14 +27,8 @@ login.h
 /home/djeck/projects/SixPrend/Game/login.h
 SDL2/SDL_ttf.h
 -
+string.h
+-
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
-
-/home/djeck/projects/SixPrend/main.c
-Game/inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-Game/init.h
-/home/djeck/projects/SixPrend/Game/init.h
-Game/login.h
-/home/djeck/projects/SixPrend/Game/login.h
 

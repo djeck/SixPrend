@@ -3,12 +3,13 @@
 
 
 extern int terminer;
-static char text[200];
+static char username[SIZESTR];
+static char password[SIZESTR];
 
 void eventLogin()
 {
 	SDL_Event event;
-    int havetoup=0;
+	int havetoup=0;
 	while (SDL_PollEvent(&event))
 	{
 		switch(event.type)
@@ -24,9 +25,44 @@ void eventLogin()
 					printf("eventLogin: character erased\n");
 					havetoup=1;
 				}
+				else if( event.key.keysym.scancode == SDL_SCANCODE_RETURN)
+				{
+					printf("eventLogin: input confirmed\n");
+					if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur
+					{
+					  strcpy(username,text); // on garde le nom d'utilisateur de côté
+					  updateText("Enter your password");
+					  text[0]='\0';
+					  step = rPass; // on lui demande le mot de passe
+					}
+					else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
+					{
+					  int resultat = identifier(username,password);
+					   switch(resultat)
+					   {
+					     case 0: // mot de passe faux
+					       printf("eventLogin: bad password\n");
+					       updateText("Try again");
+					       text[0]='\0';//on efface tout
+					       step=rLog; // il doit tout ressaisir
+					       break;
+					     case 1: // bien identifier
+					       printf("eventLogin: successfully identified\n");
+					       break;
+					     case 2: // nouveau compte
+					       printf("eventLogin: new user registred\n");
+					       break;
+					     default:
+					      printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
+					      updateText("Error  try again");
+					      text[0]='\0';//on efface tout
+					      step=rLog; // il doit tout ressaisir
+					   }
+					}
+				}
 				break;
 			case SDL_TEXTINPUT:
-				if(strlen(text)<199)
+				if(strlen(text)<SIZESTR-1)
 					strcat(text, event.text.text);
 				printf("eventLogin: buffer = %s\n",text);
 				havetoup=1;
@@ -82,27 +118,33 @@ void initLoginRender()
 	}
 	
 	step=rLog; // on va commencer par lui demander le nom d'utilisateur
-	updateText("enter your username");
+	updateText("Enter your username");
 
 	renderinitialised=1;
 }
 
 void updateText(char str[])
 {
-
-
-    stext = TTF_RenderText_Solid(font,str,color);
+    
+	if(strlen(str)==0)
+	{
+	  printf("updateText: chaine vide\n");
+	  stext = TTF_RenderText_Solid(font," ",color);
+	}
+	else
+	  stext = TTF_RenderText_Solid(font,str,color);
 	if (! stext )
 	{
-		printf("initLoginRender: impossible de cree la surface du text\n");
+		printf("updateText: impossible de cree la surface du text\n");
+		printf("updateText: taille de la chaine: %d\n",strlen(str));
 		terminer=1;
 		return;
 	}
-
+	
 	ttext = SDL_CreateTextureFromSurface(renderer,stext);
 	if (! ttext )
 	{
-		printf("initLoginRender: impossible de cree la texture du text\n");
+		printf("updateText: impossible de cree la texture du text\n");
 		terminer=1;
 		return;
 	}
@@ -134,4 +176,9 @@ void freeLoginRender()
 	SDL_DestroyTexture(tBackground); // Libération de la mémoire associée à la texture
 	SDL_FreeSurface(sBackground);
 	printf("freeLoginRender: liberation des ressources\n");
+}
+
+int identifier(char usernm[], char passwd[])
+{
+ return 3;
 }
