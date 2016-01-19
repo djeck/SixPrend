@@ -31,6 +31,6 @@ EnvironmentGroup=default
 Executable=file:///home/djeck/projects/SixPrend/
 External Terminal=konsole --noclose --workdir %workdir -e %exe
 Project Target=SixPrend,sixprend
-Use External Terminal=true
+Use External Terminal=false
 Working Directory=file:///home/djeck/projects/SixPrend
 isExecutable=false

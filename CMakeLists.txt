@@ -11,6 +11,6 @@ find_package(SDL2 REQUIRED)
 add_definitions("-Wall")
 include_directories(${SDL2_INCLUDE_DIR})
 
-add_executable(sixprend main.c Game/init.c Game/login.c Game/inc.c Game/menu.c)
+add_executable(sixprend main.c Game/init.c Game/login.c Game/inc.c Game/menu.c Game/mode.c)
 install(TARGETS sixprend DESTINATION bin)
 target_link_libraries(sixprend -lSDL2 -lSDL2_ttf)

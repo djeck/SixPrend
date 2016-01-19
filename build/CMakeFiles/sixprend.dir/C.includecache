@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/djeck/projects/SixPrend/Game/inc.c
+inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
+
 /home/djeck/projects/SixPrend/Game/inc.h
 stdio.h
 -
@@ -35,10 +39,6 @@ menu.h
 /home/djeck/projects/SixPrend/Game/login.h
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
-
-/home/djeck/projects/SixPrend/Game/menu.c
-menu.h
-/home/djeck/projects/SixPrend/Game/menu.h
 
 /home/djeck/projects/SixPrend/Game/menu.h
 SDL2/SDL_ttf.h
