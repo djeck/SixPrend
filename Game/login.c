@@ -4,6 +4,7 @@ static char username[SIZESTR];
 static char password[SIZESTR];
 
 static Image imgtext;
+static Image imginstruction;
 
 void eventLogin()
 {
@@ -30,7 +31,8 @@ void eventLogin()
 					if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur
 					{
 					  strcpy(username,text); // on garde le nom d'utilisateur de côté
-					  imgtext = getText("Enter your password",100,200,5);
+					  havetoup=1;
+					  imginstruction = getText("Password:",100,150,5);
 					  text[0]='\0';
 					  step = rPass; // on lui demande le mot de passe
 					}
@@ -42,7 +44,8 @@ void eventLogin()
 					   {
 					     case 0: // mot de passe faux
 					       printf("eventLogin: bad password\n");
-					       imgtext = getText("Try again...",100,200,5);
+					       imginstruction = getText("Wrong pwd, try again",100,150,5);
+					       havetoup=1;
 					       text[0]='\0';//on efface tout
 					       step=rLog; // il doit tout ressaisir
 					       break;
@@ -58,7 +61,8 @@ void eventLogin()
 					       break;
 					     default:
 					      printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
-					      imgtext = getText("Error  try again...",100,200,5);
+					      imginstruction = getText("Error, try again:",100,150,5);
+					      havetoup=1;
 					      text[0]='\0';//on efface tout
 					      step=rLog; // il doit tout ressaisir
 					   }
@@ -90,7 +94,8 @@ void initLoginRender()
 	
 	Background = getPicture(BACKGROUNDPATH,0,0,1);
 	
-	imgtext = getText("Enter your username",100,200,5);
+	imgtext = getText(" ",150,230,5);
+	imginstruction = getText("Enter your username:",100,150,5);
 	
 	step=rLog; // on va commencer par lui demander le nom d'utilisateur
 	renderinitialised=1;
@@ -103,6 +108,7 @@ void renderLogin()
 		return;
 	renderImage(Background);
 	renderImage(imgtext);
+	renderImage(imginstruction);
 }
 
 void freeLoginRender()
@@ -116,6 +122,7 @@ void freeLoginRender()
     renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
     freeImage(imgtext);
     freeImage(Background);
+    freeImage(imginstruction);
 
 	printf("freeLoginRender: liberation des ressources\n");
 }

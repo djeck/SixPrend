@@ -6,7 +6,6 @@
 #define LOGIN_H
 
 #define BACKGROUNDPATH "./media/background.bmp" // fond d'ecran
-#define FONTPATH "./media/sixty.fon" // fichier de fnnt
 #define FILELOGIN "./media/login.txt"
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 
