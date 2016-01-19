@@ -36,8 +36,8 @@ void eventLogin()
 					}
 					else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
 					{
-					  //on hash le mot de passe pour plus de securité
- 					  int resultat = identifier(username,password);
+					  strcpy(password,text);
+ 					  int resultat = identifier();
 					   switch(resultat)
 					   {
 					     case 0: // mot de passe faux
@@ -53,6 +53,8 @@ void eventLogin()
 					       break;
 					     case 2: // nouveau compte
 					       printf("eventLogin: new user registred\n");
+					       strcpy(utilisateur,username);
+					       changeStep(menu);
 					       break;
 					     default:
 					      printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
@@ -118,73 +120,36 @@ void freeLoginRender()
 	printf("freeLoginRender: liberation des ressources\n");
 }
 
-int identifier(char usernm[], char passwd[])
+int identifier()
 {
     FILE *fic;
-    char tot[100];
-    char ch[100];
-    char user[50];
-    char pass[50];
-    char nwuser[50];
-    char nwpass[50];
-    char nwtot[100];
-    int i,j,c=0;
-    fic=fopen("nom_de_fichier","r+");
+    char loginlu[SIZESTR],passlu[SIZESTR];
+    fic=fopen(FILELOGIN,"r+");
     if(fic==NULL)
     {
-        printf("l'ouverture n'est pas bonne");
+        printf("l'ouverture n'est pas bonne\n");
     }
     else
     {
-        for(i=0; i<strlen(usernm); i++)
-        {
-            ch[i]=usernm[i];
-        }
-        ch[i]='';
-        i=i+1;
-        for(j=i; j<i+strlen(passwd); j++)
-        {
-            ch[j]=passwd[j-strlen(usernm)-1];
-        }
-        ch[j]='\0';
-        while(fread(&tot,sizeof(tot),1,fic)&&!eof(fic))
-        {
-            if(strcmp(ch,tot)==0)
-            {
-                return 1;
-            }
-            else
-            {
-                while(fread(&user,sizeof(user),1,fic)&&!eof(fic))
-                {
-                    if(strcmp(usernm,user)==0)
-                    {
-                        return 0;
-                    }
-                }
-                fclose(fic);
-                printf("le compte n'existe pas, veillez creer un compte\n");
-                getchar();
-                gets(nwuser);
-                printf("entrer le mot de passe\n");
-                getchar();
-                gets(nwpass);
-                for(i=0; i<strlen(nwuser); i++)
-                {
-                    nwtot[i]=nwuser[i];
-                }
-                nwtot[i]='';
-                i=i+1;
-                for(j=i; j<i+strlen(nwpass); j++)
-                {
-                    nwtot[j]=nwpass[j-strlen(nwuser)-1];
-                }
-                nwtot[j]='\0';
-                fic=fopen("nom_de_fichier","r+");
-                fwrite(&nwtot,sizeof(nwtot),1,fic);
-                fclose(fic);
-                return 2
-            }
-        }
+        while(fscanf(fic,"%s %s",loginlu,passlu)==2) // tant qu'il y a des donnes valides à lire
+	{
+	  if(strcmp(loginlu,username)==0) // le compte existe
+	  {
+	    if(strcmp(passlu,password)==0) // le mot de passe rentre est valide
+	    {
+	      fclose(fic);
+	      return 1;
+	    }
+	    else // mot de passe non valide
+	    {
+	      fclose(fic);
+	      return 0;
+	    }
+	  }
+	}
+ 	//fichier parcouru sans avoir pu trouver le compte: on le cree
+	fprintf(fic,"%s %s\n",username,password);
+	fclose(fic);
+	return 2;
     }
-
+}

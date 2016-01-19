@@ -10,9 +10,8 @@
 #define FILELOGIN "./media/login.txt"
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 
-#include <SDL2/SDL_ttf.h>
-#include <string.h>
 #include "inc.h"
+
 
 /*
  * deux etapes du login:
@@ -50,6 +49,6 @@ void freeLoginRender();
  * return 1 si l'utilisateur est bien loguer
  * return 2 si un nouveaux compte est créé
  */
-int identifier(char usernm[],char passwd[]);
+int identifier();
 
 #endif

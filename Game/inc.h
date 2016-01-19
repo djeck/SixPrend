@@ -15,6 +15,10 @@
 #define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
 #define SIZESTR 21 // taille par default du nom
 
+#include <SDL2/SDL_ttf.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include "login.h"
 #include "menu.h"
 

@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/djeck/projects/SixPrend/Game/inc.c
-inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-
 /home/djeck/projects/SixPrend/Game/inc.h
 stdio.h
 -
@@ -23,38 +19,26 @@ SDL2/SDL.h
 -
 SDL/SDL.h
 -
+SDL2/SDL_ttf.h
+-
+string.h
+-
+stdio.h
+-
+stdbool.h
+-
 login.h
 /home/djeck/projects/SixPrend/Game/login.h
 menu.h
 /home/djeck/projects/SixPrend/Game/menu.h
-
-/home/djeck/projects/SixPrend/Game/init.c
-init.h
-/home/djeck/projects/SixPrend/Game/init.h
-
-/home/djeck/projects/SixPrend/Game/init.h
-SDL2/SDL_image.h
--
-SDL2/SDL_ttf.h
--
-inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
 
 /home/djeck/projects/SixPrend/Game/login.c
 login.h
 /home/djeck/projects/SixPrend/Game/login.h
 
 /home/djeck/projects/SixPrend/Game/login.h
-SDL2/SDL_ttf.h
--
-string.h
--
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
-
-/home/djeck/projects/SixPrend/Game/menu.c
-menu.h
-/home/djeck/projects/SixPrend/Game/menu.h
 
 /home/djeck/projects/SixPrend/Game/menu.h
 SDL2/SDL_ttf.h
@@ -63,10 +47,4 @@ string.h
 -
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
-
-/home/djeck/projects/SixPrend/main.c
-Game/inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-Game/init.h
-/home/djeck/projects/SixPrend/Game/init.h
 
