@@ -110,6 +110,34 @@ CMakeFiles/sixprend.dir/Game/menu.c.o
  /usr/include/SDL2/SDL_video.h
  /usr/include/SDL2/begin_code.h
  /usr/include/SDL2/close_code.h
+CMakeFiles/sixprend.dir/Game/mode.c.o
+ /home/djeck/projects/SixPrend/Game/inc.h
+ /home/djeck/projects/SixPrend/Game/login.h
+ /home/djeck/projects/SixPrend/Game/menu.h
+ /home/djeck/projects/SixPrend/Game/mode.c
+ /home/djeck/projects/SixPrend/Game/mode.h
+ /usr/include/SDL2/SDL_blendmode.h
+ /usr/include/SDL2/SDL_config.h
+ /usr/include/SDL2/SDL_error.h
+ /usr/include/SDL2/SDL_events.h
+ /usr/include/SDL2/SDL_gamecontroller.h
+ /usr/include/SDL2/SDL_gesture.h
+ /usr/include/SDL2/SDL_joystick.h
+ /usr/include/SDL2/SDL_keyboard.h
+ /usr/include/SDL2/SDL_keycode.h
+ /usr/include/SDL2/SDL_mouse.h
+ /usr/include/SDL2/SDL_pixels.h
+ /usr/include/SDL2/SDL_platform.h
+ /usr/include/SDL2/SDL_quit.h
+ /usr/include/SDL2/SDL_rect.h
+ /usr/include/SDL2/SDL_rwops.h
+ /usr/include/SDL2/SDL_scancode.h
+ /usr/include/SDL2/SDL_stdinc.h
+ /usr/include/SDL2/SDL_surface.h
+ /usr/include/SDL2/SDL_touch.h
+ /usr/include/SDL2/SDL_video.h
+ /usr/include/SDL2/begin_code.h
+ /usr/include/SDL2/close_code.h
 CMakeFiles/sixprend.dir/main.c.o
  /home/djeck/projects/SixPrend/Game/inc.h
  /home/djeck/projects/SixPrend/Game/init.h

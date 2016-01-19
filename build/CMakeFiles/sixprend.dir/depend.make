@@ -110,6 +110,34 @@ CMakeFiles/sixprend.dir/Game/menu.c.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/sixprend.dir/Game/menu.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/sixprend.dir/Game/menu.c.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/sixprend.dir/Game/mode.c.o: ../Game/inc.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: ../Game/login.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: ../Game/menu.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: ../Game/mode.c
+CMakeFiles/sixprend.dir/Game/mode.c.o: ../Game/mode.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_blendmode.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_config.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_error.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_events.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_gamecontroller.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_gesture.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_joystick.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_keyboard.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_keycode.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_mouse.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_pixels.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_platform.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_quit.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_rect.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_rwops.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_scancode.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_stdinc.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_surface.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_touch.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/SDL_video.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/begin_code.h
+CMakeFiles/sixprend.dir/Game/mode.c.o: /usr/include/SDL2/close_code.h
+
 CMakeFiles/sixprend.dir/main.c.o: ../Game/inc.h
 CMakeFiles/sixprend.dir/main.c.o: ../Game/init.h
 CMakeFiles/sixprend.dir/main.c.o: ../Game/login.h

@@ -1,1 +1,1 @@
-/usr/bin/cc  -g    CMakeFiles/sixprend.dir/main.c.o CMakeFiles/sixprend.dir/Game/init.c.o CMakeFiles/sixprend.dir/Game/login.c.o CMakeFiles/sixprend.dir/Game/inc.c.o CMakeFiles/sixprend.dir/Game/menu.c.o  -o sixprend -rdynamic -lSDL2 -lSDL2_ttf 
+/usr/bin/cc  -g    CMakeFiles/sixprend.dir/main.c.o CMakeFiles/sixprend.dir/Game/init.c.o CMakeFiles/sixprend.dir/Game/login.c.o CMakeFiles/sixprend.dir/Game/inc.c.o CMakeFiles/sixprend.dir/Game/menu.c.o CMakeFiles/sixprend.dir/Game/mode.c.o  -o sixprend -rdynamic -lSDL2 -lSDL2_ttf 

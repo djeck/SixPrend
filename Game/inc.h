@@ -11,6 +11,8 @@
 #include <SDL2/SDL.h>
 #include <SDL/SDL.h>
 
+#define BACKGROUNDPATH "./media/background.bmp" // fond d'ecran
+#define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 #define SCREEN_WIDTH 800 // largeur par default de la fenetre
 #define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
 #define SIZESTR 21 // taille par default du nom
@@ -56,10 +58,13 @@ MainStep globalStep;
  * initialise et libere les ressources
  */
 void changeStep(MainStep nextStep);
-Image getText(char str[],int x,int y,int size);
-PickableImage getPickableText(char str[],int x,int y,int size);
+
+Image createText(char str[],int x,int y,int size);
+void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size);
+void updateText(Image* ptr,char str[],int x,int y,int size);
+PickableImage createPickableText(char str[],int x,int y,int size);
 void setTextColor(int r,int g,int b);
-Image getPicture(char* path, int x, int y,int size);
+Image createPicture(char* path, int x, int y,int size);
 bool collisionWithMouse(SDL_Rect arg0,int mx,int my);
 void renderImage(Image img);
 void freeImage(Image img);

@@ -5,6 +5,7 @@ static char password[SIZESTR];
 
 static Image imgtext;
 static Image imginstruction;
+static Image lastTry;
 
 void eventLogin()
 {
@@ -32,7 +33,7 @@ void eventLogin()
 					{
 					  strcpy(username,text); // on garde le nom d'utilisateur de côté
 					  havetoup=1;
-					  imginstruction = getText("Password:",100,150,5);
+					  updateText(&imginstruction,"Password:",100,150,5);
 					  text[0]='\0';
 					  step = rPass; // on lui demande le mot de passe
 					}
@@ -44,7 +45,8 @@ void eventLogin()
 					   {
 					     case 0: // mot de passe faux
 					       printf("eventLogin: bad password\n");
-					       imginstruction = getText("Wrong pwd, try again",100,150,5);
+					       updateText(&lastTry,"bad password",100,50,5);
+					       updateText(&imginstruction,"Username:",100,150,5);
 					       havetoup=1;
 					       text[0]='\0';//on efface tout
 					       step=rLog; // il doit tout ressaisir
@@ -60,8 +62,9 @@ void eventLogin()
 					       changeStep(menu);
 					       break;
 					     default:
+					      updateText(&lastTry,"error, keep trying",100,50,5);
 					      printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
-					      imginstruction = getText("Error, try again:",100,150,5);
+					      updateText(&imginstruction,"Username:",100,150,5);
 					      havetoup=1;
 					      text[0]='\0';//on efface tout
 					      step=rLog; // il doit tout ressaisir
@@ -79,7 +82,7 @@ void eventLogin()
 		}
 	}
 	if(havetoup==1)
-        imgtext = getText(text,100,200,5);;
+	  updateText(&imgtext,text,100,200,5);;
 }
 
 extern SDL_Renderer* renderer;
@@ -92,10 +95,11 @@ void initLoginRender()
 {
   printf("initLoginRender: debut\n");
 	
-	Background = getPicture(BACKGROUNDPATH,0,0,1);
+	Background = createPicture(BACKGROUNDPATH,0,0,1);
 	
-	imgtext = getText(" ",150,230,5);
-	imginstruction = getText("Enter your username:",100,150,5);
+	imgtext = createText(" ",150,230,5);
+	imginstruction = createText("Username:",100,150,5);
+	lastTry = createText(" ",100,50,5);
 	
 	step=rLog; // on va commencer par lui demander le nom d'utilisateur
 	renderinitialised=1;
@@ -109,6 +113,7 @@ void renderLogin()
 	renderImage(Background);
 	renderImage(imgtext);
 	renderImage(imginstruction);
+	renderImage(lastTry);
 }
 
 void freeLoginRender()
@@ -123,6 +128,7 @@ void freeLoginRender()
     freeImage(imgtext);
     freeImage(Background);
     freeImage(imginstruction);
+    freeImage(lastTry);
 
 	printf("freeLoginRender: liberation des ressources\n");
 }

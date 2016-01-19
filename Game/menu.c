@@ -46,20 +46,16 @@ void eventMenu()
 	}
 }
 
-extern SDL_Renderer* renderer;
 static int renderinitialised = 0;
-
-
-
 
 void initMenuRender()
 {
 	
-	Background = getPicture(BACKGROUNDPATH,0,0,1);
+	Background = createPicture(BACKGROUNDPATH,0,0,1);
 	
-	choixJeu = getPickableText("Play",100,150,5);
-	choixStat = getPickableText("Statistic",100,210,5);
-	choixQuit = getPickableText("Exit",100,270,5);
+	choixJeu = createPickableText("Play",100,150,5);
+	choixStat = createPickableText("Statistic",100,210,5);
+	choixQuit = createPickableText("Exit",100,270,5);
 	
 	renderinitialised=1;
 }

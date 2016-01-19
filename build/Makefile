@@ -248,6 +248,30 @@ Game/menu.c.s:
 	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/menu.c.s
 .PHONY : Game/menu.c.s
 
+Game/mode.o: Game/mode.c.o
+.PHONY : Game/mode.o
+
+# target to build an object file
+Game/mode.c.o:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/mode.c.o
+.PHONY : Game/mode.c.o
+
+Game/mode.i: Game/mode.c.i
+.PHONY : Game/mode.i
+
+# target to preprocess a source file
+Game/mode.c.i:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/mode.c.i
+.PHONY : Game/mode.c.i
+
+Game/mode.s: Game/mode.c.s
+.PHONY : Game/mode.s
+
+# target to generate assembly for a file
+Game/mode.c.s:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/mode.c.s
+.PHONY : Game/mode.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -297,6 +321,9 @@ help:
 	@echo "... Game/menu.o"
 	@echo "... Game/menu.i"
 	@echo "... Game/menu.s"
+	@echo "... Game/mode.o"
+	@echo "... Game/mode.i"
+	@echo "... Game/mode.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

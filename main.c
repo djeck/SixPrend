@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
 		    renderMenu();
 		  break;
 		  case mode:
-		    //renderMode();
+		   renderMode();
 		  break;
 		  case stat:
 		    //renderStat();
@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
 		    eventMenu();
 		  break;
 		  case mode:
-		    //eventMode();
+		    eventMode();
 		  break;
 		  case stat:
 		    //eventStat();

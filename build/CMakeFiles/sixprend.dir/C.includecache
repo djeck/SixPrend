@@ -6,10 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/djeck/projects/SixPrend/Game/inc.c
-inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-
 /home/djeck/projects/SixPrend/Game/inc.h
 stdio.h
 -
@@ -35,6 +31,10 @@ login.h
 /home/djeck/projects/SixPrend/Game/login.h
 menu.h
 /home/djeck/projects/SixPrend/Game/menu.h
+
+/home/djeck/projects/SixPrend/Game/login.c
+login.h
+/home/djeck/projects/SixPrend/Game/login.h
 
 /home/djeck/projects/SixPrend/Game/login.h
 inc.h

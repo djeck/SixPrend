@@ -17,7 +17,7 @@ void changeStep(MainStep nextStep)
 	freeMenuRender();
       break;
     case mode:
-      //freeModeRender();
+      freeModeRender();
       break;
     case stat:
       //freeStatRender();
@@ -30,14 +30,13 @@ void changeStep(MainStep nextStep)
   switch(nextStep)
   {
     case login:
-      printf("changeStep: test\n");
       initLoginRender();
       break;
     case menu:
       initMenuRender();
       break;
     case mode:
-      //initModeRender();
+      initModeRender();
       break;
     case stat:
       //initStatRender();
@@ -63,7 +62,7 @@ void setTextColor(int r, int g, int b)
 }
 
 extern renderer;
-Image getText(char str[],int x,int y,int size)
+Image createText(char str[],int x,int y,int size)
 {
   printf("getText: debut\n");
 	SDL_Surface *stext;
@@ -104,7 +103,19 @@ Image getText(char str[],int x,int y,int size)
 	return img;
 }
 
-PickableImage getPickableText(char str[],int x,int y,int size)
+void updateText(Image* ptr,char str[], int x, int y, int size)
+{
+  if(ptr->texture)
+  {
+    freeImage(*ptr);
+    *ptr = createText(str,x,y,size);
+  }
+  else
+    printf("updateText: texture non initialisee ne peut pas etre mis à jour\n");
+}
+
+
+PickableImage createPickableText(char str[],int x,int y,int size)
 {
 	SDL_Surface *stext;
 	PickableImage img;
@@ -164,8 +175,19 @@ PickableImage getPickableText(char str[],int x,int y,int size)
 	return img;
 }
 
+void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size)
+{
+  if(ptr->texture && ptr->textureselelct)
+  {
+    freePickableImage(*ptr);
+    *ptr = createPickableText(str,x,y,size);
+  }
+  else
+    printf("updateText: texture non initialisee ne peut pas etre mis à jour\n");
+}
 
-Image getPicture(char* path, int x, int y,int size)
+
+Image createPicture(char* path, int x, int y,int size)
 {
   Image img;
   img.rect.x = x;
