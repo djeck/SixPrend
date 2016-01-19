@@ -1,10 +1,39 @@
 #include "menu.h"
 
+static Image Background;
+static PickableImage choixJeu; // lancer le mode puis le jeu
+static PickableImage choixStat;
+static PickableImage choixQuit;
+
 void eventMenu()
 {
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
+	  if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT )
+	  {
+	    if(collisionWithMouse(choixJeu.rect,event.button.x,event.button.y))
+	    {
+	      changeStep(mode);
+	    }
+	    else if(collisionWithMouse(choixStat.rect,event.button.x,event.button.y))
+	    {
+	      changeStep(stat);
+	    }
+	    else if(collisionWithMouse(choixQuit.rect,event.button.x,event.button.y))
+	    {
+	      changeStep(end);
+	    }
+	      
+	  }
+	  else if( event.type == SDL_MOUSEMOTION )
+	  {
+	      choixJeu.select=collisionWithMouse(choixJeu.rect,event.motion.x,event.motion.y);
+	      
+	      choixQuit.select=collisionWithMouse(choixQuit.rect,event.motion.x,event.motion.y);
+
+	      choixStat.select=collisionWithMouse(choixStat.rect,event.motion.x,event.motion.y);
+	  }
 		switch(event.type)
 		{
 			case SDL_QUIT:
@@ -20,10 +49,7 @@ void eventMenu()
 extern SDL_Renderer* renderer;
 static int renderinitialised = 0;
 
-static Image Background;
-static Image choixJeu; // lancer le mode puis le jeu
-static Image choixStat;
-static Image choixQuit;
+
 
 
 void initMenuRender()
@@ -31,9 +57,9 @@ void initMenuRender()
 	
 	Background = getPicture(BACKGROUNDPATH,0,0,1);
 	
-	choixJeu = getText("Play",100,150,5);
-	choixStat = getText("Statistic",100,210,5);
-	choixQuit = getText("Exit",100,270,5);
+	choixJeu = getPickableText("Play",100,150,5);
+	choixStat = getPickableText("Statistic",100,210,5);
+	choixQuit = getPickableText("Exit",100,270,5);
 	
 	renderinitialised=1;
 }
@@ -42,10 +68,10 @@ void renderMenu()
 {
 	if(renderinitialised==0)
 		return;
-	SDL_RenderCopy(renderer,Background.texture,NULL,&Background.rect); // Copie du sprite grâce au SDL_Renderer
-	SDL_RenderCopy(renderer,choixJeu.texture,NULL,&choixJeu.rect);
-	SDL_RenderCopy(renderer,choixStat.texture,NULL,&choixStat.rect);
-	SDL_RenderCopy(renderer,choixQuit.texture,NULL,&choixQuit.rect);
+	renderImage(Background);
+	renderPickableImage(choixJeu);
+	renderPickableImage(choixStat);
+	renderPickableImage(choixQuit);
 }
 
 void freeMenuRender()
@@ -56,10 +82,10 @@ void freeMenuRender()
 		return;
 	}
 	renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
-	SDL_DestroyTexture(choixJeu.texture);
-	SDL_DestroyTexture(choixStat.texture);
-	SDL_DestroyTexture(choixQuit.texture);
-	SDL_DestroyTexture(Background.texture); // Libération de la mémoire associée à la texture
+	freePickableImage(choixJeu);
+	freePickableImage(choixStat);
+	freePickableImage(choixQuit);
+	freeImage(Background); // Libération de la mémoire associée à la texture
 
 	printf("freeMenuRender: liberation des ressources\n");
 }

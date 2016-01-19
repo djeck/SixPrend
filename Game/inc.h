@@ -32,6 +32,13 @@ typedef struct
   SDL_Rect rect;
 } Image;
 
+typedef struct
+{
+  SDL_Texture* texture;
+  SDL_Texture* textureselelct;
+  SDL_Rect rect;
+  bool select;
+} PickableImage;
 
 /*
  * stoque le nom de l'utilisateur bien identifié
@@ -49,7 +56,13 @@ MainStep globalStep;
  */
 void changeStep(MainStep nextStep);
 Image getText(char str[],int x,int y,int size);
+PickableImage getPickableText(char str[],int x,int y,int size);
 void setTextColor(int r,int g,int b);
 Image getPicture(char* path, int x, int y,int size);
+bool collisionWithMouse(SDL_Rect arg0,int mx,int my);
+void renderImage(Image img);
+void freeImage(Image img);
+void renderPickableImage(PickableImage img);
+void freePickableImage(PickableImage img);
 
 #endif

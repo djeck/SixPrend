@@ -10,6 +10,7 @@
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 
 #include <SDL2/SDL_ttf.h>
+#include <SDL_events.h>
 #include <string.h>
 #include "inc.h"
 

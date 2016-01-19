@@ -101,8 +101,8 @@ void renderLogin()
 {
 	if(renderinitialised==0)
 		return;
-	SDL_RenderCopy(renderer,Background.texture,NULL,&Background.rect); // Copie du sprite grâce au SDL_Renderer
-	SDL_RenderCopy(renderer,imgtext.texture,NULL,&imgtext.rect);
+	renderImage(Background);
+	renderImage(imgtext);
 }
 
 void freeLoginRender()
@@ -114,8 +114,8 @@ void freeLoginRender()
 	}
 
     renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
-    SDL_DestroyTexture(imgtext.texture);
-	SDL_DestroyTexture(Background.texture); // Libération de la mémoire associée à la texture
+    freeImage(imgtext);
+    freeImage(Background);
 
 	printf("freeLoginRender: liberation des ressources\n");
 }

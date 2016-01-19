@@ -41,9 +41,27 @@ int main(int argc, char ** argv)
 		}
 		
 		SDL_RenderPresent(renderer);
+		
 		SDL_Delay(1); // provisoire afin de ne pas utiliser tout le cpu
 		
-		eventLogin(); // gestion des evenements specifique au login
+		switch(globalStep)
+		{
+		  case login:
+		    eventLogin();
+		  break;
+		  case menu:
+		    eventMenu();
+		  break;
+		  case mode:
+		    //eventMode();
+		  break;
+		  case stat:
+		    //eventStat();
+		  break;
+		  case game:
+		  //eventGame();
+		  break;
+		}
 	}
 
 	//free ressource
