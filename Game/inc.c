@@ -90,7 +90,6 @@ Image getText(char str[],int x,int y,int size)
 		changeStep(end);
 		return;
 	}
-	
 	img.texture = SDL_CreateTextureFromSurface(renderer,stext);
 	if (! img.texture )
 	{
