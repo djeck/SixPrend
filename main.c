@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
 		   renderMode();
 		  break;
 		  case stat:
-		    //renderStat();
+		    renderStat();
 		  break;
 		  case game:
 		  renderGame();
@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 		    eventMode();
 		  break;
 		  case stat:
-		    //eventStat();
+		    eventStat();
 		  break;
 		  case game:
 		  eventGame();

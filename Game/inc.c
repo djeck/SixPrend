@@ -20,7 +20,7 @@ void changeStep(MainStep nextStep)
       freeModeRender();
       break;
     case stat:
-      //freeStatRender();
+      freeStatRender();
       break;
     case game:
       freeGameRender();
@@ -39,7 +39,7 @@ void changeStep(MainStep nextStep)
       initModeRender();
       break;
     case stat:
-      //initStatRender();
+      initStatRender();
       break;
     case game:
       initGameRender();
