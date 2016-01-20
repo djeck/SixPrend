@@ -296,6 +296,30 @@ Game/mode.c.s:
 	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/mode.c.s
 .PHONY : Game/mode.c.s
 
+Game/stat.o: Game/stat.c.o
+.PHONY : Game/stat.o
+
+# target to build an object file
+Game/stat.c.o:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/stat.c.o
+.PHONY : Game/stat.c.o
+
+Game/stat.i: Game/stat.c.i
+.PHONY : Game/stat.i
+
+# target to preprocess a source file
+Game/stat.c.i:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/stat.c.i
+.PHONY : Game/stat.c.i
+
+Game/stat.s: Game/stat.c.s
+.PHONY : Game/stat.s
+
+# target to generate assembly for a file
+Game/stat.c.s:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/stat.c.s
+.PHONY : Game/stat.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -351,6 +375,9 @@ help:
 	@echo "... Game/mode.o"
 	@echo "... Game/mode.i"
 	@echo "... Game/mode.s"
+	@echo "... Game/stat.o"
+	@echo "... Game/stat.i"
+	@echo "... Game/stat.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

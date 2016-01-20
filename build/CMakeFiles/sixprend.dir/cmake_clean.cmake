@@ -6,6 +6,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/sixprend.dir/Game/menu.c.o"
   "CMakeFiles/sixprend.dir/Game/mode.c.o"
   "CMakeFiles/sixprend.dir/Game/game.c.o"
+  "CMakeFiles/sixprend.dir/Game/stat.c.o"
   "sixprend.pdb"
   "sixprend"
 )

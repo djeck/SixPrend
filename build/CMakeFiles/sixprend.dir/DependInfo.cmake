@@ -10,6 +10,7 @@ SET(CMAKE_DEPENDS_CHECK_C
   "/home/djeck/projects/SixPrend/Game/login.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/login.c.o"
   "/home/djeck/projects/SixPrend/Game/menu.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/menu.c.o"
   "/home/djeck/projects/SixPrend/Game/mode.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/mode.c.o"
+  "/home/djeck/projects/SixPrend/Game/stat.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/stat.c.o"
   "/home/djeck/projects/SixPrend/main.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/main.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
