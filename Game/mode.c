@@ -50,7 +50,7 @@ void initModeRender()
 	
 	choixQuit = createPickableText("Exit",400,500,8);
 	choixBack = createPickableText("Return",100,450,8);
-	choixStart = createPickableText("Start game",150,200,8);
+	choixStart = createPickableText("Start game",150,200,6);
 	
 	renderinitialised=1;
 }
