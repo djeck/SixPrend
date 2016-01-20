@@ -16,7 +16,8 @@
 #define SCREEN_WIDTH 800 // largeur par default de la fenetre
 #define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
 #define SIZESTR 21 // taille par default du nom
-#define FONTPATH "./media/arial.ttf" // fichier de fnnt
+#define FONTPATH "./media/sixty.fon" // fichier de fnnt
+#define CLIGNE 500
 
 #include <SDL2/SDL_ttf.h>
 #include <string.h>
@@ -34,6 +35,8 @@ typedef struct
 {
   SDL_Texture* texture;
   SDL_Rect rect;
+  SDL_Rect rectCur; // rect du cursseur
+  bool input;
 } Image;
 
 typedef struct
@@ -60,7 +63,7 @@ MainStep globalStep;
  */
 void changeStep(MainStep nextStep);
 
-Image createText(char str[],int x,int y,int size);
+Image createText(char str[],int x,int y,int size,bool input);
 void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size);
 void updateText(Image* ptr,char str[],int x,int y,int size);
 PickableImage createPickableText(char str[],int x,int y,int size);

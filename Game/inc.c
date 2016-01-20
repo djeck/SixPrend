@@ -62,11 +62,12 @@ void setTextColor(int r, int g, int b)
 }
 
 extern renderer;
-Image createText(char str[],int x,int y,int size)
+Image createText(char str[],int x,int y,int size,bool input)
 {
   printf("getText: debut\n");
 	SDL_Surface *stext;
 	Image img;
+	img.input=input;
 	img.rect.x = x;
 	img.rect.y = y;
 	
@@ -100,6 +101,10 @@ Image createText(char str[],int x,int y,int size)
 	img.rect.h = stext->h/size;
 	img.rect.w = stext->w/size;
 	SDL_FreeSurface(stext);
+	img.rectCur.h=img.rect.h;
+	img.rectCur.w=4;
+	img.rectCur.x=img.rect.x+img.rect.w;
+	img.rectCur.y=img.rect.y;
 	return img;
 }
 
@@ -108,7 +113,7 @@ void updateText(Image* ptr,char str[], int x, int y, int size)
   if(ptr->texture)
   {
     freeImage(*ptr);
-    *ptr = createText(str,x,y,size);
+    *ptr = createText(str,x,y,size,ptr->input);
   }
   else
     printf("updateText: texture non initialisee ne peut pas etre mis à jour\n");
@@ -190,6 +195,7 @@ void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size)
 Image createPicture(char* path, int x, int y,int size)
 {
   Image img;
+  img.input=false;
   img.rect.x = x;
   img.rect.y =y;
 
@@ -230,9 +236,18 @@ bool collisionWithMouse(SDL_Rect arg0,int mx,int my)
     return false;
   return true;
 }
+static Uint32 timer=0;
 void renderImage(Image img)
 {
+  
   SDL_RenderCopy(renderer,img.texture,NULL,&img.rect);
+  if(img.input && SDL_GetTicks()-timer > CLIGNE)
+  {
+    if(SDL_GetTicks()-timer > 2*CLIGNE)
+      timer=SDL_GetTicks();
+    SDL_RenderFillRect(renderer, &img.rectCur);
+    //SDL_RenderDrawRect(renderer,&rect);
+  }
 }
 void renderPickableImage(PickableImage img)
 {
