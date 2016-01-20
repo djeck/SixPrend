@@ -7,6 +7,7 @@ static Image imgtext;
 static Image imginstruction;
 static Image lastTry;
 
+static char star[SIZESTR];
 void eventLogin()
 {
 	SDL_Event event;
@@ -26,7 +27,8 @@ void eventLogin()
 					printf("eventLogin: character erased\n");
 					havetoup=1;
 				}
-				else if( event.key.keysym.scancode == SDL_SCANCODE_RETURN)
+				else if( event.key.keysym.scancode == SDL_SCANCODE_RETURN ||
+					event.key.keysym.sym == SDLK_TAB )
 				{
 					printf("eventLogin: input confirmed\n");
 					if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur
@@ -35,6 +37,7 @@ void eventLogin()
 					  havetoup=1;
 					  updateText(&imginstruction,"Password:",100,150,5);
 					  text[0]='\0';
+					  star[0]='\0';
 					  step = rPass; // on lui demande le mot de passe
 					}
 					else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
@@ -74,7 +77,11 @@ void eventLogin()
 				break;
 			case SDL_TEXTINPUT:
 				if(strlen(text)<SIZESTR-1)
+				{
 					strcat(text, event.text.text);
+					if(rPass)
+					  strcat(star, "*");
+				}
 				printf("eventLogin: buffer = %s\n",text);
 				havetoup=1;
                   break;
@@ -82,7 +89,14 @@ void eventLogin()
 		}
 	}
 	if(havetoup==1)
-	  updateText(&imgtext,text,100,200,5);;
+	{
+	  if(step==rLog)
+	    updateText(&imgtext,text,100,200,5);
+	  else
+	  {
+	    updateText(&imgtext,star,100,200,5);
+	  }
+	}
 }
 
 extern SDL_Renderer* renderer;
@@ -97,9 +111,10 @@ void initLoginRender()
 	
 	Background = createPicture(BACKGROUNDPATH,0,0,1);
 	
-	imgtext = createText(" ",150,230,5);
-	imginstruction = createText("Username:",100,150,5);
-	lastTry = createText(" ",100,50,5);
+	
+	imginstruction = createText("Username:",100,150,5,false);
+	lastTry = createText(" ",100,50,5,false);
+	imgtext = createText(" ",150,230,5,true);
 	
 	step=rLog; // on va commencer par lui demander le nom d'utilisateur
 	renderinitialised=1;
