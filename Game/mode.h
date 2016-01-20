@@ -16,12 +16,10 @@
 void eventMode();
 /*
  * Initialisation des ressources graphiques spécifique à la page de parametre
- * necessite la variable renderer
  */
 void initModeRender();
 /*
  * dessine ressources graphiques spécifique à la page de parametre
- * necessite la variable renderer
  */
 void renderMode();
 /*
