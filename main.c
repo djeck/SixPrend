@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
 		    //renderStat();
 		  break;
 		  case game:
-		  //renderGame();
+		  renderGame();
 		  break;
 		}
 		
@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
 		    //eventStat();
 		  break;
 		  case game:
-		  //eventGame();
+		  eventGame();
 		  break;
 		}
 	}

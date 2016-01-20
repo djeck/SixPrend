@@ -24,6 +24,7 @@
 #include <stdbool.h>
 #include "login.h"
 #include "menu.h"
+#include "game.h"
 
 TTF_Font* font; // initialisé par init()
 

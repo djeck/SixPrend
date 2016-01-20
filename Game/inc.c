@@ -23,7 +23,7 @@ void changeStep(MainStep nextStep)
       //freeStatRender();
       break;
     case game:
-      //freeGameRender();
+      freeGameRender();
       break;
   }
 
@@ -42,7 +42,7 @@ void changeStep(MainStep nextStep)
       //initStatRender();
       break;
     case game:
-      //initGameRender();
+      initGameRender();
       break;
   }
   globalStep=nextStep;
