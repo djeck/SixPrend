@@ -6,6 +6,24 @@
 
 #IncludeRegexTransform: 
 
+/home/djeck/projects/SixPrend/Game/game.c
+game.h
+/home/djeck/projects/SixPrend/Game/game.h
+
+/home/djeck/projects/SixPrend/Game/game.h
+SDL2/SDL_ttf.h
+-
+SDL_events.h
+-
+string.h
+-
+inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
+
+/home/djeck/projects/SixPrend/Game/inc.c
+inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
+
 /home/djeck/projects/SixPrend/Game/inc.h
 stdio.h
 -
@@ -31,6 +49,20 @@ login.h
 /home/djeck/projects/SixPrend/Game/login.h
 menu.h
 /home/djeck/projects/SixPrend/Game/menu.h
+game.h
+/home/djeck/projects/SixPrend/Game/game.h
+
+/home/djeck/projects/SixPrend/Game/init.c
+init.h
+/home/djeck/projects/SixPrend/Game/init.h
+
+/home/djeck/projects/SixPrend/Game/init.h
+SDL2/SDL_image.h
+-
+SDL2/SDL_ttf.h
+-
+inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
 
 /home/djeck/projects/SixPrend/Game/login.c
 login.h
@@ -39,6 +71,10 @@ login.h
 /home/djeck/projects/SixPrend/Game/login.h
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
+
+/home/djeck/projects/SixPrend/Game/menu.c
+menu.h
+/home/djeck/projects/SixPrend/Game/menu.h
 
 /home/djeck/projects/SixPrend/Game/menu.h
 SDL2/SDL_ttf.h
@@ -49,6 +85,26 @@ string.h
 -
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
+
+/home/djeck/projects/SixPrend/Game/mode.c
+mode.h
+/home/djeck/projects/SixPrend/Game/mode.h
+
+/home/djeck/projects/SixPrend/Game/mode.h
+SDL2/SDL_ttf.h
+-
+SDL_events.h
+-
+string.h
+-
+inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
+
+/home/djeck/projects/SixPrend/main.c
+Game/inc.h
+/home/djeck/projects/SixPrend/Game/inc.h
+Game/init.h
+/home/djeck/projects/SixPrend/Game/init.h
 
 /usr/include/SDL2/SDL_blendmode.h
 begin_code.h

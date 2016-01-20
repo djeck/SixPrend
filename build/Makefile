@@ -152,6 +152,30 @@ sixprend/fast:
 	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/build
 .PHONY : sixprend/fast
 
+Game/game.o: Game/game.c.o
+.PHONY : Game/game.o
+
+# target to build an object file
+Game/game.c.o:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/game.c.o
+.PHONY : Game/game.c.o
+
+Game/game.i: Game/game.c.i
+.PHONY : Game/game.i
+
+# target to preprocess a source file
+Game/game.c.i:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/game.c.i
+.PHONY : Game/game.c.i
+
+Game/game.s: Game/game.c.s
+.PHONY : Game/game.s
+
+# target to generate assembly for a file
+Game/game.c.s:
+	$(MAKE) -f CMakeFiles/sixprend.dir/build.make CMakeFiles/sixprend.dir/Game/game.c.s
+.PHONY : Game/game.c.s
+
 Game/inc.o: Game/inc.c.o
 .PHONY : Game/inc.o
 
@@ -309,6 +333,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... sixprend"
+	@echo "... Game/game.o"
+	@echo "... Game/game.i"
+	@echo "... Game/game.s"
 	@echo "... Game/inc.o"
 	@echo "... Game/inc.i"
 	@echo "... Game/inc.s"

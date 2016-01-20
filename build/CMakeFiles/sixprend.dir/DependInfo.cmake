@@ -4,6 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
+  "/home/djeck/projects/SixPrend/Game/game.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/game.c.o"
   "/home/djeck/projects/SixPrend/Game/inc.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/inc.c.o"
   "/home/djeck/projects/SixPrend/Game/init.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/init.c.o"
   "/home/djeck/projects/SixPrend/Game/login.c" "/home/djeck/projects/SixPrend/build/CMakeFiles/sixprend.dir/Game/login.c.o"
