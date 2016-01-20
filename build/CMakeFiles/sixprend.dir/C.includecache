@@ -16,10 +16,6 @@ string.h
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
 
-/home/djeck/projects/SixPrend/Game/inc.c
-inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-
 /home/djeck/projects/SixPrend/Game/inc.h
 stdio.h
 -
@@ -48,13 +44,9 @@ menu.h
 game.h
 /home/djeck/projects/SixPrend/Game/game.h
 
-/home/djeck/projects/SixPrend/Game/init.h
-SDL2/SDL_image.h
--
-SDL2/SDL_ttf.h
--
-inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
+/home/djeck/projects/SixPrend/Game/login.c
+login.h
+/home/djeck/projects/SixPrend/Game/login.h
 
 /home/djeck/projects/SixPrend/Game/login.h
 inc.h
@@ -69,26 +61,6 @@ string.h
 -
 inc.h
 /home/djeck/projects/SixPrend/Game/inc.h
-
-/home/djeck/projects/SixPrend/Game/stat.c
-stat.h
-/home/djeck/projects/SixPrend/Game/stat.h
-
-/home/djeck/projects/SixPrend/Game/stat.h
-SDL2/SDL_ttf.h
--
-SDL_events.h
--
-string.h
--
-inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-
-/home/djeck/projects/SixPrend/main.c
-Game/inc.h
-/home/djeck/projects/SixPrend/Game/inc.h
-Game/init.h
-/home/djeck/projects/SixPrend/Game/init.h
 
 /usr/include/SDL2/SDL_blendmode.h
 begin_code.h
