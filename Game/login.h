@@ -49,5 +49,10 @@ void freeLoginRender();
  * return 2 si un nouveaux compte est créé
  */
 int identifier();
+/*
+ * Cherche dans le fichier si l'utilisateur à un compte ou pas
+ * return true si il est trouvé, false sinon
+ */
+bool exist();
 
 #endif
