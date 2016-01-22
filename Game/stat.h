@@ -24,7 +24,10 @@ typedef struct {
  * la variable de la structure Statistique
  */
 static Statistique stats[MAXSTAT];
-
+/*
+ * le taille de tableau
+ */
+static int tailleStats;
 /*
  * ajouter une victoire ou une défaite selon la valeur du booléen
  * true, ajouter une victoire
