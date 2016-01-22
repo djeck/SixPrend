@@ -92,7 +92,7 @@ void ajout_stat(bool victoire)
     loadStatFromFile();
     for(i=0; i<tailleStats && !trouve; i++)
     {
-        if(strcmp(utilisateur,stats[i])==0) // trouve
+        if(strcmp(utilisateur,stats[i].nom)==0) // trouve
         {
             if(victoire==true)
             {
