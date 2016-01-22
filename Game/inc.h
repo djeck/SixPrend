@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <SDL2/SDL.h>
-#include <SDL/SDL.h>
 
 #define BACKGROUNDPATH "./media/background.bmp" // fond d'ecran
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
