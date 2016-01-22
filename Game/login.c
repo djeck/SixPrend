@@ -184,9 +184,24 @@ int identifier()
 
 bool exist()
 {
-  // le nom saisie par l'utilisateur est dans la variable username
-  // le chemin d'acces au fichier est dans FILELOGIN
-  // le format adopté est texte clair: "nomDeLUtilisateur motDePasse\n"
-  return false; // temporaire pour les tests
+    FILE *fic;
+    char usernmlu[SIZESTR];
+    char passlu[SIZESTR];
+    fic=fopen(FILELOGIN,"r+");
+    if(fic==NULL)
+    {
+        printf("l'ouverture n'est pas bonne\n");
+    }
+    else
+    {
+        while(fscanf(fic,"%s %s",usernmlu, passlu)==2)
+        {
+            if(strcmp(usernmlu,username)==0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
