@@ -1,4 +1,5 @@
 #include "stat.h"
+#define FILESTATS "./media/stats.dat"
 
 static PickableImage choixBack;
 static Image Background;
@@ -60,4 +61,76 @@ void freeStatRender()
 	freeImage(Background); // Libération de la mémoire associée à la texture
 
 	printf("freeStatRender: liberation des ressources\n");
+}
+
+void loadStatFromFile()
+{
+    FILE *fic;
+    int i=0;
+    fic=fopen(FILESTATS,"r");
+    if(fic==NULL)
+    {
+        printf("loadStatFromFile: l'ouverture n'est pas bonne\n");
+    }
+    else
+    {
+        while(!feof(fic) && fread(&stats[i],sizeof(Statistique),1,fic))
+        {
+            i++;
+        }
+        fclose(fic);
+    }
+    tailleStats = i;
+}
+
+void ajout_stat(bool victoire)
+{
+    FILE *fic;
+    int i;
+    bool trouve =false;
+
+    loadStatFromFile();
+    for(i=0; i<tailleStats && !trouve; i++)
+    {
+        if(strcmp(utilisateur,stats[i])==0) // trouve
+        {
+            if(victoire==true)
+            {
+                stats[i].nb_vic=stats[i].nb_vic+1;
+            }
+            else
+            {
+                stats[i].nb_def=stats[i].nb_def+1;
+            }
+            trouve=true;
+        }
+
+    }
+    if(!trouve)
+    {
+        if(tailleStats < MAXSTAT)
+        {
+          strcpy(utilisateur,stats[tailleStats].nom);
+          stats[tailleStats].nb_vic=0;
+          stats[tailleStats].nb_def=0;
+          tailleStats++;
+        }
+        else
+        {
+            printf("ajout_stat: taille max atteint\n");
+        }
+    }
+    fic=fopen(FILESTATS,"w");
+    if(fic==NULL)
+    {
+        printf("ajout_stat: l'ouverture n'est pas bonne\n");
+    }
+    else
+    {
+        for(i=0;i<tailleStats;i++)
+        {
+            fwrite(&stats[i],sizeof(Statistique),1,fic);
+        }
+        fclose(fic);
+    }
 }
