@@ -20,6 +20,9 @@ typedef struct {
   int nb_def;
 } Statistique;
 
+/*
+ * la variable de la structure Statistique
+ */
 static Statistique stats[MAXSTAT];
 
 /*
