@@ -14,12 +14,12 @@
 /*
  *La structure de statistique
  */
-typedef struct {
+typedef struct
+{
   char nom[SIZESTR];
   int nb_vic;
   int nb_def;
 } Statistique;
-
 /*
  * la variable de la structure Statistique
  */
