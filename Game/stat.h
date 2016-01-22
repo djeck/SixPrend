@@ -29,10 +29,6 @@ static Statistique stats[MAXSTAT];
  */
 static int tailleStats;
 /*
- *initialisation du fichier
- */
-void initFile();
-/*
  * ajouter une victoire ou une défaite selon la valeur du booléen
  * true, ajouter une victoire
  * false, ajouter une défaite
