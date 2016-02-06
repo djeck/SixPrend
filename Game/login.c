@@ -3,11 +3,15 @@
 static char username[SIZESTR];
 static char password[SIZESTR];
 
+static Etapes step; // étapes du login
+
 static Image imgtext;
 static Image imginstruction;
 static Image lastTry;
 
 static char star[SIZESTR];
+// donnees à afficher
+static char text[SIZESTR];
 void eventLogin()
 {
 	SDL_Event event;
@@ -180,6 +184,7 @@ int identifier()
 	fclose(fic);
 	return 2;
     }
+    return 0; // en cas d'erreur le mot de passe n'est pas validé
 }
 
 bool exist()
@@ -201,7 +206,8 @@ bool exist()
                 return true;
             }
         }
-        return false;
+        
     }
+    return false;
 }
 

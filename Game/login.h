@@ -19,11 +19,6 @@
  */
 typedef enum{rLog,rPass} Etapes;
 
-static Etapes step;
-
-// donnees à afficher
-static char text[SIZESTR];
-
 /*
  * Gestion des evenements spécifique au login
  */
