@@ -1,5 +1,5 @@
 # SixPrend
-Projet informatique deuxieme anéee
+Projet informatique deuxième anéee
 
 headers:
 game.h
