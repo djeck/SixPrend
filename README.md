@@ -1,5 +1,5 @@
 # SixPrend
-Projet informatique deuxieme annee
+Projet informatique deuxieme anéee
 
 headers:
 inc.h
