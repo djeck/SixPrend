@@ -25,6 +25,8 @@ void changeStep(MainStep nextStep)
     case game:
       freeGameRender();
       break;
+    default:
+      break;
   }
 
   switch(nextStep)
@@ -44,6 +46,8 @@ void changeStep(MainStep nextStep)
     case game:
       initGameRender();
       break;
+    default:
+      break;
   }
   globalStep=nextStep;
   printf("changeStep: changement d'etat effectue avec succes\n");
@@ -61,7 +65,7 @@ void setTextColor(int r, int g, int b)
   color.b=b;
 }
 
-extern renderer;
+extern SDL_Renderer *renderer;
 Image createText(char str[],int x,int y,int size,bool input)
 {
   printf("getText: debut\n");
