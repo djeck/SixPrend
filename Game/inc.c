@@ -5,8 +5,8 @@
 
 void changeStep(MainStep nextStep)
 {
-  if(nextStep==globalStep)
-    return;
+  if(nextStep==globalStep || globalStep == end) // si il n'y a pas de changement ou que l'on s'apprêtait à quitter
+    return; // on de charge pas les ressources
   
   switch(globalStep)
   {
@@ -90,7 +90,7 @@ Image createText(char str[],int x,int y,int size,bool input)
 	if (! stext )
 	{
 		printf("getText: impossible de cree la surface du text\n");
-		printf("getText: taille de la chaine: %d\n",strlen(str));
+		printf("getText: taille de la chaine: %d\n",(int)strlen(str));
 		changeStep(end);
 		return;
 	}
