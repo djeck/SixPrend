@@ -91,15 +91,17 @@ Image createText(char str[],int x,int y,int size,bool input)
 	{
 		printf("getText: impossible de cree la surface du text\n");
 		printf("getText: taille de la chaine: %d\n",(int)strlen(str));
+		img.texture=NULL;
 		changeStep(end);
-		return;
+		return img;
 	}
 	img.texture = SDL_CreateTextureFromSurface(renderer,stext);
 	if (! img.texture )
 	{
 		printf("getText: impossible de cree la texture du text\n");
+		img.texture=NULL;
 		changeStep(end);
-		return;
+		return img;
 	}
 
 	img.rect.h = stext->h/size;
@@ -147,17 +149,21 @@ PickableImage createPickableText(char str[],int x,int y,int size)
 	if (! stext )
 	{
 		printf("getText: impossible de cree la surface du text\n");
-		printf("getText: taille de la chaine: %d\n",strlen(str));
+		printf("getText: taille de la chaine: %d\n",(int)strlen(str));
+		img.texture=NULL;
+		img.textureselelct=NULL;
 		changeStep(end);
-		return;
+		return img;
 	}
 	
 	img.texture = SDL_CreateTextureFromSurface(renderer,stext);
 	if (! img.texture )
 	{
 		printf("getText: impossible de cree la texture du text\n");
+		img.texture=NULL;
+		img.textureselelct=NULL;
 		changeStep(end);
-		return;
+		return img;
 	}
 	SDL_FreeSurface(stext);
 	
@@ -165,17 +171,19 @@ PickableImage createPickableText(char str[],int x,int y,int size)
 	if (! stext )
 	{
 		printf("getText: impossible de cree la surface du text\n");
-		printf("getText: taille de la chaine: %d\n",strlen(str));
+		printf("getText: taille de la chaine: %d\n",(int)strlen(str));
+		img.textureselelct=NULL; // img.texture est initialisee
 		changeStep(end);
-		return;
+		return img;
 	}
 	
 	img.textureselelct = SDL_CreateTextureFromSurface(renderer,stext);
 	if (! img.textureselelct )
 	{
 		printf("getText: impossible de cree la texture du text\n");
+		img.textureselelct=NULL; // img.texture est initialisee
 		changeStep(end);
-		return;
+		return img;
 	}
 
 	img.rect.h = stext->h/size;
@@ -207,13 +215,15 @@ Image createPicture(char* path, int x, int y,int size)
 	if ( !surface )
 	{
 		printf("getPicture: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
+		img.texture = NULL;
 		changeStep(end);
-		return;
+		return img;
 	}
 	img.texture = SDL_CreateTextureFromSurface(renderer,surface); // Préparation du sprite
 	if (! img.texture )
 	{
 		printf("getPicture: impossible de cree la texture de l'image de fond\n");
+		img.texture = NULL;
 		changeStep(end);
 		return img;
 	}
