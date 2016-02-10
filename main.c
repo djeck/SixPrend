@@ -38,6 +38,10 @@ int main(int argc, char ** argv)
 		  case game:
 		  renderGame();
 		  break;
+		  case end:
+		    break;
+		  default:
+		    printf("main: globalState non valide\n");
 		}
 		
 		SDL_RenderPresent(renderer);
@@ -61,6 +65,11 @@ int main(int argc, char ** argv)
 		  case game:
 		  eventGame();
 		  break;
+		  case end:
+		    break;
+		  default:
+		    printf("main: globalState non valide\n");
+		  
 		}
 	}
 
