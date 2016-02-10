@@ -25,6 +25,8 @@
 #include "login.h"
 #include "menu.h"
 #include "game.h"
+#include "mode.h"
+#include "stat.h"
 
 TTF_Font* font; // initialisé par init()
 
