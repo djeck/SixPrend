@@ -9,6 +9,8 @@
 #include <SDL_events.h>
 #include <string.h>
 #include "inc.h"
+
+#define MAXJOUEUR 10
 #define NB_CARD 104
 #define HAND 10 // nombre de carte dans la main
 #define POSHAND_X  20 // position de la premiere carte de la main selon X
@@ -19,12 +21,23 @@
 #define POSTABLE_X 10
 #define POSTABLE_Y 20
 #define DECRANGEE 5
+#define POSJOUEUR_X 700
+#define POSJOUEUR_Y 20
+#define SIZEJOUEUR 60 // taille réservé à l'affichage de chaque joueur
 
+typedef enum {OK=1,ERR=0,BOT=2} TypeJoueur;
 
-static int table[RANGEE][CPRANGEE];
-SDL_Rect posTable[RANGEE][CPRANGEE]; // la position de chaque carte posee sur la table
-static int poignee[HAND]; // la main de l'utilisateur, contient le numero de la carte à afficher [1,104]
-SDL_Rect posPoignee[HAND]; // la position de chaque carte da la main pour l'y afficher à l'écran
+typedef struct {
+  TypeJoueur type;
+  char nom[SIZESTR];
+  int tete; // nombre de tête de boeuf
+  SDL_Rect rect; // position à l'ecran de leur nom ...
+} Joueur;
+
+/*
+ * génére les donnees à afficher pour chaque joueur
+ */
+void updateJoueur();
 /*
  * ranger la main et calculer la position où sera rendu chaque image de la main
  */
