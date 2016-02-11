@@ -22,16 +22,16 @@
 #define POSTABLE_Y 20
 #define DECRANGEE 5
 #define POSJOUEUR_X 700
-#define POSJOUEUR_Y 20
+#define POSJOUEUR_Y 5
 #define SIZEJOUEUR 60 // taille réservé à l'affichage de chaque joueur
 
 typedef enum {OK=1,ERR=0,BOT=2} TypeJoueur;
 
 typedef struct {
-  TypeJoueur type;
-  char nom[SIZESTR];
-  int tete; // nombre de tête de boeuf
-  SDL_Rect rect; // position à l'ecran de leur nom ...
+    TypeJoueur type;
+    char nom[SIZESTR];
+    int tete; // nombre de tête de boeuf
+    SDL_Rect rect; // position à l'ecran de leur nom ...
 } Joueur;
 
 /*

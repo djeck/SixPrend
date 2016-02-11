@@ -33,22 +33,22 @@
 
 TTF_Font* font; // initialisé par init()
 
-typedef enum{none,login,menu,mode,stat,game,end} MainStep; // étapes principales du jeu
+typedef enum {none,login,menu,mode,stat,game,end} MainStep; // étapes principales du jeu
 
 typedef struct
 {
-  SDL_Texture* texture;
-  SDL_Rect rect;
-  SDL_Rect rectCur; // rect du cursseur (pour la barre lors de saisie de texte par exemple)
-  bool input; // sert à faire clignoter l'image (pour la barre lors de saisie de texte par exemple)
+    SDL_Texture* texture;
+    SDL_Rect rect;
+    SDL_Rect rectCur; // rect du cursseur (pour la barre lors de saisie de texte par exemple)
+    bool input; // sert à faire clignoter l'image (pour la barre lors de saisie de texte par exemple)
 } Image;
 
 typedef struct
 {
-  SDL_Texture* texture;
-  SDL_Texture* textureselelct;
-  SDL_Rect rect;
-  bool select;
+    SDL_Texture* texture;
+    SDL_Texture* textureselelct;
+    SDL_Rect rect;
+    bool select;
 } PickableImage;
 
 /*

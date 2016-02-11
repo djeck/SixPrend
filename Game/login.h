@@ -17,7 +17,7 @@
  * rLog : rensseigner le nom d'utilisateur
  * rPass : rensseigner le mot de passe
  */
-typedef enum{rLog,rPass} Etapes;
+typedef enum {rLog,rPass} Etapes;
 
 /*
  * Gestion des evenements spécifique au login
