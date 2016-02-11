@@ -4,6 +4,8 @@ static PickableImage choixQuit;
 static PickableImage choixBack;
 static Image Background;
 
+static Image card[NB_CARD];
+
 void eventGame()
 {
   SDL_Event event;
@@ -39,11 +41,20 @@ static int renderinitialised = 0;
 
 void initGameRender()
 {
-	
+	printf("initGameRender: début\n");
 	Background = createPicture(BACKGROUNDPATH,0,0,1);
 	
 	choixQuit = createPickableText("Exit",400,500,8);
 	choixBack = createPickableText("Return",100,500,8);
+	
+	int i;
+	char path[10];
+	for(i=0;i<NB_CARD;i++)
+	{
+	  sprintf(path,"./media/%d.bmp",i+1);
+	  printf("initGameRender: chagement de la carte %s\n",path);
+	  card[i] = createPicture(path,0,0,1);
+	}
 	
 	renderinitialised=1;
 }
@@ -64,6 +75,11 @@ void freeGameRender()
 		return;
 	}
 	renderinitialised=0;
+	int i;
+	for(i=0;i<NB_CARD;i++)
+	{
+	  freeImage(card[i]);
+	}
 	freePickableImage(choixQuit);
 	freePickableImage(choixBack);
 	freeImage(Background); // Libération de la mémoire associée à la texture

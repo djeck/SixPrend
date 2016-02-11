@@ -9,6 +9,7 @@
 #include <SDL_events.h>
 #include <string.h>
 #include "inc.h"
+#define NB_CARD 104
 
 /*
  * Gestion des evenements spécifique au jeu
