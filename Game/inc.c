@@ -263,6 +263,11 @@ void renderImage(Image img)
     //SDL_RenderDrawRect(renderer,&rect);
   }
 }
+void renderIn(Image img, SDL_Rect rect)
+{
+  SDL_RenderCopy(renderer,img.texture,NULL,&rect);
+}
+
 void renderPickableImage(PickableImage img)
 {
   if(img.select)

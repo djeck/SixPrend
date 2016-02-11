@@ -36,8 +36,8 @@ typedef struct
 {
   SDL_Texture* texture;
   SDL_Rect rect;
-  SDL_Rect rectCur; // rect du cursseur
-  bool input;
+  SDL_Rect rectCur; // rect du cursseur (pour la barre lors de saisie de texte par exemple)
+  bool input; // sert à faire clignoter l'image (pour la barre lors de saisie de texte par exemple)
 } Image;
 
 typedef struct
@@ -72,6 +72,7 @@ void setTextColor(int r,int g,int b);
 Image createPicture(char* path, int x, int y,int size);
 bool collisionWithMouse(SDL_Rect arg0,int mx,int my);
 void renderImage(Image img);
+void renderIn(Image img,SDL_Rect rect);
 void freeImage(Image img);
 void renderPickableImage(PickableImage img);
 void freePickableImage(PickableImage img);
