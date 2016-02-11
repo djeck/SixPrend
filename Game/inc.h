@@ -11,6 +11,9 @@
 #include <SDL2/SDL.h>
 
 #define BACKGROUNDPATH "./media/background.bmp" // fond d'ecran
+#define OKPATH "./media/ok.bmp"
+#define NOPATH "./media/no.bmp"
+#define ROBOTPATH "./media/robot.bmp"
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 #define SCREEN_WIDTH 800 // largeur par default de la fenetre
 #define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
