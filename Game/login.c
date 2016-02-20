@@ -28,6 +28,7 @@ void eventLogin()
             if ( event.key.keysym.sym == SDLK_DELETE || event.key.keysym.sym == SDLK_BACKSPACE )
             {
                 text[strlen(text)-1]='\0';
+		star[strlen(star)-1]='\0';
                 printf("eventLogin: character erased\n");
                 havetoup=1;
             }
