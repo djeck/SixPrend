@@ -5,11 +5,14 @@
 
 #include "Game/inc.h"
 #include "Game/init.h"
+#include "time.h"
 
 extern SDL_Renderer *renderer;
 
 int main(int argc, char ** argv)
 {
+    srand(time(NULL));
+    
     printf("main: lancement du jeu\n");
 
     init(); // initialisation des ressources communes à toute partie du jeu
