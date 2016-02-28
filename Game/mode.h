@@ -6,7 +6,7 @@
 #define MODE_H
 
 #include <SDL2/SDL_ttf.h>
-#include <SDL_events.h>
+#include <SDL2/SDL_events.h>
 #include <string.h>
 #include "inc.h"
 
