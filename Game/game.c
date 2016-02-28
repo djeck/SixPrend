@@ -4,10 +4,6 @@ static PickableImage choixQuit;
 static PickableImage choixBack;
 static Image Background;
 
-static Image ok; // image pour les joueurs connecté
-static Image no; // image pour les joueur non connecté
-static Image robot; // image pour les robots
-
 static Image card[NB_CARD]; // card[0] contient la carte 1 ...
 
 static int table[RANGEE][CPRANGEE]; // chaque carte de la table, 0 dès la fin d'une rangee
@@ -23,6 +19,19 @@ static Image joueurNom[MAXJOUEUR];
 static Image joueurPoint[MAXJOUEUR];
 
 void updateJoueur()
+{
+  char buff[10];
+    int i;
+    for(i=0; i<MAXJOUEUR; i++)
+    {
+        updateText(&joueurNom[i],joueurs[i].nom,POSJOUEUR_X-100,POSJOUEUR_Y + i*(SIZEJOUEUR),10); // mis a jour des noms des joueurs
+        sprintf(buff,"%d",joueurs[i].tete);
+        updateText(&joueurPoint[i],buff,POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17 ,10); // mis à jour des points
+    }
+  
+}
+
+void createJoueur()
 {
     char buff[10];
     int i;
@@ -90,17 +99,12 @@ void initGameRender()
     nombreJoueur=2;
 
     Background = createPicture(BACKGROUNDPATH,0,0,1);
-
-    ok = createPicture(OKPATH,0,0,1);
-    no = createPicture(NOPATH,0,0,1);
-    robot = createPicture(ROBOTPATH,0,0,1);
-
+ 
     choixQuit = createPickableText("Exit",400,520,8);
     choixBack = createPickableText("Return",100,500,8);
 
     int i,z;
     char path[10];
-    char buff[10];
 
     for(i=0; i<NB_CARD; i++) // chargement des ressources pour afficher toutes les cartes
     {
@@ -143,31 +147,28 @@ void initGameRender()
         joueurs[i].tete=0;
         joueurs[i].rect.x = POSJOUEUR_X;
         joueurs[i].rect.y = POSJOUEUR_Y + i*(SIZEJOUEUR);
-        joueurs[i].rect.w = ok.rect.w;
-        joueurs[i].rect.h = ok.rect.h;
-        joueurNom[i] =  createText(joueurs[i].nom,POSJOUEUR_X-100,POSJOUEUR_Y + i*(SIZEJOUEUR),10,false);
-        sprintf(buff,"%d",joueurs[i].tete);
-        joueurPoint[i] =  createText(buff,POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17 ,10,false);
     }
 
     //pour test
-    nombreJoueur=10;
-    strcpy(joueurs[5].nom,"djeck");
-    joueurs[0].type=BOT;
-    joueurs[2].type=OK;
+    nombreJoueur=5;
+    strcpy(joueurs[0].nom,"mark");
+    strcpy(joueurs[1].nom,"polo");
+    strcpy(joueurs[2].nom,"patrice");
+    strcpy(joueurs[3].nom,"antoine");
+    strcpy(joueurs[4].nom,"jack");
+    joueurs[0].tete=5;
     poignee[0] = 17;
     poignee[1] = 2;
     poignee[2] = 16;
     poignee[3] = 84;
     poignee[4] = 0;
     poignee[5] = 32;
-    table[0][0]=86;
-    table[0][1]=4;
+    table[0][0]=86; table[0][1]=4;
     table[1][0]=65;
     table[2][0]=45;
     table[3][0]=34;
     ordonner();
-    updateJoueur();
+    createJoueur();
 
     renderinitialised=1;
 }
@@ -185,12 +186,6 @@ void renderGame()
 
     for(i=0; i<nombreJoueur; i++)
     {
-        if(joueurs[i].type == OK)
-            renderIn(ok,joueurs[i].rect);
-        else if(joueurs[i].type == BOT)
-            renderIn(robot,joueurs[i].rect);
-        else
-            renderIn(no,joueurs[i].rect);
         renderImage(joueurNom[i]);
         renderImage(joueurPoint[i]);
     }
@@ -219,9 +214,6 @@ void freeGameRender()
     }
     freePickableImage(choixQuit);
     freePickableImage(choixBack);
-    freeImage(ok);
-    freeImage(no);
-    freeImage(robot);
     freeImage(Background); // Libération de la mémoire associée à la texture
 
     printf("freeGameGame: liberation des ressources\n");

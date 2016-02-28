@@ -6,7 +6,7 @@
 #define GAME_H
 
 #include <SDL2/SDL_ttf.h>
-#include <SDL_events.h>
+#include <SDL2/SDL_events.h>
 #include <string.h>
 #include "inc.h"
 
@@ -20,24 +20,25 @@
 #define CPRANGEE 6 // nombre de carte maximum par rangee
 #define POSTABLE_X 10
 #define POSTABLE_Y 20
-#define DECRANGEE 5
-#define POSJOUEUR_X 700
+#define DECRANGEE 7
+#define POSJOUEUR_X 800
 #define POSJOUEUR_Y 5
 #define SIZEJOUEUR 60 // taille réservé à l'affichage de chaque joueur
 
-typedef enum {OK=1,ERR=0,BOT=2} TypeJoueur;
-
 typedef struct {
-    TypeJoueur type;
     char nom[SIZESTR];
     int tete; // nombre de tête de boeuf
     SDL_Rect rect; // position à l'ecran de leur nom ...
 } Joueur;
 
 /*
- * génére les donnees à afficher pour chaque joueur
+ * met à jour les donnees à afficher pour chaque joueur
  */
 void updateJoueur();
+/*
+ * creer les donnees à afficher pour chaque joueur
+ */
+void createJoueur();
 /*
  * ranger la main et calculer la position où sera rendu chaque image de la main
  */
