@@ -1,8 +1,22 @@
 #include "stat.h"
-#define FILESTATS "./media/stats.dat"
 
 static PickableImage choixBack;
 static Image Background;
+static Image name; // lancer le mode puis le jeu
+static Image vic;
+static Image def;
+static Image testname[10];
+static Image testvic[10];
+static Image testdef[10];
+
+/*
+ * la variable de la structure Statistique
+ */
+static Statistique stats[MAXSTAT];
+/*
+ * le taille de tableau
+ */
+static int tailleStats;
 
 void eventStat()
 {
@@ -34,29 +48,75 @@ static int renderinitialised = 0;
 
 void initStatRender()
 {
-
+    
+    loadStatFromFile();
+    int j=0;
+    char nom[200], vics[200], defs[200];
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
     choixBack = createPickableText("Return",100,500,8);
 
+    do
+    {
+      strcpy(nom,stats[j].nom);
+      sprintf(vics,"%d",stats[j].nb_vic);
+      sprintf(defs,"%d",stats[j].nb_def);
+      j++;
+      testname[j-1]=createText(nom,50+j*80,150,9,false);
+      testvic[j-1]=createText(vics,50+j*80,210,9,false);
+      testdef[j-1]=createText(defs,50+j*80,270,9,false);
+    }while(j<tailleStats && tailleStats<MAXSTAT);
+    
+    loadStatFromFile();
+    name = createText("Name:",50,150,10,false);
+    vic = createText("Victoire:",50,210,10,false);
+    def = createText("Default:",50,270,10,false);
+
+    printf("initStatRender : initialised\n");
+    
+    
     renderinitialised=1;
 }
 void renderStat()
 {
+    int j;
     if(renderinitialised==0)
         return;
+    
     renderImage(Background);
+    
+    renderImage(name);
+    renderImage(vic);
+    renderImage(def);
+    do{
+    renderImage(testname[j]);
+    renderImage(testvic[j]);
+    renderImage(testdef[j]);
+    j++;
+    }while(j<10);
+
+    
     renderPickableImage(choixBack);
 }
 
 void freeStatRender()
 {
+  int j=0;
     if(renderinitialised==0)
     {
         printf("freeStatRender: ne peut pas liberer les ressources car elles n'ont pas etaient inititialisé\n");
         return;
     }
     renderinitialised=0;
+    freeImage(name);
+    freeImage(vic);
+    freeImage(def);
+    do{
+    freeImage(testname[j]);
+    freeImage(testvic[j]);
+    freeImage(testdef[j]);
+    j++;
+    }while(j<10);
     freePickableImage(choixBack);
     freeImage(Background); // Libération de la mémoire associée à la texture
 
@@ -74,7 +134,7 @@ void loadStatFromFile()
     }
     else
     {
-        while(!feof(fic) && fread(&stats[i],sizeof(Statistique),1,fic))
+        while(i<MAXSTAT && !feof(fic) && fread(&stats[i],sizeof(Statistique),1,fic))
         {
             i++;
         }
@@ -106,13 +166,21 @@ void ajout_stat(bool victoire)
         }
 
     }
-    if(!trouve)
+    if(!trouve) // le joueur n'a pas encore de statistique
     {
-        if(tailleStats < MAXSTAT)
+        if(tailleStats < MAXSTAT-1)
         {
-            strcpy(utilisateur,stats[tailleStats].nom);
-            stats[tailleStats].nb_vic=0;
-            stats[tailleStats].nb_def=0;
+            strcpy(stats[tailleStats].nom,utilisateur);
+	    if(victoire==true)
+            {
+                stats[tailleStats].nb_vic=1;
+		stats[tailleStats].nb_def=0;
+            }
+            else
+            {
+                stats[tailleStats].nb_def=1;
+		stats[tailleStats].nb_vic=0;
+            }
             tailleStats++;
         }
         else

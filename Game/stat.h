@@ -6,10 +6,12 @@
 #define STAT_H
 
 #include <SDL2/SDL_ttf.h>
-#include <SDL_events.h>
+#include <SDL2/SDL_events.h>
 #include <string.h>
+
 #include "inc.h"
 #define MAXSTAT 100
+#define FILESTATS "./media/stats.dat"
 
 /*
  *La structure de statistique
@@ -20,14 +22,7 @@ typedef struct
     int nb_vic;
     int nb_def;
 } Statistique;
-/*
- * la variable de la structure Statistique
- */
-static Statistique stats[MAXSTAT];
-/*
- * le taille de tableau
- */
-static int tailleStats;
+
 /*
  * ajouter une victoire ou une défaite selon la valeur du booléen
  * true, ajouter une victoire
