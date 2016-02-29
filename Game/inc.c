@@ -135,21 +135,22 @@ PickableImage createPickableText(char str[],int x,int y,int size)
     img.rect.y = y;
 
     if(!font)
-        printf("getText: font non charge\n");
+        printf("createPickableText: font non charge\n");
 
     if(strlen(str)==0)
     {
-        printf("getText: chaine vide\n");
-        stext = TTF_RenderText_Solid(font," ",color);
+        printf("createPickableText: chaine vide\n");
+	str=" ";
+        stext = TTF_RenderText_Solid(font,str,color);
     }
     else
     {
-        stext = TTF_RenderText_Solid(font,str,color);/**/
+        stext = TTF_RenderText_Solid(font,str,color);
     }
     if (! stext )
     {
-        printf("getText: impossible de cree la surface du text\n");
-        printf("getText: taille de la chaine: %d\n",(int)strlen(str));
+        printf("createPickableText: impossible de cree la surface du text %s\n",TTF_GetError());
+        printf("createPickableText: taille de la chaine: %d\n",(int)strlen(str));
         img.texture=NULL;
         img.textureselelct=NULL;
         changeStep(end);
@@ -159,7 +160,7 @@ PickableImage createPickableText(char str[],int x,int y,int size)
     img.texture = SDL_CreateTextureFromSurface(renderer,stext);
     if (! img.texture )
     {
-        printf("getText: impossible de cree la texture du text\n");
+        printf("createPickableText: impossible de cree la texture du text\n");
         img.texture=NULL;
         img.textureselelct=NULL;
         changeStep(end);
@@ -170,8 +171,8 @@ PickableImage createPickableText(char str[],int x,int y,int size)
     stext = TTF_RenderText_Solid(font,str,colorsel);/**/
     if (! stext )
     {
-        printf("getText: impossible de cree la surface du text\n");
-        printf("getText: taille de la chaine: %d\n",(int)strlen(str));
+        printf("createPickableText: impossible de cree la surface du text\n");
+        printf("createPickableText: taille de la chaine: %d\n",(int)strlen(str));
         img.textureselelct=NULL; // img.texture est initialisee
         changeStep(end);
         return img;
@@ -180,7 +181,7 @@ PickableImage createPickableText(char str[],int x,int y,int size)
     img.textureselelct = SDL_CreateTextureFromSurface(renderer,stext);
     if (! img.textureselelct )
     {
-        printf("getText: impossible de cree la texture du text\n");
+        printf("createPickableText: impossible de cree la texture du text\n");
         img.textureselelct=NULL; // img.texture est initialisee
         changeStep(end);
         return img;
@@ -196,8 +197,10 @@ void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size)
 {
     if(ptr->texture && ptr->textureselelct)
     {
+	bool selected = ptr->select;
         freePickableImage(*ptr);
         *ptr = createPickableText(str,x,y,size);
+	ptr->select=selected;
     }
     else
         printf("updateText: texture non initialisee ne peut pas etre mis à jour\n");
