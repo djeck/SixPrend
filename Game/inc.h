@@ -52,13 +52,6 @@ typedef struct
     bool select; // si l'untilisateur a selectionner cette image
 } PickableImage;
 
-/*
- * stoque le nom de l'utilisateur bien identifié
- * defini pour les etapes menu, mode, stat,game
- * ne pas utiliser sinon
- */
-char utilisateur[SIZESTR];
-
 // Etapes principale du jeu
 MainStep globalStep;
 
@@ -70,17 +63,4 @@ void changeStep(MainStep nextStep);
 
 bool collisionWithMouse(SDL_Rect arg0,int mx,int my);
 
-/*
-Image createText(char str[],int x,int y,int size,bool input);
-void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size);
-void updateText(Image* ptr,char str[],int x,int y,int size);
-PickableImage createPickableText(char str[],int x,int y,int size);
-void setTextColor(int r,int g,int b);
-Image createPicture(char* path, int x, int y,int size);
-void renderImage(Image img);
-void renderIn(Image img,SDL_Rect rect);
-void freeImage(Image img);
-void renderPickableImage(PickableImage img);
-void freePickableImage(PickableImage img);
-*/
 #endif

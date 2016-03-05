@@ -1,7 +1,16 @@
 #include "login.h"
 
-static char username[SIZESTR]; // ne contient pas forcement un utilisateur valide, buffer pour ce fichier
-static char password[SIZESTR];
+/*
+ * stoque le nom de l'utilisateur bien identifié
+ * defini pour les etapes menu, mode, stat,game
+ * ne pas utiliser sinon
+ */
+static char utilisateur[SIZESTR];
+
+char* getUsername()
+{
+  return utilisateur;
+}
 
 static Etapes step; // étapes du login
 
@@ -12,6 +21,9 @@ static Text lastTry;
 void eventLogin()
 {
     SDL_Event event;
+    static char username[SIZESTR];
+    static char password[SIZESTR];
+
     while (SDL_PollEvent(&event))
     {
 	inputTextBox(&inputBox,&event);
@@ -37,8 +49,8 @@ void eventLogin()
                 else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
                 {
                     strcpy(password,inputBox.text);
-                    int resultat = identifier();
-		    inputBox.text[0]='\0';
+                    int resultat = identifier(username,password);
+		    inputBox.text[0]='\0'; // on efface le contenu
 		    updateTextBox(&inputBox);
                     switch(resultat)
                     {
@@ -86,8 +98,8 @@ void initLoginRender()
 
 
     imginstruction = createText("Username:",100,150,5);
-    lastTry = createText(" ",100,50,5);
-    inputBox = createTextBox(" ",100,200,5,true);
+    lastTry = createText("",100,50,5);
+    inputBox = createTextBox("",100,200,5,true);
 
     step=rLog; // on va commencer par lui demander le nom d'utilisateur
     renderinitialised=1;
@@ -121,7 +133,7 @@ void freeLoginRender()
     printf("freeLoginRender: liberation des ressources\n");
 }
 
-int identifier()
+int identifier(char *username,char *password)
 {
     FILE *fic;
     char loginlu[SIZESTR],passlu[SIZESTR];
@@ -149,6 +161,7 @@ int identifier()
             }
         }
         //fichier parcouru sans avoir pu trouver le compte: on le cree
+        printf("login.c : identifier : AJOUT du joueur %s\n",username);
         fprintf(fic,"%s %s\n",username,password);
         fclose(fic);
         return 2;
@@ -156,7 +169,7 @@ int identifier()
     return 0; // en cas d'erreur le mot de passe n'est pas validé
 }
 
-bool exist()
+bool exist(char *username)
 {
     FILE *fic;
     char usernmlu[SIZESTR];
@@ -177,6 +190,7 @@ bool exist()
         }
 
     }
+    printf("login.c : exist : le joueur n'existe pas\n");
     return false;
 }
 

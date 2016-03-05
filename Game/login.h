@@ -18,6 +18,8 @@
  */
 typedef enum {rLog,rPass} Etapes;
 
+// retourne NULL si non identifier
+char* getUsername();
 /*
  * Gestion des evenements spécifique au login
  */

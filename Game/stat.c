@@ -148,7 +148,7 @@ void ajout_stat(bool victoire)
     loadStatFromFile();
     for(i=0; i<tailleStats && !trouve; i++)
     {
-        if(strcmp(utilisateur,stats[i].nom)==0) // trouve
+        if(strcmp(getUsername(),stats[i].nom)==0) // trouve
         {
             if(victoire==true)
             {
@@ -166,7 +166,7 @@ void ajout_stat(bool victoire)
     {
         if(tailleStats < MAXSTAT-1)
         {
-            strcpy(stats[tailleStats].nom,utilisateur);
+            strcpy(stats[tailleStats].nom,getUsername());
 	    if(victoire==true)
             {
                 stats[tailleStats].nb_vic=1;

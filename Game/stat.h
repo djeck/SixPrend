@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "inc.h"
+#include "login.h"
 #include "../GUI/button.h"
 #include "../GUI/text.h"
 #include "../GUI/picture.h"
