@@ -1,15 +1,15 @@
 #include "mode.h"
 
-static PickableImage choixQuit;
-static PickableImage choixStart;
-static PickableImage choixBack;
-static Image Background;
+static Button choixQuit;
+static Button choixStart;
+static Button choixBack;
+static Picture Background;
 
-static PickableImage choixConnect;
-static Image ipAsk;
-static PickableImage ipServer;
+static Button choixConnect;
+static Text ipAsk;
+static TextBox ipServer;
 
-static Image connecting; //message de connection
+static Text connecting; //message de connection
 
 static char ipText[100];
 
@@ -26,71 +26,16 @@ void eventMode()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-        if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT )
-        {
-            if(collisionWithMouse(choixQuit.rect,event.button.x,event.button.y))
-            {
-                changeStep(end);
-            }
-            else if(collisionWithMouse(choixBack.rect,event.button.x,event.button.y))
-            {
-                changeStep(menu);
-            }
-            else if(collisionWithMouse(choixStart.rect,event.button.x,event.button.y))
-            {
-	      if(modeStep == READY) // si le joueur a bien choisi une salle
-                changeStep(game);
-            }
-            else if(collisionWithMouse(choixConnect.rect,event.button.x,event.button.y))
-            {
-                modeStep=CONNECT;
-            }
-            if(collisionWithMouse(ipAsk.rect,event.button.x,event.button.y) && modeStep == GETIP) // si une nouvelle ip est fournie
-	    {
-	      ipServer.select = true;
-	      choixConnect.select=false;
-	      modeStep = GETIP; // on n'affiche plus le choix des salles
-	    }
-	    else
-	      ipServer.select=false;
-
-        }
-        else if( event.type == SDL_MOUSEMOTION )
-        {
-            choixQuit.select=collisionWithMouse(choixQuit.rect,event.motion.x,event.motion.y);
-            choixBack.select=collisionWithMouse(choixBack.rect,event.motion.x,event.motion.y);
-	    if(modeStep==READY)
-	      choixStart.select=collisionWithMouse(choixStart.rect,event.motion.x,event.motion.y);
-	    if(modeStep==GETIP)
-	      choixConnect.select=collisionWithMouse(choixConnect.rect,event.motion.x,event.motion.y);
-        }
-        else if ( event.type == SDL_KEYUP )
-	{
-	  if ( event.key.keysym.sym == SDLK_DELETE || event.key.keysym.sym == SDLK_BACKSPACE )
-            {
-                if(ipServer.select && strlen(ipText)!=0)
-		{
-		  ipText[strlen(ipText)-1]='\0';
-		  updatePickableText(&ipServer,ipText,150,100,8);
-		}
-                printf("eventLogin: character erased\n");
-            }
-	}
+	inputTextBox(&ipServer,&event);
+	inputButton(&choixQuit,&event);
+	inputButton(&choixBack,&event);
+	inputButton(&choixStart,&event);
+	inputButton(&choixConnect,&event);
+        
         switch(event.type)
         {
         case SDL_QUIT:
             changeStep(end);
-            break;
-	case SDL_TEXTINPUT:
-	  if(ipServer.select)
-	  {
-            if(strlen(ipText)<100-1)
-            {
-                strcat(ipText, event.text.text);
-            }
-            updatePickableText(&ipServer,ipText,150,100,8);
-            printf("eventMode: ipText = %s\n",ipText);
-	  }
             break;
         }
     }
@@ -103,15 +48,35 @@ void initModeRender()
     strcpy(ipText,"127.0.0.1");
     Background = createPicture(BACKGROUNDPATH,0,0,1);
     
-    choixQuit = createPickableText("Exit",400,550,8);
-    choixBack = createPickableText("Return",100,550,8);
-    choixStart = createPickableText("Start game",100,450,8);
+    choixQuit = createButton("Exit",400,550,8);
+    choixBack = createButton("Return",100,550,8);
+    choixStart = createButton("Start game",100,450,8);
     
-    ipAsk = createText("Server IP",20,100,8,false);
-    ipServer = createPickableText(ipText,150,100,8);
-    choixConnect = createPickableText("Connect",400,100,8);
+    ipAsk = createText("Server IP",20,100,8);
+    ipServer = createTextBox(ipText,150,100,8,true);
+    choixConnect = createButton("Connect",400,100,8);
     
-    connecting = createText("Connecting to server ...",150,300,6,false);
+    connecting = createText("Connecting to server ...",150,300,6);
+    void CQuit()
+    {
+      changeStep(end);
+    }
+    choixQuit.callback = &CQuit;
+    void CMenu()
+    {
+      changeStep(menu);
+    }
+    choixBack.callback = &CMenu;
+    void CGame()
+    {
+      changeStep(game);
+    }
+    choixStart.callback = &CGame;
+    void CConnect()
+    {
+      modeStep=CONNECT;
+    }
+    choixConnect.callback = &CConnect;
     
     renderinitialised=1;
     modeStep=GETIP;
@@ -120,16 +85,16 @@ void renderMode()
 {
     if(renderinitialised==0)
         return;
-    renderImage(Background);
+    renderPicture(&Background);
     
-    renderImage(ipAsk);
+    renderText(&ipAsk);
     if(modeStep==CONNECT)
-      renderImage(connecting);
-    renderPickableImage(ipServer);
-    renderPickableImage(choixConnect);
-    renderPickableImage(choixQuit);
-    renderPickableImage(choixBack);
-    renderPickableImage(choixStart);
+      renderText(&connecting);
+    renderTextBox(&ipServer);
+    renderButton(&choixConnect);
+    renderButton(&choixQuit);
+    renderButton(&choixBack);
+    renderButton(&choixStart);
 }
 
 void freeModeRender()
@@ -140,14 +105,14 @@ void freeModeRender()
         return;
     }
     renderinitialised=0;
-    freePickableImage(choixConnect);
-    freePickableImage(choixQuit);// Libération de la mémoire associée aux textures
-    freePickableImage(ipServer);
-    freeImage(ipAsk);
-    freeImage(connecting);
-    freePickableImage(choixBack);
-    freePickableImage(choixStart);
-    freeImage(Background);
+    freeButton(&choixConnect);
+    freeButton(&choixQuit);// Libération de la mémoire associée aux textures
+    freeTextBox(&ipServer);
+    freeText(&ipAsk);
+    freeText(&connecting);
+    freeButton(&choixBack);
+    freeButton(&choixStart);
+    freePicture(&Background);
 
     printf("freeModeRender: liberation des ressources\n");
 }

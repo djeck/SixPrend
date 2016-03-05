@@ -4,15 +4,6 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdbool.h>
 #include "../Game/inc.h"
 
 typedef struct

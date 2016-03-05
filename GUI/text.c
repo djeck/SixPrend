@@ -68,12 +68,12 @@ void updateText(Text* ptr,char str[])
 
 void freeText(Text *img)
 {
-    SDL_DestroyTexture(*img.texture);
+    SDL_DestroyTexture(img->texture);
 }
 
 static Uint32 timer=0;
 void renderText(Text *img)
 {
-  SDL_RenderCopy(renderer,img.texture,NULL,&img.rect);
+  SDL_RenderCopy(renderer,img->texture,NULL,&img->rect);
 }
 

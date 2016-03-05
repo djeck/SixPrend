@@ -1,24 +1,20 @@
 #include "login.h"
 
-static char username[SIZESTR];
+static char username[SIZESTR]; // ne contient pas forcement un utilisateur valide, buffer pour ce fichier
 static char password[SIZESTR];
 
 static Etapes step; // étapes du login
 
-static Image imgtext;
-static Image imginstruction;
-static Image lastTry;
+static TextBox inputBox;
+static Text imginstruction;
+static Text lastTry;
 
-//donnees à afficher pour le mot de passe
-static char star[SIZESTR];
-// donnees à afficher
-static char text[SIZESTR];
 void eventLogin()
 {
     SDL_Event event;
-    int havetoup=0;
     while (SDL_PollEvent(&event))
     {
+	inputTextBox(&inputBox,&event);
         switch(event.type)
         {
         case SDL_QUIT:
@@ -26,38 +22,30 @@ void eventLogin()
             changeStep(end);
             break;
         case SDL_KEYUP:
-            if ( event.key.keysym.sym == SDLK_DELETE || event.key.keysym.sym == SDLK_BACKSPACE )
-            {
-                text[strlen(text)-1]='\0';
-		star[strlen(star)-1]='\0';
-                printf("eventLogin: character erased\n");
-                havetoup=1;
-            }
-            else if( event.key.keysym.scancode == SDL_SCANCODE_RETURN ||
+            if( event.key.keysym.scancode == SDL_SCANCODE_RETURN ||
                      event.key.keysym.sym == SDLK_TAB )
             {
                 printf("eventLogin: input confirmed\n");
-                if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur
+                if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur, on recupère le résultat
                 {
-                    strcpy(username,text); // on garde le nom d'utilisateur de côté
-                    havetoup=1;
-                    updateText(&imginstruction,"Password:",100,150,5);
-                    text[0]='\0';
-                    star[0]='\0';
+                    strcpy(username,inputBox.text); // on garde le nom d'utilisateur de côté
+                    updateText(&imginstruction,"Password:");
+                    inputBox.text[0]='\0';
+                    updateTextBox(&inputBox);
                     step = rPass; // on lui demande le mot de passe
                 }
                 else if(step==rPass)// sinon si l'utilisateur valide le mot de passe saisie
                 {
-                    strcpy(password,text);
+                    strcpy(password,inputBox.text);
                     int resultat = identifier();
+		    inputBox.text[0]='\0';
+		    updateTextBox(&inputBox);
                     switch(resultat)
                     {
                     case 0: // mot de passe faux
                         printf("eventLogin: bad password\n");
-                        updateText(&lastTry,"bad password",100,50,5);
-                        updateText(&imginstruction,"Username:",100,150,5);
-                        havetoup=1;
-                        text[0]='\0';//on efface tout
+                        updateText(&lastTry,"bad password");
+                        updateText(&imginstruction,"Username:");
                         step=rLog; // il doit tout ressaisir
                         break;
                     case 1: // bien identifier
@@ -71,36 +59,15 @@ void eventLogin()
                         changeStep(menu);
                         break;
                     default:
-                        updateText(&lastTry,"error, keep trying",100,50,5);
+                        updateText(&lastTry,"error, keep trying");
                         printf("eventLogin: error, identifer(char*,char*) shouldnt return %d\n",resultat);
-                        updateText(&imginstruction,"Username:",100,150,5);
-                        havetoup=1;
-                        text[0]='\0';//on efface tout
+                        updateText(&imginstruction,"Username:");
                         step=rLog; // il doit tout ressaisir
                     }
                 }
             }
             break;
-        case SDL_TEXTINPUT:
-            if(strlen(text)<SIZESTR-1)
-            {
-                strcat(text, event.text.text);
-                if(rPass)
-                    strcat(star, "*");
-            }
-            printf("eventLogin: buffer = %s\n",text);
-            havetoup=1;
-            break;
 
-        }
-    }
-    if(havetoup==1)
-    {
-        if(step==rLog)
-            updateText(&imgtext,text,100,200,5);
-        else
-        {
-            updateText(&imgtext,star,100,200,5);
         }
     }
 }
@@ -108,7 +75,7 @@ void eventLogin()
 extern SDL_Renderer* renderer;
 static int renderinitialised = 0;
 
-static Image Background;
+static Picture Background;
 
 
 void initLoginRender()
@@ -118,9 +85,9 @@ void initLoginRender()
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
 
-    imginstruction = createText("Username:",100,150,5,false);
-    lastTry = createText(" ",100,50,5,false);
-    imgtext = createText(" ",100,200,5,true);
+    imginstruction = createText("Username:",100,150,5);
+    lastTry = createText(" ",100,50,5);
+    inputBox = createTextBox(" ",100,200,5,true);
 
     step=rLog; // on va commencer par lui demander le nom d'utilisateur
     renderinitialised=1;
@@ -131,10 +98,10 @@ void renderLogin()
 {
     if(renderinitialised==0)
         return;
-    renderImage(Background);
-    renderImage(imgtext);
-    renderImage(imginstruction);
-    renderImage(lastTry);
+    renderPicture(&Background);
+    renderTextBox(&inputBox);
+    renderText(&imginstruction);
+    renderText(&lastTry);
 }
 
 void freeLoginRender()
@@ -146,10 +113,10 @@ void freeLoginRender()
     }
 
     renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
-    freeImage(imgtext);
-    freeImage(Background);
-    freeImage(imginstruction);
-    freeImage(lastTry);
+    freeTextBox(&inputBox);
+    freePicture(&Background);
+    freeText(&imginstruction);
+    freeText(&lastTry);
 
     printf("freeLoginRender: liberation des ressources\n");
 }

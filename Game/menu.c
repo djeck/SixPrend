@@ -1,39 +1,19 @@
 #include "menu.h"
 
-static Image Background;
-static PickableImage choixJeu; // lancer le mode puis le jeu
-static PickableImage choixStat;
-static PickableImage choixQuit;
+static Picture Background;
+static Button choixJeu; // lancer le mode puis le jeu
+static Button choixStat;
+static Button choixQuit;
 
 void eventMenu()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-        if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT )
-        {
-            if(collisionWithMouse(choixJeu.rect,event.button.x,event.button.y))
-            {
-                changeStep(mode);
-            }
-            else if(collisionWithMouse(choixStat.rect,event.button.x,event.button.y))
-            {
-                changeStep(stat);
-            }
-            else if(collisionWithMouse(choixQuit.rect,event.button.x,event.button.y))
-            {
-                changeStep(end);
-            }
-
-        }
-        else if( event.type == SDL_MOUSEMOTION )
-        {
-            choixJeu.select=collisionWithMouse(choixJeu.rect,event.motion.x,event.motion.y);
-
-            choixQuit.select=collisionWithMouse(choixQuit.rect,event.motion.x,event.motion.y);
-
-            choixStat.select=collisionWithMouse(choixStat.rect,event.motion.x,event.motion.y);
-        }
+	inputButton(&choixJeu,&event);
+	inputButton(&choixStat,&event);
+	inputButton(&choixQuit,&event);
+        
         switch(event.type)
         {
         case SDL_QUIT:
@@ -48,14 +28,30 @@ void eventMenu()
 
 static int renderinitialised = 0;
 
+void CQuitGame() // quit game callback
+{
+  changeStep(end);
+}
+void CStat()
+{
+  changeStep(stat);
+}
+void CMode()
+{
+  changeStep(mode);
+}
 void initMenuRender()
 {
 
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
-    choixJeu = createPickableText("Play",100,150,5);
-    choixStat = createPickableText("Statistic",100,210,5);
-    choixQuit = createPickableText("Exit",100,270,5);
+    choixJeu = createButton("Play",100,150,5);
+    choixStat = createButton("Statistic",100,210,5);
+    choixQuit = createButton("Exit",100,270,5);
+    
+    choixJeu.callback = *CMode;
+    choixQuit.callback = *CQuitGame;
+    choixStat.callback = *CStat;
 
     renderinitialised=1;
 }
@@ -64,10 +60,10 @@ void renderMenu()
 {
     if(renderinitialised==0)
         return;
-    renderImage(Background);
-    renderPickableImage(choixJeu);
-    renderPickableImage(choixStat);
-    renderPickableImage(choixQuit);
+    renderPicture(&Background);
+    renderButton(&choixJeu);
+    renderButton(&choixStat);
+    renderButton(&choixQuit);
 }
 
 void freeMenuRender()
@@ -78,10 +74,10 @@ void freeMenuRender()
         return;
     }
     renderinitialised=0; // pour etre sur que on ne dessine pas avec les ressources qui ne sont plus disponiblent
-    freePickableImage(choixJeu);
-    freePickableImage(choixStat);
-    freePickableImage(choixQuit);
-    freeImage(Background); // Libération de la mémoire associée à la texture
+    freeButton(&choixJeu);
+    freeButton(&choixStat);
+    freeButton(&choixQuit);
+    freePicture(&Background); // Libération de la mémoire associée à la texture
 
     printf("freeMenuRender: liberation des ressources\n");
 }

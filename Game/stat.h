@@ -11,7 +11,7 @@
 
 #include "inc.h"
 #define MAXSTAT 100
-#define FILESTATS "./media/stats.dat"
+#define FILESTATS "../media/stats.dat"
 
 /*
  *La structure de statistique

@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
 
         SDL_RenderPresent(renderer);
 
-        SDL_Delay(1); // provisoire afin de ne pas utiliser tout le cpu
+        SDL_Delay(5); // provisoire afin de ne pas utiliser tout le cpu
 
         switch(globalStep)
         {

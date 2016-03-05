@@ -8,6 +8,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_events.h>
 #include <string.h>
+#include "../GUI/picture.h"
+#include "../GUI/button.h"
 #include "inc.h"
 
 /*

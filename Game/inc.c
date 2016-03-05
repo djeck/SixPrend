@@ -53,8 +53,24 @@ void changeStep(MainStep nextStep)
     printf("changeStep: changement d'etat effectue avec succes\n");
 }
 
+bool collisionWithMouse(SDL_Rect arg0,int mx,int my)
+{
+    SDL_GetMouseState(&mx, &my);
+    bool haut=false,bas=false,gauche=false,droite=false;
+    if(mx<arg0.x)
+        gauche=true;
+    if(mx>arg0.x+arg0.w)
+        droite=true;
+    if(my<arg0.y)
+        haut=true;
+    if(my>arg0.y+arg0.h)
+        bas=true;
+    if(gauche || droite || haut || bas)
+        return false;
+    return true;
+}
 
-
+/*
 static SDL_Color color = {0,0,0};
 static SDL_Color colorsel = {255,0,0};
 
@@ -85,7 +101,7 @@ Image createText(char str[],int x,int y,int size,bool input)
     }
     else
     {
-        stext = TTF_RenderText_Solid(font,str,color);/**/
+        stext = TTF_RenderText_Solid(font,str,color);
     }
     if (! stext )
     {
@@ -168,7 +184,7 @@ PickableImage createPickableText(char str[],int x,int y,int size)
     }
     SDL_FreeSurface(stext);
 
-    stext = TTF_RenderText_Solid(font,str,colorsel);/**/
+    stext = TTF_RenderText_Solid(font,str,colorsel);
     if (! stext )
     {
         printf("createPickableText: impossible de cree la surface du text\n");
@@ -237,22 +253,7 @@ Image createPicture(char* path, int x, int y,int size)
 }
 
 
-bool collisionWithMouse(SDL_Rect arg0,int mx,int my)
-{
-    SDL_GetMouseState(&mx, &my);
-    bool haut=false,bas=false,gauche=false,droite=false;
-    if(mx<arg0.x)
-        gauche=true;
-    if(mx>arg0.x+arg0.w)
-        droite=true;
-    if(my<arg0.y)
-        haut=true;
-    if(my>arg0.y+arg0.h)
-        bas=true;
-    if(gauche || droite || haut || bas)
-        return false;
-    return true;
-}
+
 static Uint32 timer=0;
 void renderImage(Image img)
 {
@@ -287,4 +288,4 @@ void freePickableImage(PickableImage img)
     SDL_DestroyTexture(img.texture);
     SDL_DestroyTexture(img.textureselelct);
 }
-
+*/

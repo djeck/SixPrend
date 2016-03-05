@@ -1,8 +1,8 @@
 #include "game.h"
 
-static PickableImage choixQuit;
-static PickableImage choixBack;
-static Image Background;
+static Button choixQuit;
+static Button choixBack;
+static Picture Background;
 
 static Image card[NB_CARD]; // card[0] contient la carte 1 ...
 
@@ -108,7 +108,7 @@ void initGameRender()
 
     for(i=0; i<NB_CARD; i++) // chargement des ressources pour afficher toutes les cartes
     {
-        sprintf(path,"./media/%d.bmp",i+1);
+        sprintf(path,"../media/%d.bmp",i+1);
         printf("initGameRender: chagement de la carte %s\n",path);
         card[i] = createPicture(path,0,0,1);
     }

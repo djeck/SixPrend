@@ -10,15 +10,14 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 
-#define BACKGROUNDPATH "./media/background.bmp" // fond d'ecran
-#define OKPATH "./media/ok.bmp"
-#define NOPATH "./media/no.bmp"
-#define ROBOTPATH "./media/robot.bmp"
+#define FILELOGIN "../media/login.txt"
+#define BACKGROUNDPATH "../media/background.bmp" // fond d'ecran
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 #define SCREEN_WIDTH 800 // largeur par default de la fenetre
 #define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
 #define SIZESTR 21 // taille par default du nom
-#define FONTPATH "./media/sixty.fon" // fichier de fnnt
+#define FONTPATH "../media/sixty.fon" // fichier de fnnt
+#define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 #define CLIGNE 500
 
 #include <SDL2/SDL_ttf.h>
@@ -32,6 +31,8 @@
 #include "stat.h"
 
 TTF_Font* font; // initialisé par init()
+SDL_Window * window;
+SDL_Renderer * renderer;
 
 typedef enum {none,login,menu,mode,stat,game,end} MainStep; // étapes principales du jeu
 
@@ -67,17 +68,19 @@ MainStep globalStep;
  */
 void changeStep(MainStep nextStep);
 
+bool collisionWithMouse(SDL_Rect arg0,int mx,int my);
+
+/*
 Image createText(char str[],int x,int y,int size,bool input);
 void updatePickableText(PickableImage* ptr,char str[], int x, int y, int size);
 void updateText(Image* ptr,char str[],int x,int y,int size);
 PickableImage createPickableText(char str[],int x,int y,int size);
 void setTextColor(int r,int g,int b);
 Image createPicture(char* path, int x, int y,int size);
-bool collisionWithMouse(SDL_Rect arg0,int mx,int my);
 void renderImage(Image img);
 void renderIn(Image img,SDL_Rect rect);
 void freeImage(Image img);
 void renderPickableImage(PickableImage img);
 void freePickableImage(PickableImage img);
-
+*/
 #endif

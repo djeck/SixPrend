@@ -26,7 +26,7 @@ typedef struct
     char text[100];
 } TextBox;
 
-TextBox createTextBox(char str[],int x,int y,int size);
+TextBox createTextBox(char str[],int x,int y,int size,bool arg0);
 void updateTextBox(TextBox* ptr);
 void inputTextBox(TextBox* ptr,SDL_Event *event); // si select==true gére la saisie de caractères
 void freeTextBox(TextBox *img);

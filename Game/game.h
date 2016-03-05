@@ -9,6 +9,10 @@
 #include <SDL2/SDL_events.h>
 #include <string.h>
 #include "inc.h"
+#include "../GUI/button.h"
+#include "../GUI/card.h"
+#include "../GUI/text.h"
+#include "../GUI/picture.h"
 
 #define MAXJOUEUR 10
 #define NB_CARD 104
