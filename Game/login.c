@@ -9,6 +9,7 @@ static Image imgtext;
 static Image imginstruction;
 static Image lastTry;
 
+//donnees à afficher pour le mot de passe
 static char star[SIZESTR];
 // donnees à afficher
 static char text[SIZESTR];
