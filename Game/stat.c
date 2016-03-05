@@ -1,16 +1,16 @@
 #include "stat.h"
 
-static PickableImage choixBack;
-static Image Background;
-static Image name; // lancer le mode puis le jeu
-static Image vic;
-static Image def;
-static Image testname[10];
-static Image testvic[10];
-static Image testdef[10];
+static Button choixBack;
+static Picture Background;
+static Text name; // ligne des noms
+static Text vic; // ligne des victoires
+static Text def; // ligne des défaites
+static Text testname[10]; // chaque nom de joueur
+static Text testvic[10]; // les victoires de chaque joueur
+static Text testdef[10]; // les défaites de chaque joueur
 
 /*
- * la variable de la structure Statistique
+ * la variable de structure Statistique
  */
 static Statistique stats[MAXSTAT];
 /*
@@ -23,18 +23,8 @@ void eventStat()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-        if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT )
-        {
-            if(collisionWithMouse(choixBack.rect,event.button.x,event.button.y))
-            {
-                changeStep(menu);
-            }
+      inputButton(&choixBack,&event);
 
-        }
-        else if( event.type == SDL_MOUSEMOTION )
-        {
-            choixBack.select=collisionWithMouse(choixBack.rect,event.motion.x,event.motion.y);
-        }
         switch(event.type)
         {
         case SDL_QUIT:
@@ -46,6 +36,11 @@ void eventStat()
 
 static int renderinitialised = 0;
 
+void CMenu()
+{
+  changeStep(menu);
+}
+
 void initStatRender()
 {
     
@@ -54,7 +49,8 @@ void initStatRender()
     char nom[200], vics[200], defs[200];
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
-    choixBack = createPickableText("Return",100,500,8);
+    choixBack = createButton("Return",100,500,8);
+    choixBack.callback = &CMenu;
 
     do
     {
@@ -62,15 +58,15 @@ void initStatRender()
       sprintf(vics,"%d",stats[j].nb_vic);
       sprintf(defs,"%d",stats[j].nb_def);
       j++;
-      testname[j-1]=createText(nom,50+j*80,150,9,false);
-      testvic[j-1]=createText(vics,50+j*80,210,9,false);
-      testdef[j-1]=createText(defs,50+j*80,270,9,false);
+      testname[j-1]=createText(nom,50+j*80,150,9);
+      testvic[j-1]=createText(vics,50+j*80,210,9);
+      testdef[j-1]=createText(defs,50+j*80,270,9);
     }while(j<tailleStats && tailleStats<MAXSTAT);
     
     loadStatFromFile();
-    name = createText("Name:",50,150,10,false);
-    vic = createText("Victoire:",50,210,10,false);
-    def = createText("Default:",50,270,10,false);
+    name = createText("Name:",50,150,10);
+    vic = createText("Victoire:",50,210,10);
+    def = createText("Default:",50,270,10);
 
     printf("initStatRender : initialised\n");
     
@@ -83,20 +79,20 @@ void renderStat()
     if(renderinitialised==0)
         return;
     
-    renderImage(Background);
+    renderPicture(&Background);
     
-    renderImage(name);
-    renderImage(vic);
-    renderImage(def);
+    renderText(&name);
+    renderText(&vic);
+    renderText(&def);
     do{
-    renderImage(testname[j]);
-    renderImage(testvic[j]);
-    renderImage(testdef[j]);
+    renderText(&testname[j]);
+    renderText(&testvic[j]);
+    renderText(&testdef[j]);
     j++;
     }while(j<10);
 
     
-    renderPickableImage(choixBack);
+    renderButton(&choixBack);
 }
 
 void freeStatRender()
@@ -108,17 +104,17 @@ void freeStatRender()
         return;
     }
     renderinitialised=0;
-    freeImage(name);
-    freeImage(vic);
-    freeImage(def);
+    freeText(&name);
+    freeText(&vic);
+    freeText(&def);
     do{
-    freeImage(testname[j]);
-    freeImage(testvic[j]);
-    freeImage(testdef[j]);
+    freeText(&testname[j]);
+    freeText(&testvic[j]);
+    freeText(&testdef[j]);
     j++;
     }while(j<10);
-    freePickableImage(choixBack);
-    freeImage(Background); // Libération de la mémoire associée à la texture
+    freeButton(&choixBack);
+    freePicture(&Background); // Libération de la mémoire associée à la texture
 
     printf("freeStatRender: liberation des ressources\n");
 }

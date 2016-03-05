@@ -12,7 +12,7 @@ typedef struct
     SDL_Rect rect;
 } Picture;
 
-Picture createPicture(char pth[],int x,int y,int size);
+Picture createPicture(char path[],int x,int y,int size);
 void freePicture(Picture *img);
 void renderPicture(Picture *img);
 

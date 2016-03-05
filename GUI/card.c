@@ -4,20 +4,20 @@ SDL_Texture* cards[NB_CARD];
 
 extern SDL_Renderer *renderer;
 
-SDL_Surface* createTexture(char pth[],int x,int y,int size)
+SDL_Texture* createTexture(char path[],int x,int y,int size)
 {
     SDL_Texture* texture = NULL;
     SDL_Surface* surface = SDL_LoadBMP(path);
     if ( !surface )
     {
-        printf("createPicture: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
+        printf("createTexture: impossible de creer le sprite de l'image de fond, impossible d'ouvrir le fichier\n");
         changeStep(end);
         return texture;
     }
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface); // Préparation du sprite
+    texture = SDL_CreateTextureFromSurface(renderer,surface); // Préparation du sprite
     if (! texture )
     {
-        printf("createPicture: impossible de cree la texture de l'image de fond\n");
+        printf("createTexture: impossible de cree la texture de l'image de fond\n");
         texture = NULL;
         changeStep(end);
         return texture;
@@ -29,11 +29,10 @@ SDL_Surface* createTexture(char pth[],int x,int y,int size)
 void initCard()
 {
   int i;
-  char path[10];
+  char path[50];
   for(i=0; i<NB_CARD; i++) // chargement des ressources pour afficher toutes les cartes
     {
-        sprintf(path,PATH_CARD,i+1);
-        printf("initGameRender: chagement de la carte %s\n",path);
+        sprintf(path,"../media/%d.bmp",i+1);
         cards[i] = createTexture(path,0,0,1);
     }
 }

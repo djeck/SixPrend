@@ -1,12 +1,15 @@
 /*
  * Composant de l'interface graphique ustilisateur: la carte
  */
-#ifndef CARD_H
-#define CARD_H
+#ifndef CARD_HH
+#define CARD_HH
 
 #include "../Game/inc.h"
+
 #define NB_CARD 104
 #define PATH_CARD "../media/%d.bmp"
+#define CARD_H 80
+#define CARD_W 52
 
 typedef struct
 {

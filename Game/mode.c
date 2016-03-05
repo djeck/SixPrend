@@ -4,8 +4,8 @@ static Button choixQuit;
 static Button choixStart;
 static Button choixBack;
 static Picture Background;
-
 static Button choixConnect;
+
 static Text ipAsk;
 static TextBox ipServer;
 

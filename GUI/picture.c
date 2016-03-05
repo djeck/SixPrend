@@ -2,12 +2,12 @@
 
 extern SDL_Renderer *renderer;
 
-Picture createPicture(char pth[],int x,int y,int size)
+Picture createPicture(char path[],int x,int y,int size)
 {
     Picture img;
     img.rect.x = x;
     img.rect.y =y;
-
+    printf("createPicture: loading picture %s\n",path);
     SDL_Surface* surface = SDL_LoadBMP(path);
     if ( !surface )
     {

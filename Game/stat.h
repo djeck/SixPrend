@@ -10,7 +10,11 @@
 #include <string.h>
 
 #include "inc.h"
-#define MAXSTAT 100
+#include "../GUI/button.h"
+#include "../GUI/text.h"
+#include "../GUI/picture.h"
+
+#define MAXSTAT 100 // nombre de statistiques maximum lus depuis le fichier FILESTATS
 #define FILESTATS "../media/stats.dat"
 
 /*
