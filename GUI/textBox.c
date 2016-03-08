@@ -19,7 +19,6 @@ TextBox createTextBox(char str[],int x,int y,int size,bool arg0)
 
     if(strlen(str)==0)
     {
-        printf("createTextBox: chaine vide\n");
 	str=" ";
         stext = TTF_RenderText_Solid(font,str,color);
     }
@@ -64,7 +63,26 @@ void updateTextBox(TextBox* ptr)
         *ptr = createTextBox(ptr->text,ptr->rect.x,ptr->rect.y,ptr->size,ptr->select);
     }
     else
-        printf("updateTextBox: texture non initialisee ne peut pas etre mis à jour\n");
+        printf("updateTextBox: texture non initialisee ne peut pas etre mise à jour\n");
+}
+
+void updatePassBox(TextBox* ptr)
+{
+  char buff[100],text[100];
+  int i;
+  if(ptr->texture)
+    {
+	freeTextBox(ptr);
+	
+	buff[0]='\0';
+	for(i=0;i<strlen(ptr->text);i++)
+	  strcat(buff,"*");
+	strcpy(text,ptr->text);
+        *ptr = createTextBox(buff,ptr->rect.x,ptr->rect.y,ptr->size,ptr->select);
+	strcpy(ptr->text,text);
+    }
+    else
+        printf("updatePassBox: texture non initialisee ne peut pas etre mise à jour\n");
 }
 
 void freeTextBox(TextBox *img)
@@ -96,5 +114,22 @@ void inputTextBox(TextBox* ptr,SDL_Event *event)
    ptr->text[strlen(ptr->text)-1]='\0';
    updateTextBox(ptr);
  }
+ else if(event->type == SDL_MOUSEBUTTONDOWN && event->button.button == SDL_BUTTON_LEFT)
+  {
+    ptr->select=collisionWithMouse(ptr->rect,event->button.x,event->button.y);
+  }
 }
 
+void inputPassBox(TextBox* ptr,SDL_Event *event)
+{
+ if(ptr->select && event->type == SDL_TEXTINPUT && strlen(ptr->text)<100-1)
+ {
+   strcat(ptr->text, event->text.text);
+   updatePassBox(ptr);
+ }
+ else if ( event->type == SDL_KEYUP && (event->key.keysym.sym == SDLK_DELETE || event->key.keysym.sym == SDLK_BACKSPACE) && strlen(ptr->text)>0)
+ {
+   ptr->text[strlen(ptr->text)-1]='\0';
+   updatePassBox(ptr);
+ }
+}

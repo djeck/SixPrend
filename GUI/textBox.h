@@ -4,13 +4,6 @@
 #ifndef TEXTBOX_H
 #define TEXTBOX_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include "../Game/inc.h"
 
 typedef struct
@@ -26,9 +19,10 @@ typedef struct
     char text[100];
 } TextBox;
 
-TextBox createTextBox(char str[],int x,int y,int size,bool arg0);
+TextBox createTextBox(char str[],int x,int y,int size,bool arg0); // arg0: selected or not by default
 void updateTextBox(TextBox* ptr);
 void inputTextBox(TextBox* ptr,SDL_Event *event); // si select==true gére la saisie de caractères
+void inputPassBox(TextBox* ptr,SDL_Event *event); // afficher des étoiles
 void freeTextBox(TextBox *img);
 void renderTextBox(TextBox *img);
 
