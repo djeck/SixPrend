@@ -10,10 +10,10 @@ void eventMenu()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-	inputButton(&choixJeu,&event);
-	inputButton(&choixStat,&event);
-	inputButton(&choixQuit,&event);
-        
+        inputButton(&choixJeu,&event);
+        inputButton(&choixStat,&event);
+        inputButton(&choixQuit,&event);
+
         switch(event.type)
         {
         case SDL_QUIT:
@@ -28,18 +28,7 @@ void eventMenu()
 
 static int renderinitialised = 0;
 
-void CQuitGame() // quit game callback
-{
-  changeStep(end);
-}
-void CStat()
-{
-  changeStep(stat);
-}
-void CMode()
-{
-  changeStep(mode);
-}
+
 void initMenuRender()
 {
 
@@ -48,7 +37,20 @@ void initMenuRender()
     choixJeu = createButton("Play",100,150,5);
     choixStat = createButton("Statistic",100,210,5);
     choixQuit = createButton("Exit",100,270,5);
-    
+
+    void CQuitGame() // quit game callback
+    {
+        changeStep(end);
+    }
+    void CStat()
+    {
+        changeStep(stat);
+    }
+    void CMode()
+    {
+        changeStep(mode);
+    }
+
     choixJeu.callback = *CMode;
     choixQuit.callback = *CQuitGame;
     choixStat.callback = *CStat;

@@ -59,13 +59,22 @@ void ordonner()
 
 }
 
+void CCard(int id) {
+  printf("CCard: card id %d had been pressed\n",id);
+    };
 void eventGame()
 {
     SDL_Event event;
+    int i;
+    
     while (SDL_PollEvent(&event))
     {
       inputButton(&choixQuit,&event);
       inputButton(&choixBack,&event);
+      for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // on calcule les positons aux quelles on affichera chaque cartes de la main
+    {
+      eventCard(&event,&poignee[i],&CCard);
+    }
         switch(event.type)
         {
         case SDL_QUIT:

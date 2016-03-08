@@ -26,7 +26,11 @@ void eventLogin()
 
     while (SDL_PollEvent(&event))
     {
+      if(step == rLog)
 	inputTextBox(&inputBox,&event);
+      else
+	inputPassBox(&inputBox,&event);
+      
         switch(event.type)
         {
         case SDL_QUIT:
@@ -98,7 +102,7 @@ void initLoginRender()
 
 
     imginstruction = createText("Username:",100,150,5);
-    lastTry = createText("",100,50,5);
+    lastTry = createText(" ",100,50,5);
     inputBox = createTextBox("",100,200,5,true);
 
     step=rLog; // on va commencer par lui demander le nom d'utilisateur

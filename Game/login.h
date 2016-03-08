@@ -6,7 +6,6 @@
 #define LOGIN_H
 
 #include "inc.h"
-#include "../GUI/textBox.h"
 #include "../GUI/picture.h"
 #include "../GUI/text.h"
 

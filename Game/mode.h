@@ -12,6 +12,7 @@
 #include "../GUI/picture.h"
 #include "../GUI/text.h"
 #include "../GUI/textBox.h"
+#include "client.h"
 #include "inc.h"
 
 /*

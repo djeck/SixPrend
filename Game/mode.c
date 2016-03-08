@@ -11,8 +11,6 @@ static TextBox ipServer;
 
 static Text connecting; //message de connection
 
-static char ipText[100];
-
 /*
  * GETIP le joueur saisie de l'ip du serveur, premiere étape et on y retourne quant on change l'ip du serveur
  * CONNECT connection en cour au serveur
@@ -29,7 +27,8 @@ void eventMode()
 	inputTextBox(&ipServer,&event);
 	inputButton(&choixQuit,&event);
 	inputButton(&choixBack,&event);
-	inputButton(&choixStart,&event);
+	if(modeStep==READY)
+	  inputButton(&choixStart,&event);
 	inputButton(&choixConnect,&event);
         
         switch(event.type)
@@ -45,6 +44,7 @@ static int renderinitialised = 0;
 
 void initModeRender()
 {
+    char ipText[100];
     strcpy(ipText,"127.0.0.1");
     Background = createPicture(BACKGROUNDPATH,0,0,1);
     
@@ -74,7 +74,10 @@ void initModeRender()
     choixStart.callback = &CGame;
     void CConnect()
     {
+      initialisationReseau(ipServer.text);
+      reception();
       modeStep=CONNECT;
+      
     }
     choixConnect.callback = &CConnect;
     
@@ -105,6 +108,7 @@ void freeModeRender()
         return;
     }
     renderinitialised=0;
+    freeRessourcesReseau();
     freeButton(&choixConnect);
     freeButton(&choixQuit);// Libération de la mémoire associée aux textures
     freeTextBox(&ipServer);

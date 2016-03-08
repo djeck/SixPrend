@@ -23,7 +23,7 @@ void eventStat()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-      inputButton(&choixBack,&event);
+        inputButton(&choixBack,&event);
 
         switch(event.type)
         {
@@ -36,41 +36,42 @@ void eventStat()
 
 static int renderinitialised = 0;
 
-void CMenu()
-{
-  changeStep(menu);
-}
 
 void initStatRender()
 {
-    
+
     loadStatFromFile();
     int j=0;
     char nom[200], vics[200], defs[200];
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
     choixBack = createButton("Return",100,500,8);
+    
+    void CMenu()
+    {
+        changeStep(menu);
+    }
     choixBack.callback = &CMenu;
 
     do
     {
-      strcpy(nom,stats[j].nom);
-      sprintf(vics,"%d",stats[j].nb_vic);
-      sprintf(defs,"%d",stats[j].nb_def);
-      j++;
-      testname[j-1]=createText(nom,50+j*80,150,9);
-      testvic[j-1]=createText(vics,50+j*80,210,9);
-      testdef[j-1]=createText(defs,50+j*80,270,9);
-    }while(j<tailleStats && tailleStats<MAXSTAT);
-    
+        strcpy(nom,stats[j].nom);
+        sprintf(vics,"%d",stats[j].nb_vic);
+        sprintf(defs,"%d",stats[j].nb_def);
+        j++;
+        testname[j-1]=createText(nom,50+j*80,150,9);
+        testvic[j-1]=createText(vics,50+j*80,210,9);
+        testdef[j-1]=createText(defs,50+j*80,270,9);
+    } while(j<tailleStats && tailleStats<MAXSTAT);
+
     loadStatFromFile();
     name = createText("Name:",50,150,10);
     vic = createText("Victoire:",50,210,10);
     def = createText("Default:",50,270,10);
 
     printf("initStatRender : initialised\n");
-    
-    
+
+
     renderinitialised=1;
 }
 void renderStat()
@@ -78,26 +79,26 @@ void renderStat()
     int j;
     if(renderinitialised==0)
         return;
-    
+
     renderPicture(&Background);
-    
+
     renderText(&name);
     renderText(&vic);
     renderText(&def);
-    do{
-    renderText(&testname[j]);
-    renderText(&testvic[j]);
-    renderText(&testdef[j]);
-    j++;
-    }while(j<10);
+    do {
+        renderText(&testname[j]);
+        renderText(&testvic[j]);
+        renderText(&testdef[j]);
+        j++;
+    } while(j<10);
 
-    
+
     renderButton(&choixBack);
 }
 
 void freeStatRender()
 {
-  int j=0;
+    int j=0;
     if(renderinitialised==0)
     {
         printf("freeStatRender: ne peut pas liberer les ressources car elles n'ont pas etaient inititialisé\n");
@@ -107,12 +108,12 @@ void freeStatRender()
     freeText(&name);
     freeText(&vic);
     freeText(&def);
-    do{
-    freeText(&testname[j]);
-    freeText(&testvic[j]);
-    freeText(&testdef[j]);
-    j++;
-    }while(j<10);
+    do {
+        freeText(&testname[j]);
+        freeText(&testvic[j]);
+        freeText(&testdef[j]);
+        j++;
+    } while(j<10);
     freeButton(&choixBack);
     freePicture(&Background); // Libération de la mémoire associée à la texture
 
@@ -167,15 +168,15 @@ void ajout_stat(bool victoire)
         if(tailleStats < MAXSTAT-1)
         {
             strcpy(stats[tailleStats].nom,getUsername());
-	    if(victoire==true)
+            if(victoire==true)
             {
                 stats[tailleStats].nb_vic=1;
-		stats[tailleStats].nb_def=0;
+                stats[tailleStats].nb_def=0;
             }
             else
             {
                 stats[tailleStats].nb_def=1;
-		stats[tailleStats].nb_vic=0;
+                stats[tailleStats].nb_vic=0;
             }
             tailleStats++;
         }
