@@ -60,7 +60,12 @@ void eventCard(SDL_Event* event, Card* card, void (*callback)(int))
   if( event->type == SDL_MOUSEMOTION )
   {
     card->selected=collisionWithMouse(card->rect,event->motion.x,event->motion.y);
-    printf("eventCard callback use ...");
+    
+    
+  }
+  if(event->type == SDL_MOUSEBUTTONDOWN && event->button.button == SDL_BUTTON_LEFT && collisionWithMouse(card->rect,event->button.x,event->button.y))
+  {
+    printf("eventCard callback used ...\n");
     (*callback)(card->id);
   }
   
