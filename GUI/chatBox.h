@@ -16,7 +16,7 @@ typedef struct
   char text[NB_MSG][100];//chaques messages de %messages
   TextBox input; // user input
   void (*callback)(char*); // optionel (appelé lors de la saisie d'un message par l'utilisateur
-    
+  bool update;
 } ChatBox;
 
 ChatBox createChatBox(int x,int y);

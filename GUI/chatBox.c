@@ -10,6 +10,7 @@ ChatBox createChatBox(int x, int y)
   box.rect.h = DY * (NB_MSG);
   box.rect.w = CHAT_W;
   box.callback = NULL;
+  box.update = false;
   
   for(i=0;i<NB_MSG;i++)
   {
@@ -32,6 +33,7 @@ void pushChatBox(ChatBox* ptr)
   updateText(&ptr->messages[NB_MSG-1],ptr->text[NB_MSG-1]);
   ptr->input.text[0]='\0';
   updateTextBox(&ptr->input);
+  ptr->update = false;
 }
 
 void inputChatBox(ChatBox* ptr, SDL_Event* event)
@@ -57,6 +59,8 @@ void freeChatBox(ChatBox* img)
 void renderChatBox(ChatBox* img)
 {
   int i;
+  if(img->update)
+    pushChatBox(img);
   for(i=0;i<NB_MSG;i++)
     renderText(&img->messages[i]);
   renderTextBox(&img->input);
