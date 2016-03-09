@@ -49,8 +49,15 @@ void CConfim(Data* data) // confimation de la connection au serveur
 	if(data->dataType == CONN && data->car == CONN_OK)
 	{
 	  modeStep = SALLE;
+	  strcpy(chat.input.text,"Connection established");
+	  chat.update = true; // sera mis a jour par le thread principale
+	  askList();
+	}
+	else if(data->dataType == MSG && strlen(data->tab)>1)
+	{
+	  printf("Message recu: <<%s>>\n",data->tab);
 	  strcpy(chat.input.text,data->tab);
-	  pushChatBox(&chat);
+	  chat.update = true;// sera mis a jour par le thread principale
 	}
     }
     void CQuit()
@@ -73,7 +80,6 @@ void CConfim(Data* data) // confimation de la connection au serveur
       modeStep=CONNECT;
       initialisationReseau(ipServer.text);
       reception(&CConfim);
-      modeStep=SALLE;
     }
     void CMsg(char* msg)
     {
@@ -116,13 +122,13 @@ void renderMode()
     renderText(&ipAsk);
     if(modeStep==CONNECT)
       renderText(&connecting);
-    if(modeStep==SALLE)
-      renderChatBox(&chat);
     renderTextBox(&ipServer);
     renderButton(&choixConnect);
     renderButton(&choixQuit);
     renderButton(&choixBack);
     renderButton(&choixStart);
+    if(modeStep==SALLE)
+      renderChatBox(&chat);
 }
 
 void freeModeRender()
