@@ -3,7 +3,15 @@ project(sixquiprend)
 add_definitions("-Wall")
 include_directories(${SDL2_INCLUDE_DIR})
 
-add_executable(sixquiprend main.c Game/init.c Game/login.c Game/inc.c Game/menu.c Game/mode.c Game/game.c Game/stat.c GUI/textBox.c GUI/text.c GUI/button.c GUI/card.c GUI/picture.c Game/client.c GUI/chatBox.c)
+file(
+        GLOB_RECURSE
+        source_files
+        GUI/*
+        Game/*
+        main.c
+)
+
+add_executable(sixquiprend ${source_files})
 
 install(TARGETS sixquiprend RUNTIME DESTINATION bin)
 target_link_libraries(sixquiprend -lSDL2 -lSDL2_ttf -lSDL2_net)
