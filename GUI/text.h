@@ -4,7 +4,8 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include "../Game/inc.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 typedef struct
 {

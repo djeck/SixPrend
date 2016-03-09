@@ -8,7 +8,16 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
+
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+
+#include "login.h"
+#include "menu.h"
+#include "game.h"
+#include "mode.h"
+#include "stat.h"
 
 #define FILELOGIN "../media/login.txt"
 #define BACKGROUNDPATH "../media/background.bmp" // fond d'ecran
@@ -20,15 +29,6 @@
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 #define CLIGNE 500
 
-#include <SDL2/SDL_ttf.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include "login.h"
-#include "menu.h"
-#include "game.h"
-#include "mode.h"
-#include "stat.h"
 
 TTF_Font* font; // initialisé par init()
 SDL_Window * window;

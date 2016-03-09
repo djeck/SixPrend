@@ -36,7 +36,10 @@ void eventStat()
 
 static int renderinitialised = 0;
 
-
+void CStatMenu()
+    {
+        changeStep(menu);
+    }
 void initStatRender()
 {
 
@@ -47,11 +50,8 @@ void initStatRender()
 
     choixBack = createButton("Return",100,500,8);
     
-    void CMenu()
-    {
-        changeStep(menu);
-    }
-    choixBack.callback = &CMenu;
+    
+    choixBack.callback = &CStatMenu;
 
     do
     {

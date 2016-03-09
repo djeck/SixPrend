@@ -5,6 +5,7 @@ static Button choixStart;
 static Button choixBack;
 static Picture Background;
 static Button choixConnect;
+static ChatBox chat;
 
 static Text ipAsk;
 static TextBox ipServer;
@@ -27,6 +28,7 @@ void eventMode()
 	inputTextBox(&ipServer,&event);
 	inputButton(&choixQuit,&event);
 	inputButton(&choixBack,&event);
+	inputChatBox(&chat,&event);
 	if(modeStep==READY)
 	  inputButton(&choixStart,&event);
 	inputButton(&choixConnect,&event);
@@ -42,6 +44,42 @@ void eventMode()
 
 static int renderinitialised = 0;
 
+void CConfim(Data* data) // confimation de la connection au serveur
+    {
+	if(data->dataType == CONN && data->car == CONN_OK)
+	{
+	  modeStep = SALLE;
+	  strcpy(chat.input.text,data->tab);
+	  pushChatBox(&chat);
+	}
+    }
+    void CQuit()
+    {
+      changeStep(end);
+    }
+    
+    void CMenu()
+    {
+      changeStep(menu);
+    }
+    
+    void CGame()
+    {
+      changeStep(game);
+    }
+    
+    void CConnect()
+    {
+      modeStep=CONNECT;
+      initialisationReseau(ipServer.text);
+      reception(&CConfim);
+      modeStep=SALLE;
+    }
+    void CMsg(char* msg)
+    {
+      sendMsg(msg);
+    }
+
 void initModeRender()
 {
     char ipText[100];
@@ -53,33 +91,18 @@ void initModeRender()
     choixStart = createButton("Start game",100,450,8);
     
     ipAsk = createText("Server IP",20,100,8);
-    ipServer = createTextBox(ipText,150,100,8,true);
-    choixConnect = createButton("Connect",400,100,8);
+    ipServer = createTextBox(ipText,150,100,15,30,15,true);
+    choixConnect = createButton("Connect",450,100,8);
+    chat = createChatBox(500,450);
     
     connecting = createText("Connecting to server ...",150,300,6);
-    void CQuit()
-    {
-      changeStep(end);
-    }
-    choixQuit.callback = &CQuit;
-    void CMenu()
-    {
-      changeStep(menu);
-    }
-    choixBack.callback = &CMenu;
-    void CGame()
-    {
-      changeStep(game);
-    }
-    choixStart.callback = &CGame;
-    void CConnect()
-    {
-      initialisationReseau(ipServer.text);
-      reception();
-      modeStep=CONNECT;
-      
-    }
+    
+    
     choixConnect.callback = &CConnect;
+    chat.callback = &CMsg;
+    choixQuit.callback = &CQuit;
+    choixBack.callback = &CMenu;
+    choixStart.callback = &CGame;
     
     renderinitialised=1;
     modeStep=GETIP;
@@ -93,6 +116,8 @@ void renderMode()
     renderText(&ipAsk);
     if(modeStep==CONNECT)
       renderText(&connecting);
+    if(modeStep==SALLE)
+      renderChatBox(&chat);
     renderTextBox(&ipServer);
     renderButton(&choixConnect);
     renderButton(&choixQuit);
@@ -117,6 +142,7 @@ void freeModeRender()
     freeButton(&choixBack);
     freeButton(&choixStart);
     freePicture(&Background);
+    freeChatBox(&chat);
 
     printf("freeModeRender: liberation des ressources\n");
 }

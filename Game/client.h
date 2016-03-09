@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL2/SDL_net.h>
+#include <SDL2/SDL_thread.h>
+#include <SDL2/SDL_timer.h>
 #include "network.h"
 #define PORT 2000
 
@@ -16,10 +18,10 @@ void wait();
 //reception
 DataList* receptList();
 void receptGame();
-void reception();
+void reception(void (*callback)(Data*));
 
 //emission
-void sendMsg();
+void sendMsg(char *msg);
 void askList();
 void join();
 void create();

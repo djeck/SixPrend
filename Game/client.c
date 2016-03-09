@@ -7,7 +7,6 @@ static DataList dataList;
 static DataGame dataGame;
 
 static int networkinitialised = 0;
-
 void initialisationReseau(char *strip)
 {
   if(isNetInitialised())
@@ -79,13 +78,13 @@ void receptGame()
   printf("***************************\n");
 }
 
-void reception()
+static int Treception(void *ptr)
 {
-  if(networkinitialised!=1)
-    return;
-    int receivedByteCount = SDLNet_TCP_Recv(sd, &data, sizeof(Data));
+    void (*callback)(Data*);
+    callback = ptr;
+    int cnt = SDLNet_TCP_Recv(sd, &data, sizeof(Data));
   
-    printf("received: %d\n",receivedByteCount);
+    printf("received: %d\n",cnt);
     if(data.dataType == CONN)
     {
       printf("données de type CONN reçu\n");
@@ -133,15 +132,34 @@ void reception()
     }
     else
       printf("ERROR type de donné inconu\n");
+    
+    (*callback)(&data);
+    return cnt;
 }
 
-void sendMsg()
+void reception(void (*callback)(Data*))
+{
+  
+  if(networkinitialised!=1)
+    return;
+  
+  SDL_Thread *thread;
+  int threadReturnValue;
+  thread = SDL_CreateThread(Treception, "receptData", (void *)callback);
+  if (NULL == thread) {
+        printf("\nSDL_CreateThread failed: %s\n", SDL_GetError());
+    } else {
+        SDL_WaitThread(thread, &threadReturnValue);
+        printf("\nThread returned value: %d", threadReturnValue);
+    }
+}
+
+void sendMsg(char *msg)
 {
   if(networkinitialised!=1)
     return;
-  printf("give a msg to send >");
   data.dataType=MSG;
-  scanf("%s", data.tab);
+  strcpy(data.tab,msg);
   if (SDLNet_TCP_Send(sd, &data, sizeof(data)) < sizeof(data))
   {
      printf("***********l'envoi a échoué**************\n>");

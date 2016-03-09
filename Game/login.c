@@ -103,7 +103,7 @@ void initLoginRender()
 
     imginstruction = createText("Username:",100,150,5);
     lastTry = createText(" ",100,50,5);
-    inputBox = createTextBox("",100,200,5,true);
+    inputBox = createTextBox("",100,200,15,50,22,true);
 
     step=rLog; // on va commencer par lui demander le nom d'utilisateur
     renderinitialised=1;

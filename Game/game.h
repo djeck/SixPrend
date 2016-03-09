@@ -5,9 +5,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_events.h>
-#include <string.h>
 #include "inc.h"
 #include "../GUI/button.h"
 #include "../GUI/card.h"

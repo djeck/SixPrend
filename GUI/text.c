@@ -1,3 +1,4 @@
+#include "../Game/inc.h"
 #include "text.h"
 
 extern SDL_Renderer *renderer;

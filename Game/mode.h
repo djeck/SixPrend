@@ -5,15 +5,10 @@
 #ifndef MODE_H
 #define MODE_H
 
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_events.h>
-#include <string.h>
 #include "../GUI/button.h"
 #include "../GUI/picture.h"
-#include "../GUI/text.h"
-#include "../GUI/textBox.h"
+#include "../GUI/chatBox.h"
 #include "client.h"
-#include "inc.h"
 
 /*
  * Gestion des evenements spécifique à la page de parametre

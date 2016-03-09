@@ -4,13 +4,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <stdbool.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#define SIZESTR 21 // taille par default du nom
 #include "../Game/inc.h"
 
 typedef struct

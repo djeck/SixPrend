@@ -28,19 +28,9 @@ void eventMenu()
 
 static int renderinitialised = 0;
 
-
-void initMenuRender()
-{
-
-    Background = createPicture(BACKGROUNDPATH,0,0,1);
-
-    choixJeu = createButton("Play",100,150,5);
-    choixStat = createButton("Statistic",100,210,5);
-    choixQuit = createButton("Exit",100,270,5);
-
-    void CQuitGame() // quit game callback
+void CQuitGame() // quit game callback
     {
-        changeStep(end);
+      changeStep(end);
     }
     void CStat()
     {
@@ -50,6 +40,14 @@ void initMenuRender()
     {
         changeStep(mode);
     }
+void initMenuRender()
+{
+
+    Background = createPicture(BACKGROUNDPATH,0,0,1);
+
+    choixJeu = createButton("Play",100,150,5);
+    choixStat = createButton("Statistic",100,210,5);
+    choixQuit = createButton("Exit",100,270,5);
 
     choixJeu.callback = *CMode;
     choixQuit.callback = *CQuitGame;
