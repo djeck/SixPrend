@@ -13,11 +13,7 @@
 void initialisationReseau(char *strip);
 void freeRessourcesReseau();
 
-void wait();
-
 //reception
-DataList* receptList();
-void receptGame();
 void reception(void (*callback)(Data*));
 
 //emission

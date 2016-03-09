@@ -6,6 +6,15 @@ static Data data;
 static DataList dataList;
 static DataGame dataGame;
 
+static SDL_Thread *threadRecept; // thread reception
+
+SDL_mutex *bufferLock = NULL;
+
+static bool stopNetwork;
+
+//SDL_cond *canRecept = NULL;
+//SDL_cond *canSend = NULL;
+
 static int networkinitialised = 0;
 void initialisationReseau(char *strip)
 {
@@ -32,6 +41,10 @@ void initialisationReseau(char *strip)
         printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
         return;
     }
+    stopNetwork=false;
+    bufferLock = SDL_CreateMutex();
+    //canRecept = SDL_CreateCond(); 
+    //canSend = SDL_CreateCond();
     networkinitialised = 1;
 }
 
@@ -81,59 +94,19 @@ void receptGame()
 static int Treception(void *ptr)
 {
     void (*callback)(Data*);
+    int cnt;
     callback = ptr;
-    int cnt = SDLNet_TCP_Recv(sd, &data, sizeof(Data));
-  
-    printf("received: %d\n",cnt);
-    if(data.dataType == CONN)
-    {
-      printf("données de type CONN reçu\n");
-      
-        if(data.car == CONN_FULL)
-            printf("CONN_FULL Echec de la connection: serveur plein\n");
-        else if(data.car == CONN_OK)
-            printf("CONN_OK Connection etablie avec success\n");
-        else if(data.car == CONN_STOP)
-            printf("CONN_STOP le serveur met fin à la connection\n");
-        else if(data.car == CONN_ERROR)
-            printf("CONN_ERROR erreur inconnue\n");
-	else if(data.car == CONN_LIST)
-            printf("CONN_LIST ne devrais pas etre envoyé au client\n");
-	else if(data.car == CONN_JOIN)
-            printf("CONN_JOIN ne devrais pas etre envoyé au client\n");
-	else if(data.car == CONN_CREATE)
-            printf("CONN_CREATE ne devrais pas etre envoyé au client\n");
-	else
-	  printf("donnees de nature inconnue\n");
-    }
-    else if(data.dataType == MSG)
-    {
-	printf("données de type MSG reçu\n");
-    }
-    else if(data.dataType == GAME)
-    {
-      printf("données de type GAMME reçu\n");
-      if(data.car == GAME_OK)
-            printf("GAME_OK bien connecté à une salle\n");
-        else if(data.car == GAME_LOGIN)
-            printf("GAME_LOGIN le serveur demande d'envoyer le login\n");
-        else if(data.car == GAME_ERROR)
-            printf("GAME_ERROR erreur\n");
-        else if(data.car == GAME_START)
-            printf("GAME_START on peut commencer à jouer\n");
-	else if(data.car == GAME_CHOICE)
-            printf("GAME_CHOICE le serveur demande aux joueurs de choisir leurs cartes\n");
-	else if(data.car == END_TURN)
-            printf("END_TURN fin du tour, apprêté vous à recevoir les donnees du jeu\n");
-	else if(data.car == END_GAME)
-            printf("END_GAME fin du jeu, attend game_start pour recommancer\n");
-	else
-	  printf("donnees de nature inconnue\n");
-    }
-    else
-      printf("ERROR type de donné inconu\n");
     
+    while(!stopNetwork)
+    {
+    //SDL_CondWait( canRecept, bufferLock );
+    cnt = SDLNet_TCP_Recv(sd, &data, sizeof(Data));
+    //SDL_mutexP( bufferLock );
     (*callback)(&data);
+    //SDL_mutexV( bufferLock );
+    }
+    //SDL_CondSignal( canSend );
+    printf("Treception terminé\n");
     return cnt;
 }
 
@@ -142,15 +115,9 @@ void reception(void (*callback)(Data*))
   
   if(networkinitialised!=1)
     return;
-  
-  SDL_Thread *thread;
-  int threadReturnValue;
-  thread = SDL_CreateThread(Treception, "receptData", (void *)callback);
-  if (NULL == thread) {
+  threadRecept = SDL_CreateThread(Treception, "receptData", (void *)callback);
+  if (NULL == threadRecept) {
         printf("\nSDL_CreateThread failed: %s\n", SDL_GetError());
-    } else {
-        SDL_WaitThread(thread, &threadReturnValue);
-        printf("\nThread returned value: %d", threadReturnValue);
     }
 }
 
@@ -188,9 +155,18 @@ void freeRessourcesReseau()
 {
   if(networkinitialised!=1)
   {
-    printf("freeRessourcesReseau: ERROR");
+    printf("freeRessourcesReseau: ERROR\n");
     return;
   }
+  int threadReturnValue;
+  stopNetwork=true;
+  printf("Waiting for reception thread\n");
+  SDL_WaitThread(threadRecept, &threadReturnValue);
+  printf("\nThread returned value: %d\n", threadReturnValue);
+  SDL_DestroyMutex( bufferLock );
+  //SDL_DestroyCond( canSend );
+  //SDL_DestroyCond( canRecept );
+  
   SDLNet_TCP_Close(sd);
   SDLNet_Quit();
 }
