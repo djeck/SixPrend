@@ -76,7 +76,7 @@ void initStatRender()
 }
 void renderStat()
 {
-    int j;
+    int j=0;
     if(renderinitialised==0)
         return;
 
