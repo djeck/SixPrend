@@ -7,6 +7,7 @@ file(
         GLOB_RECURSE
         source_files
         GUI/*
+	GUI/multiText.c
         Game/*
         main.c
 )
