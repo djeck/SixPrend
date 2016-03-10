@@ -4,9 +4,9 @@
 #include "text.h"
 #include "textBox.h"
 
-#define NB_MSG 3
+#define NB_MSG 6
 #define DY 30 // espace entre chaque rangée
-#define CHAT_W 200
+#define CHAT_W 300
 
 typedef struct
 {

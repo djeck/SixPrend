@@ -11,6 +11,7 @@ static Text ipAsk;
 static TextBox ipServer;
 
 static Text connecting; //message de connection
+static MultiText list;
 
 /*
  * GETIP le joueur saisie de l'ip du serveur, premiere étape et on y retourne quant on change l'ip du serveur
@@ -44,22 +45,38 @@ void eventMode()
 
 static int renderinitialised = 0;
 
-void CConfim(Data* data) // confimation de la connection au serveur
-    {
+void CData(Data* data) // confimation de la connection au serveur
+{
 	if(data->dataType == CONN && data->car == CONN_OK)
 	{
 	  modeStep = SALLE;
-	  strcpy(chat.input.text,"Connection established");
+	  sprintf(chat.input.text,"! Connection established");
 	  chat.update = true; // sera mis a jour par le thread principale
 	  askList();
 	}
 	else if(data->dataType == MSG && strlen(data->tab)>1)
 	{
 	  printf("Message recu: <<%s>>\n",data->tab);
-	  strcpy(chat.input.text,data->tab);
+	  sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
 	  chat.update = true;// sera mis a jour par le thread principale
 	}
-    }
+}
+void CDtList(DataList* data) // callback datalist
+{
+printf("CList\n");
+char str[100];
+int i=0;
+while(sscanf(data->tab,"%s\n",str)==1 && i<NB_LINE)
+{
+  strcpy(list.text[i],str);
+  i++;
+  list.update=true;
+}
+}
+void CDtGame(DataGame* data) // callback datagame
+{
+  printf("CGame\n");
+}
     void CQuit()
     {
       changeStep(end);
@@ -78,8 +95,10 @@ void CConfim(Data* data) // confimation de la connection au serveur
     void CConnect()
     {
       modeStep=CONNECT;
-      initialisationReseau(ipServer.text);
-      reception(&CConfim);
+      printf("CConnect\n");
+      initialisationReseau(ipServer.text,&CData,&CDtList,&CDtGame);
+      reception();
+      printf("CConnect: done\n");
     }
     void CMsg(char* msg)
     {
@@ -99,10 +118,12 @@ void initModeRender()
     ipAsk = createText("Server IP",20,100,8);
     ipServer = createTextBox(ipText,150,100,15,30,15,true);
     choixConnect = createButton("Connect",450,100,8);
-    chat = createChatBox(500,450);
+    chat = createChatBox(500,350);
     
-    connecting = createText("Connecting to server ...",150,300,6);
-    
+    connecting = createText("Connecting to server ...",100,300,8);
+    list = createMultiText(50,150);
+    strcpy(list.text[0],"No available room");
+    list.update=true;
     
     choixConnect.callback = &CConnect;
     chat.callback = &CMsg;
@@ -128,7 +149,10 @@ void renderMode()
     renderButton(&choixBack);
     renderButton(&choixStart);
     if(modeStep==SALLE)
+    {
       renderChatBox(&chat);
+      renderMultiText(&list);
+    }
 }
 
 void freeModeRender()
@@ -149,6 +173,8 @@ void freeModeRender()
     freeButton(&choixStart);
     freePicture(&Background);
     freeChatBox(&chat);
+    freeMultiText(&list);
 
     printf("freeModeRender: liberation des ressources\n");
 }
+

@@ -9,6 +9,7 @@
 #include "../GUI/picture.h"
 #include "../GUI/chatBox.h"
 #include "client.h"
+#include "../GUI/multiText.h"
 
 /*
  * Gestion des evenements spécifique à la page de parametre
