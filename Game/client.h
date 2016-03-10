@@ -10,16 +10,17 @@
 #define PORT 2000
 
 //fonction de base
-void initialisationReseau(char *strip);
+void initialisationReseau(char *strip,void (*backData)(Data*),void (*backList)(DataList*),void (*backGame)(DataGame*));
 void freeRessourcesReseau();
 
-//reception
-void reception(void (*callback)(Data*));
+//reception début de la boucle (dans un nouveau SDL_thread
+void reception();
 
 //emission
 void sendMsg(char *msg);
 void askList();
 void join();
+void sendQuit();
 void create();
 void startGame();
 void choice();

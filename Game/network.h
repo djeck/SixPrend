@@ -71,6 +71,8 @@
  * le server declare fin du jeu (un joueur est arrive à 66 points) le serveur attend un GAME_START pour repartir
  */
 #define END_GAME 13
+#define SWITCH 14 // changement de type de donnees, selon DataType
+#define CONN_QUIT 15
 
 /**	Les types de donnée	**/
 

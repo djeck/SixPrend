@@ -2,22 +2,29 @@
 
 static IPaddress ip;		/* Server address */
 static TCPsocket sd;		/* Socket descriptor */
+
 static Data data;
 static DataList dataList;
 static DataGame dataGame;
+static void (*mCData)(Data*);
+static void (*mCList)(DataList*);
+static void (*mCGame)(DataGame*);
 
 static SDL_Thread *threadRecept; // thread reception
 
 SDL_mutex *bufferLock = NULL;
 
-static bool stopNetwork;
-
 //SDL_cond *canRecept = NULL;
 //SDL_cond *canSend = NULL;
 
 static int networkinitialised = 0;
-void initialisationReseau(char *strip)
+void initialisationReseau(char *strip,void (*backData)(Data*),void (*backList)(DataList*),void (*backGame)(DataGame*))
 {
+  
+  mCData = backData;
+  mCList= backList;
+  mCGame= backGame;
+  printf("initialisationReseau: test\n");
   if(isNetInitialised())
   {
     freeRessourcesReseau();
@@ -41,81 +48,64 @@ void initialisationReseau(char *strip)
         printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
         return;
     }
-    stopNetwork=false;
+    
     bufferLock = SDL_CreateMutex();
     //canRecept = SDL_CreateCond(); 
     //canSend = SDL_CreateCond();
     networkinitialised = 1;
 }
 
-
-DataList* receptList()
-{
-  if(networkinitialised!=1)
-    return NULL;
-  printf("reception d'une liste\n");
-  int receivedByteCount = SDLNet_TCP_Recv(sd, &dataList, sizeof(DataList));
-  printf("***************************\n");
-  printf("tab: %s\n",dataList.tab);
-  printf("end: %d\n",(int)dataList.end);
-  printf("received: %d\n",receivedByteCount);
-  printf("***************************\n");
-  return &dataList;
-}
-
-void receptGame()
-{
-  int i,z;
-  if(networkinitialised!=1)
-    return;
-  
-  printf("reception de donnée de jeu\n");
-  int receivedByteCount = SDLNet_TCP_Recv(sd, &dataGame, sizeof(DataGame));
-  printf("***************************\n");
-  printf("received: %d\n",receivedByteCount);
-  printf("table: \n");
-  for(i=0;i<4;i++)
-  {
-    for(z=0;z<6;z++)
-      printf("%d ",dataGame.table[i][z]);
-    printf("\n");
-  }
-  for(i=0;i<10;i++)
-    printf("users %d %s\n",i,dataGame.users[i]);
-  for(i=0;i<10;i++)
-    printf("turn %d %d\n",i,dataGame.turn[i]);
-  for(i=0;i<10;i++)
-    printf("scores %d %d\n",i,dataGame.scores[i]);
-  for(i=0;i<10;i++)
-    printf("hand %d %d\n",i,dataGame.hand[i]);
-  printf("***************************\n");
-}
-
 static int Treception(void *ptr)
 {
-    void (*callback)(Data*);
     int cnt;
-    callback = ptr;
+    bool stopNetwork=false;
     
     while(!stopNetwork)
     {
-    //SDL_CondWait( canRecept, bufferLock );
-    cnt = SDLNet_TCP_Recv(sd, &data, sizeof(Data));
-    //SDL_mutexP( bufferLock );
-    (*callback)(&data);
-    //SDL_mutexV( bufferLock );
+     cnt = SDLNet_TCP_Recv(sd, &data, sizeof(Data));
+     if(cnt <= 0)
+       return cnt;
+     (*mCData)(&data);
+     if(data.dataType == CONN)
+     {
+       if(data.car == SWITCH) // on nous prévient que une dataList va être transmise
+       {
+	  cnt = SDLNet_TCP_Recv(sd, &dataList, sizeof(DataList));
+	  (*mCList)(&dataList);
+       }
+       else if(data.car == CONN_QUIT)
+	 stopNetwork = true;
+       else if(data.car == CONN_ERROR)
+	 stopNetwork=true;
+       else if(data.car == CONN_STOP)
+	 stopNetwork=true;
+       
+     }
+     else if(data.dataType == GAME)
+     {
+       if(data.car == SWITCH) // on nous prévient que une dataGame va être transmise
+       {
+	  cnt = SDLNet_TCP_Recv(sd, &dataGame, sizeof(DataGame));
+	  (*mCGame)(&dataGame);
+       }
+       else if(data.car == GAME_ERROR)
+       {
+	 stopNetwork=true;
+       }
+     }
+     if(cnt <= 0)
+       stopNetwork=true;
     }
-    //SDL_CondSignal( canSend );
     printf("Treception terminé\n");
     return cnt;
 }
 
-void reception(void (*callback)(Data*))
+void reception()
 {
   
   if(networkinitialised!=1)
     return;
-  threadRecept = SDL_CreateThread(Treception, "receptData", (void *)callback);
+  threadRecept = SDL_CreateThread(Treception, "receptData", (void *)NULL);
   if (NULL == threadRecept) {
         printf("\nSDL_CreateThread failed: %s\n", SDL_GetError());
     }
@@ -139,65 +129,35 @@ void askList()
     return;
   data.dataType=CONN;
   data.car=CONN_LIST;
+  data.from=-1;
   if (SDLNet_TCP_Send(sd, &data, sizeof(data)) < sizeof(data))
   {
      printf("***********l'envoi a échoué**************\n>");
   }
   printf("envoie éffectué \n");
 }
-void wait()
-{
-  printf("press enter to continue\n");
-  fflush(stdin);
-  getchar();
-}
-void freeRessourcesReseau()
-{
-  if(networkinitialised!=1)
-  {
-    printf("freeRessourcesReseau: ERROR\n");
-    return;
-  }
-  int threadReturnValue;
-  stopNetwork=true;
-  printf("Waiting for reception thread\n");
-  SDL_WaitThread(threadRecept, &threadReturnValue);
-  printf("\nThread returned value: %d\n", threadReturnValue);
-  SDL_DestroyMutex( bufferLock );
-  //SDL_DestroyCond( canSend );
-  //SDL_DestroyCond( canRecept );
-  
-  SDLNet_TCP_Close(sd);
-  SDLNet_Quit();
-}
-void join()
+void join(char* str,int passwd)
 {
   if(networkinitialised!=1)
     return;
-  printf("envoie une demande pour rejoindre une salle \n");
   data.dataType=CONN;
   data.car=CONN_JOIN;
-  printf("saississez le nom de la salle \n");
-  scanf("%s",data.tab);
-  printf("saississez le mot de passe -1 sinon \n");
-  scanf("%d",&data.from);
+  strcpy(data.tab,str);
+  data.from = passwd;
   if (SDLNet_TCP_Send(sd, &data, sizeof(data)) < sizeof(data))
   {
      printf("***********l'envoi a échoué**************\n>");
   }
   printf("envoie éffectué \n");
 }
-void create()
+void create(char* str,int passwd)
 {
   if(networkinitialised!=1)
     return;
-  printf("envoie une demande pour creer une salle \n");
   data.dataType=CONN;
   data.car=CONN_CREATE;
-  printf("saississez le nom de la salle \n");
-  scanf("%s",data.tab);
-  printf("saississez le mot de passe -1 sinon \n");
-  scanf("%d",&data.from);
+  strcpy(data.tab,str);
+  data.from = passwd;
   if (SDLNet_TCP_Send(sd, &data, sizeof(data)) < sizeof(data))
   {
      printf("***********l'envoi a échoué**************\n>");
@@ -216,19 +176,52 @@ void startGame()
   }
   printf("envoie éffectué \n");
 }
-void choice()
+void choice(int choice)
 {
   if(networkinitialised!=1)
     return;
   data.dataType=GAME;
   data.car=GAME_CHOICE;
-  printf("donnez votre choix: ");
-  scanf("%d",&data.from);
+  data.from=choice;
   if (SDLNet_TCP_Send(sd, &data, sizeof(data)) < sizeof(data))
   {
      printf("***********l'envoi a échoué**************\n>");
   }
   printf("envoie éffectué \n");
+}
+void sendQuit()
+{
+  if(networkinitialised!=1)
+    return;
+  data.dataType=CONN;
+  data.car=CONN_QUIT;
+  data.from=0;
+  if (SDLNet_TCP_Send(sd, &data, sizeof(data)) < sizeof(data))
+  {
+     printf("***********l'envoi a échoué**************\n>");
+  }
+  printf("envoie éffectué \n");
+}
+
+void freeRessourcesReseau()
+{
+  if(networkinitialised!=1)
+  {
+    printf("freeRessourcesReseau: ERROR\n");
+    return;
+  }
+  int threadReturnValue;
+  sendQuit();
+  printf("Waiting for reception thread\n");
+  SDL_WaitThread(threadRecept, &threadReturnValue);
+  printf("\nThread returned value: %d\n", threadReturnValue);
+  SDL_DestroyMutex( bufferLock );
+  //SDL_DestroyCond( canSend );
+  //SDL_DestroyCond( canRecept );
+  
+  SDLNet_TCP_Close(sd);
+  SDLNet_Quit();
+  networkinitialised=0;
 }
 int isNetInitialised()
 {
