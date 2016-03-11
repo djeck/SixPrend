@@ -7,7 +7,7 @@
 #include "../Game/inc.h"
 
 #define NB_CARD 104
-#define PATH_CARD "../media/%d.bmp"
+#define PATH_CARD "./media/%d.bmp"
 #define CARD_H 80
 #define CARD_W 52
 

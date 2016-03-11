@@ -2,6 +2,7 @@
 #define MULTITEXT_H
 
 #include <stdbool.h>
+#include <string.h>
 #include "text.h"
 #define NB_LINE 10
 

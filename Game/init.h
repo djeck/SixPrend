@@ -5,7 +5,6 @@
 #ifndef INIT_H
 #define INIT_H
 
-#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
 #include "inc.h"

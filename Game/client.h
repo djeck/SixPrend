@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <SDL2/SDL_net.h>
 #include <SDL2/SDL_thread.h>
 #include <SDL2/SDL_timer.h>
