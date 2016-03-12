@@ -1,7 +1,9 @@
-/*
- * Fichier correspondant à l'affichage et la gestion de la page de parametre, avant l'acces au jeu
+/**
+ * \file mode.h
+ * \brief Fichier correspondant à l'affichage et la gestion de la page de parametre, avant l'acces au jeu
+ * \author Aubin Detrez
+ *
  */
-
 #ifndef MODE_H
 #define MODE_H
 
@@ -11,20 +13,24 @@
 #include "client.h"
 #include "../GUI/multiText.h"
 
-/*
- * Gestion des evenements spécifique à la page de parametre
+/**
+ * \fn void eventMode()
+ * \brief Gestion des evenements spécifique à la page de parametre
  */
 void eventMode();
-/*
- * Initialisation des ressources graphiques spécifique à la page de parametre
+/**
+ * \fn void initModeRender()
+ * \brief Initialisation des ressources graphiques spécifique à la page de parametre
  */
 void initModeRender();
-/*
- * dessine ressources graphiques spécifique à la page de parametre
+/**
+ * \fn void renderMode()
+ * \brief dessine ressources graphiques spécifique à la page de parametre
  */
 void renderMode();
-/*
- * Libere les ressources graphiques initialisees par initModeRender
+/**
+ * \fn void freeModeRender()
+ * \brief Libere les ressources graphiques initialisees par initModeRender
  */
 void freeModeRender();
 

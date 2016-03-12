@@ -11,7 +11,6 @@ Button createButton(char str[],int x,int y,int size)
     SDL_Surface *stext;
     Button img;
     img.select=false;
-    img.active=true;
     img.rect.x = x;
     img.rect.y = y;
 

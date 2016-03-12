@@ -1,24 +1,36 @@
+/**
+ * \file client.c 
+ * \brief implémentation réseau
+ * \author Aubin Detrez
+ * 
+ * Permet de ce connecter au serveur de jeu, lancer un thread
+ * d'écoute et recevoir les données du serveur pas l'intermédiaire de callback
+ *
+ */
+
 #include "client.h"
 
-static IPaddress ip;		/* Server address */
-static TCPsocket sd;		/* Socket descriptor */
+static IPaddress ip;		  /* adresse du serveur */
+static TCPsocket sd;		  /* socket tcp */
 
-static Data data;
-static DataList dataList;
-static DataGame dataGame;
-static void (*mCData)(Data*);
-static void (*mCList)(DataList*);
-static void (*mCGame)(DataGame*);
+static Data data;                /* buffer de réception */
+static DataList dataList;        /* buffer de réception pour les listes de salles*/
+static DataGame dataGame;        /* buffer de réception pour les données de jeu*/
+static void (*mCData)(Data*);       /* callback appellé par le thread de réception*/
+static void (*mCList)(DataList*);   /* callback pour les listes de salles */
+static void (*mCGame)(DataGame*);   /* callback pour les données de jeu */
 
-static SDL_Thread *threadRecept; // thread reception
+static SDL_Thread *threadRecept; // thread de réception
 
-SDL_mutex *bufferLock = NULL;
-bool waiting;
+static SDL_mutex *bufferLock = NULL;
+/*
+ * fait patienter le thread de réception jusqu'à ce que le thread de réception
+ * jusqu'à ce que le thread principale puisse traiter les retours (callback valide)
+ */
+static bool waiting;
 
-//SDL_cond *canRecept = NULL;
-//SDL_cond *canSend = NULL;
+static int networkinitialised = 0; // s'assure que tout est déjà initialisé
 
-static int networkinitialised = 0;
 void initialisationReseau(char *strip,void (*backData)(Data*),void (*backList)(DataList*),void (*backGame)(DataGame*))
 {
 

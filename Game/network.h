@@ -1,3 +1,10 @@
+/**
+ * \file network.h
+ * \brief Fichier correspondant au structures et types de donnée pour le reseau
+ * doit être le même sur le serveur et le client (note: sur le serveur c'est inc.hpp)
+ * \author Aubin Detrez
+ *
+ */
 #ifndef INC_HPP
 #define INC_HPP
 
@@ -9,7 +16,7 @@
 #define BUF_LIST 640
 #define MAXCONN 100
 
-/** Les valeures possibles de [Data].car selon le [Data].dataType	**/
+/* Les valeures possibles de [Data].car selon le [Data].dataType	*/
 
 /* le serveur ne peut pas satisfaire la demande du client ou une erreur est constaté
 	tab - indications suplémentaire */
@@ -72,49 +79,56 @@
  */
 #define END_GAME 13
 #define SWITCH 14 // changement de type de donnees, selon DataType
-#define CONN_QUIT 15
+#define CONN_QUIT 15 // quitter proprement
 
 /**	Les types de donnée	**/
 
-typedef enum {CONN=0,MSG=1,GAME=2} DataType;
+/**
+ * \enum DataType
+ * \brief les types de paquet selon leurs fonction
+ * correspond au champ dataType de la structure Data
+ */
+typedef enum {
+    CONN=0, /*!< pour la connection*/
+    MSG=1,  /*!< pour le chat (message)*/
+    GAME=2  /*!< pour le jeu*/
+} DataType;
 
-/*
-	Données pour toute la partie connection
-	dataType: type de donnée concerné
-	car: information complementaire sur les données
-	tab: buffer pour des chaines de caractére
-	fom: source d'un message ou mot de passe pour rejoindre une salle
-*/
+/**
+ * \struct Data
+ * \brief données de base
+ *  Données pour toute la partie connection
+ */
 typedef struct
 {
-    DataType dataType;
-    char car;
-    char tab[BUF_SIZE];
-    int from;
+    DataType dataType; /*!< type de donnée concerné*/
+    char car;           /*!< information complementaire sur la nature des données*/
+    char tab[BUF_SIZE]; /*!< buffer pour des chaines de caractére*/
+    int from;           /*!< source d'un message ou mot de passe pour rejoindre une salle*/
 } __attribute__ ((packed)) Data;
 
-/*
-	Données pour la transmission par le serveur des
-	noms des salles.
-	tab: nom des salles espacé par '\n'
-	end: vaut true si le client n'a pas à attendre d'autre données de ce type
+/**
+ * \struct DataList
+ * \brief données spécifiques à la liste des salles
+ * sont comme une liste chainée, dernier paquet contient end à true
 */
 typedef struct
 {
-    char tab[BUF_LIST];
-    bool end;
+    char tab[BUF_LIST]; /*!< nom des salles espacé par '\n'*/
+    bool end; /*!< true si le client n'a pas à attendre d'autre données de ce type*/
 } __attribute__ ((packed)) DataList;
 
-/*
-	Données pour le jeu en lui même
-*/
+/**
+ * \struct DataGame
+ * \brief Données pour le jeu en lui même
+ */
 typedef struct
 {
-    int table[4][6]; // les cartes sur la table, 4 ranges de 10 cartes maximum, vaut 0 si derniere carte de la rangée
-    char users[10][BUF_SIZE]; // nom de chaques joueurs
-    int turn[10]; // choix de chaque joueurs
-    int scores[10]; //scores de chaques joueur
-    int hand[10]; // main du joueur
+    int table[4][6]; /*!< les cartes sur la table, 4 ranges de 10 cartes maximum, vaut 0 si derniere carte de la rangée */
+    char users[10][BUF_SIZE]; /*!< nom de chaques joueurs */
+    int turn[10]; /*!< choix de chaque joueurs */
+    int scores[10]; /*!< scores de chaques joueur */
+    int hand[10]; /*!< main du joueur */
 } __attribute__ ((packed)) DataGame;
 
 #endif

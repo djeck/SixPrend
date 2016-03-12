@@ -1,5 +1,7 @@
-/*
- * Comprend L'initialisation de la SDL, et la liberation des ressources
+/**
+ * \file init.h
+ * \brief Comprend L'initialisation de la SDL, et la liberation des ressources
+ * \author Aubin Detrez
  */
 
 #ifndef INIT_H
@@ -9,13 +11,15 @@
 
 #include "inc.h"
 
-/*
- * initialisation des ressources 'globales'
+/**
+ * \fn void init()
+ * \brief initialisation des ressources 'globales'
  */
 void init();
 
-/*
- * libere les ressources 'globales'
+/**
+ * \fn void quit()
+ * \brief libere les ressources 'globales'
  */
 void quit();
 

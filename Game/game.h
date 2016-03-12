@@ -1,7 +1,14 @@
 /*
  * Fichier correspondant à l'affichage et la gestion du jeu
  */
-
+/**
+ * \file game.h
+ * \brief interface graphique du jeu
+ * \author Aubin Detrez
+ *
+ * affichage des informations depuis les données du serveur
+ *
+ */
 #ifndef GAME_H
 #define GAME_H
 
@@ -11,53 +18,72 @@
 #include "../GUI/text.h"
 #include "../GUI/picture.h"
 
-#define MAXJOUEUR 10
-#define NB_CARD 104
+#define SIZESTR 21
+#define MAXJOUEUR 10 // nombre maximal de joueur dans une partie
+#define NB_CARD 104 // nombre total de cartes différentes
 #define HAND 10 // nombre de carte dans la main
 #define POSHAND_X  20 // position de la premiere carte de la main selon X
 #define POSHAND_Y 400 // position des cartes de la main selon Y
 #define DECHAND 5 // ecart entre les carte de la main (selon X)
 #define RANGEE 4 // nombre de rangee de cartes communes
 #define CPRANGEE 6 // nombre de carte maximum par rangee
-#define POSTABLE_X 10
-#define POSTABLE_Y 20
-#define DECRANGEE 7
-#define POSJOUEUR_X 800
-#define POSJOUEUR_Y 5
+#define POSTABLE_X 10 // position de la pemière carte de la table selon X
+#define POSTABLE_Y 20 // position de la pemière carte de la table selon Y
+#define DECRANGEE 7 // décalage entre les rangées
+#define POSJOUEUR_X 800 // position X des informations sur les joueurs
+#define POSJOUEUR_Y 5 // position selon Y de la premiére information sur les joueurs
 #define SIZEJOUEUR 60 // taille réservé à l'affichage de chaque joueur
 
+/**
+* \struct Joueur
+* \brief Objet positionnement et valeurs de données sur chaque joueur
+*
+* permet de savoir quoi afficher et ou pour les score et joueurs
+*
+*/
 typedef struct {
-    char nom[SIZESTR];
-    int tete; // nombre de tête de boeuf
-    SDL_Rect rect; // position à l'ecran de leur nom ...
+    char nom[SIZESTR];  /*!< chaine de caractère nom du joueur */
+    int tete; /*!< nombre de tête de boeuf (score) du joueur*/
+    SDL_Rect rect; /*!< positionnement à l'écran de ces informations*/
 } Joueur;
 
-/*
- * met à jour les donnees à afficher pour chaque joueur
+/**
+ * \fn void updateJoueur()
+ * \brief met à jour les donnees à afficher pour chaque joueur
  */
 void updateJoueur();
-/*
- * creer les donnees à afficher pour chaque joueur
+
+/**
+ * \fn void createJoueur()
+ * \brief creer les donnees à afficher pour chaque joueur
+ * se sert de données du tableau joueurs (cf game.c)
  */
 void createJoueur();
-/*
- * ranger la main et calculer la position où sera rendu chaque image de la main
+
+/**
+ * \fn void ordonner()
+ * \brief ranger la main
+ * le tableau représentant la main du joueur est 'poignee' (cf game.c)
  */
 void ordonner();
-/*
- * Gestion des evenements spécifique au jeu
+/**
+ * \fn void eventGame()
+ * \brief Gestion des evenements spécifique au jeu
  */
 void eventGame();
-/*
- * Initialisation des ressources graphiques spécifique au jeu
+/**
+ * \fn void initGameRender()
+ * \brief Initialisation des ressources graphiques spécifique au jeu
  */
 void initGameRender();
-/*
- * dessine ressources graphiques spécifique au jeu
+/**
+ * \fn void renderGame()
+ * \brief dessine ressources graphiques spécifique au jeu
  */
 void renderGame();
-/*
- * Libere les ressources graphiques initialisees par initGameRender
+/**
+ * \fn void freeGameRender()
+ * \brief Libere les ressources graphiques initialisees par initGameRender
  */
 void freeGameRender();
 

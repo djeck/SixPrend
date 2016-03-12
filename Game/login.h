@@ -1,5 +1,8 @@
-/*
- * Fichier correspondant à l'affichage et la gestion du login du jeu
+/**
+ * \file login.h
+ * \brief Fichier correspondant à l'affichage et la gestion du login du jeu
+ * \author Aubin Detrez
+ *
  */
 
 #ifndef LOGIN_H
@@ -10,43 +13,50 @@
 #include "../GUI/text.h"
 
 
-/*
- * deux etapes du login:
- * rLog : rensseigner le nom d'utilisateur
- * rPass : rensseigner le mot de passe
+/**
+ * \enum Etapes
+ * \brief deux etapes du login:
  */
-typedef enum {rLog,rPass} Etapes;
+typedef enum {
+    rLog, /*!< rensseigner le nom d'utilisateur*/
+    rPass/*!< rensseigner le mot de passe*/
+} Etapes;
 
-// retourne NULL si non identifier
+/**
+ * \fn char* getUsername()
+ * \return nom de l'utilisateur, NULL si non identifié
+ */
 char* getUsername();
-/*
- * Gestion des evenements spécifique au login
+/**
+ * \fn void eventLogin()
+ * \brief Gestion des evenements spécifique au login
  */
 void eventLogin();
-/*
- * Initialisation des ressources graphiques spécifique au rendu du login
- * necessite la variable renderer
+/**
+ * \fn void initLoginRender()
+ * \brief Initialisation des ressources graphiques spécifique au rendu du login
  */
 void initLoginRender();
-/*
- * dessine ressources graphiques spécifique au rendu du login
- * necessite la variable renderer
+/**
+ * \fn void renderLogin()
+ * \brief dessine ressources graphiques spécifique au rendu du login
  */
 void renderLogin();
-/*
- * Libere les ressources graphiques initialisees par initLoginRender
+/**
+ * \fn void freeLoginRender()
+ * \brief Libere les ressources graphiques initialisees par initLoginRender
  */
 void freeLoginRender();
-/*
- * Cherche dans le fichier si l'utilisateur à un compte et si le mot de passe est juste
- * retourn 0 si le mot de passe est faux
- * return 1 si l'utilisateur est bien loguer
- * return 2 si un nouveaux compte est créé
+/**
+ * \fn int identifier()
+ * \brief Cherche dans le fichier si l'utilisateur à un compte et si le mot de passe est juste
+ * \return 0 si le mot de passe est faux, 1 si l'utilisateur est bien loguer, 2 si un nouveaux compte est créé
  */
 int identifier();
-/*
- * Cherche dans le fichier si l'utilisateur à un compte ou pas
- * return true si il est trouvé, false sinon
+/**
+ * \fn bool exist()
+ * \brief Cherche dans le fichier si l'utilisateur à un compte ou pas
+ * \return true si il est trouvé, false sinon
  */
 bool exist();
 
