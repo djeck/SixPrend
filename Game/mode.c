@@ -86,10 +86,11 @@ void CData(Data* data) // callback pour le thread de reception pour tout type de
     else if(data->dataType == GAME && data->car == GAME_START)
     {
         printf("GAME_start recu, le thread principale va charger la page de jeu\n");
+        identifySrv(getUsername());
         modeStep = GO;
         setWait(true);
     }
-    printData();
+    printData(data);
 }
 void CDtList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {

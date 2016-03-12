@@ -46,7 +46,7 @@ void CGameData(Data* data) // callback pour le thread de reception pour tout typ
     {
         endGame=false;
     }
-    printData();
+    printData(data);
 }
 void CGameList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {

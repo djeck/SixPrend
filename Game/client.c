@@ -1,8 +1,8 @@
 /**
- * \file client.c 
+ * \file client.c
  * \brief implémentation réseau
  * \author Aubin Detrez
- * 
+ *
  * Permet de ce connecter au serveur de jeu, lancer un thread
  * d'écoute et recevoir les données du serveur pas l'intermédiaire de callback
  *
@@ -13,9 +13,6 @@
 static IPaddress ip;		  /* adresse du serveur */
 static TCPsocket sd;		  /* socket tcp */
 
-static Data data;                /* buffer de réception */
-static DataList dataList;        /* buffer de réception pour les listes de salles*/
-static DataGame dataGame;        /* buffer de réception pour les données de jeu*/
 static void (*mCData)(Data*);       /* callback appellé par le thread de réception*/
 static void (*mCList)(DataList*);   /* callback pour les listes de salles */
 static void (*mCGame)(DataGame*);   /* callback pour les données de jeu */
@@ -81,6 +78,10 @@ void updateCallback(void (*backData)(Data*),void (*backList)(DataList*),void (*b
 }
 static int Treception(void *ptr)
 {
+    Data data;                /* buffer de réception */
+    DataList dataList;        /* buffer de réception pour les listes de salles*/
+    DataGame dataGame;        /* buffer de réception pour les données de jeu*/
+
     int cnt;
     bool stopNetwork=false;
 
@@ -148,6 +149,7 @@ void reception()
 
 void sendMsg(char *msg)
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=MSG;
@@ -160,6 +162,7 @@ void sendMsg(char *msg)
 }
 void askList()
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=CONN;
@@ -173,6 +176,7 @@ void askList()
 }
 void join(char* str,int passwd)
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=CONN;
@@ -187,6 +191,7 @@ void join(char* str,int passwd)
 }
 void create(char* str,int passwd)
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=CONN;
@@ -201,6 +206,7 @@ void create(char* str,int passwd)
 }
 void startGame()
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=GAME;
@@ -213,6 +219,7 @@ void startGame()
 }
 void choice(int choice)
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=GAME;
@@ -226,6 +233,7 @@ void choice(int choice)
 }
 void sendQuit()
 {
+    Data data;
     if(networkinitialised!=1)
         return;
     data.dataType=CONN;
@@ -266,49 +274,49 @@ void setWait(bool arg0)
 {
     waiting = arg0;
 }
-void printData()
+void printData(Data* data)
 {
-    if(data.dataType == CONN)
+    if(data->dataType == CONN)
     {
         printf("données de type CONN reçu\n");
 
-        if(data.car == CONN_FULL)
+        if(data->car == CONN_FULL)
             printf("CONN_FULL Echec de la connection: serveur plein\n");
-        else if(data.car == CONN_OK)
+        else if(data->car == CONN_OK)
             printf("CONN_OK Connection etablie avec success\n");
-        else if(data.car == CONN_STOP)
+        else if(data->car == CONN_STOP)
             printf("CONN_STOP le serveur met fin à la connection\n");
-        else if(data.car == CONN_ERROR)
+        else if(data->car == CONN_ERROR)
             printf("CONN_ERROR erreur inconnue\n");
-        else if(data.car == CONN_LIST)
+        else if(data->car == CONN_LIST)
             printf("CONN_LIST ne devrais pas etre envoyé au client\n");
-        else if(data.car == CONN_JOIN)
+        else if(data->car == CONN_JOIN)
             printf("CONN_JOIN ne devrais pas etre envoyé au client\n");
-        else if(data.car == CONN_CREATE)
+        else if(data->car == CONN_CREATE)
             printf("CONN_CREATE ne devrais pas etre envoyé au client\n");
         else
             printf("donnees de nature inconnue\n");
     }
-    else if(data.dataType == MSG)
+    else if(data->dataType == MSG)
     {
         printf("données de type MSG reçu\n");
     }
-    else if(data.dataType == GAME)
+    else if(data->dataType == GAME)
     {
         printf("données de type GAME reçu\n");
-        if(data.car == GAME_OK)
+        if(data->car == GAME_OK)
             printf("GAME_OK bien connecté à une salle\n");
-        else if(data.car == GAME_LOGIN)
+        else if(data->car == GAME_LOGIN)
             printf("GAME_LOGIN le serveur demande d'envoyer le login\n");
-        else if(data.car == GAME_ERROR)
+        else if(data->car == GAME_ERROR)
             printf("GAME_ERROR erreur\n");
-        else if(data.car == GAME_START)
+        else if(data->car == GAME_START)
             printf("GAME_START on peut commencer à jouer\n");
-        else if(data.car == GAME_CHOICE)
+        else if(data->car == GAME_CHOICE)
             printf("GAME_CHOICE le serveur demande aux joueurs de choisir leurs cartes\n");
-        else if(data.car == END_TURN)
+        else if(data->car == END_TURN)
             printf("END_TURN fin du tour, apprêté vous à recevoir les donnees du jeu\n");
-        else if(data.car == END_GAME)
+        else if(data->car == END_GAME)
             printf("END_GAME fin du jeu, attend game_start pour recommancer\n");
         else
             printf("donnees de nature inconnue\n");
@@ -317,9 +325,25 @@ void printData()
         printf("ERROR type de donné inconu\n");
 
     printf("***************************\n");
-    printf("datatype: %d\n",(int)data.dataType);
-    printf("car: %d\n",(int)data.car);
-    printf("tab: <<%s>>\n",data.tab);
-    printf("from: %d\n",data.from);
+    printf("datatype: %d\n",(int)data->dataType);
+    printf("car: %d\n",(int)data->car);
+    printf("tab: <<%s>>\n",data->tab);
+    printf("from: %d\n",data->from);
     printf("***************************\n");
+}
+
+void identifySrv(char *name)
+{
+    Data buff;
+    if(networkinitialised!=1)
+        return;
+    buff.dataType=GAME;
+    buff.car=GAME_LOGIN;
+    buff.from=0;
+    strcpy(buff.tab,name);
+    if (SDLNet_TCP_Send(sd, &buff, sizeof(Data)) < sizeof(Data))
+    {
+        printf("***********l'envoi a échoué**************\n>");
+    }
+    printf("envoie demande identification\n");
 }

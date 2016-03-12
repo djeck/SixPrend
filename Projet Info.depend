@@ -391,7 +391,7 @@
 	<SDL2/SDL_ttf.h>
 	<stdbool.h>
 
-1457804874 c:\users\djeck\documents\github\sixprend\game\client.h
+1457817302 c:\users\djeck\documents\github\sixprend\game\client.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -431,10 +431,10 @@
 	<SDL2/SDL_ttf.h>
 	"inc.h"
 
-1457802986 source:c:\users\djeck\documents\github\sixprend\game\client.c
+1457817880 source:c:\users\djeck\documents\github\sixprend\game\client.c
 	"client.h"
 
-1457799310 source:c:\users\djeck\documents\github\sixprend\game\game.c
+1457817277 source:c:\users\djeck\documents\github\sixprend\game\game.c
 	"game.h"
 
 1457709553 source:c:\users\djeck\documents\github\sixprend\game\inc.c
@@ -449,7 +449,7 @@
 1457789196 source:c:\users\djeck\documents\github\sixprend\game\menu.c
 	"menu.h"
 
-1457795423 source:c:\users\djeck\documents\github\sixprend\game\mode.c
+1457817730 source:c:\users\djeck\documents\github\sixprend\game\mode.c
 	"mode.h"
 
 1457742005 source:c:\users\djeck\documents\github\sixprend\game\stat.c
