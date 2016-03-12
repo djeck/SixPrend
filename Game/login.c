@@ -9,7 +9,7 @@ static char utilisateur[SIZESTR];
 
 char* getUsername()
 {
-  return utilisateur;
+    return utilisateur;
 }
 
 static Etapes step; // étapes du login
@@ -26,11 +26,11 @@ void eventLogin()
 
     while (SDL_PollEvent(&event))
     {
-      if(step == rLog)
-	inputTextBox(&inputBox,&event);
-      else
-	inputPassBox(&inputBox,&event);
-      
+        if(step == rLog)
+            inputTextBox(&inputBox,&event);
+        else
+            inputPassBox(&inputBox,&event);
+
         switch(event.type)
         {
         case SDL_QUIT:
@@ -39,7 +39,7 @@ void eventLogin()
             break;
         case SDL_KEYUP:
             if( event.key.keysym.scancode == SDL_SCANCODE_RETURN ||
-                     event.key.keysym.sym == SDLK_TAB )
+                    event.key.keysym.sym == SDLK_TAB )
             {
                 printf("eventLogin: input confirmed\n");
                 if(step==rLog) // si l'utilisateur à validé la saisie du nom d'utilisateur, on recupère le résultat
@@ -54,8 +54,8 @@ void eventLogin()
                 {
                     strcpy(password,inputBox.text);
                     int resultat = identifier(username,password);
-		    inputBox.text[0]='\0'; // on efface le contenu
-		    updateTextBox(&inputBox);
+                    inputBox.text[0]='\0'; // on efface le contenu
+                    updateTextBox(&inputBox);
                     switch(resultat)
                     {
                     case 0: // mot de passe faux

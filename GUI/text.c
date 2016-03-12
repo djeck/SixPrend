@@ -60,7 +60,7 @@ void updateText(Text* ptr,char str[])
 {
     if(ptr->texture)
     {
-	SDL_DestroyTexture(ptr->texture);
+        SDL_DestroyTexture(ptr->texture);
         *ptr = createText(str,ptr->rect.x,ptr->rect.y,ptr->size);
     }
     else
@@ -74,6 +74,6 @@ void freeText(Text *img)
 
 void renderText(Text *img)
 {
-  SDL_RenderCopy(renderer,img->texture,NULL,&img->rect);
+    SDL_RenderCopy(renderer,img->texture,NULL,&img->rect);
 }
 

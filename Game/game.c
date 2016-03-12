@@ -26,7 +26,7 @@ void updateJoueur()
         sprintf(buff,"%d",joueurs[i].tete);
         updateText(&joueurPoint[i],buff); // mis à jour des points
     }
-  
+
 }
 
 //crée les données à afficher grâce au tableau joueurs[]
@@ -38,7 +38,7 @@ void createJoueur()
     {
         joueurNom[i] =  createText(joueurs[i].nom,POSJOUEUR_X-100,POSJOUEUR_Y + i*(SIZEJOUEUR),10); // mis a jour des noms des joueurs
         sprintf(buff,"%d",joueurs[i].tete);
-        joueurPoint[i] =  createText(buff,POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17 ,10); // mis à jour des points
+        joueurPoint[i] =  createText(buff,POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17,10);  // mis à jour des points
     }
 }
 
@@ -59,22 +59,23 @@ void ordonner()
 
 }
 
-void CCard(int id) {
-  printf("CCard: card id %d had been pressed\n",id);
-    };
+void CCard(int id)
+{
+    printf("CCard: card id %d had been pressed\n",id);
+};
 void eventGame()
 {
     SDL_Event event;
     int i;
-    
+
     while (SDL_PollEvent(&event))
     {
-      inputButton(&choixQuit,&event);
-      inputButton(&choixBack,&event);
-      for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // on calcule les positons aux quelles on affichera chaque cartes de la main
-    {
-      eventCard(&event,&poignee[i],&CCard);
-    }
+        inputButton(&choixQuit,&event);
+        inputButton(&choixBack,&event);
+        for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // on calcule les positons aux quelles on affichera chaque cartes de la main
+        {
+            eventCard(&event,&poignee[i],&CCard);
+        }
         switch(event.type)
         {
         case SDL_QUIT:
@@ -92,21 +93,21 @@ void initGameRender()
     printf("initGameRender: début\n");
 
     nombreJoueur=2;
-    
+
     Background = createPicture(BACKGROUNDPATH,0,0,1);
- 
+
     choixQuit = createButton("Exit",400,520,8);
     choixBack = createButton("Return",100,500,8);
-    
+
     initCard();
-    
+
     void CQuitGame() // quit game callback
     {
-      changeStep(end);
+        changeStep(end);
     };
     void CMenu()
     {
-      changeStep(menu);
+        changeStep(menu);
     };
     choixQuit.callback = &CQuitGame;
     choixBack.callback = &CMenu;
@@ -125,8 +126,8 @@ void initGameRender()
         poignee[i].rect.y = POSHAND_Y;
         poignee[i].rect.w = CARD_W;
         poignee[i].rect.h = CARD_H;
-	poignee[i].id=0;
-	poignee[i].selected=false;
+        poignee[i].id=0;
+        poignee[i].selected=false;
     }
 
     for(i=0; i<RANGEE; i++) // on calcule les positions des cartes de la tables
@@ -140,8 +141,8 @@ void initGameRender()
             table[i][z].rect.y = POSTABLE_Y + i*(CARD_H + DECRANGEE);
             table[i][z].rect.w = CARD_W;
             table[i][z].rect.h = CARD_H;
-	    table[i][z].id=0;
-	    table[i][z].selected=false;
+            table[i][z].id=0;
+            table[i][z].selected=false;
         }
 
     for(i=0; i<MAXJOUEUR; i++)
@@ -160,14 +161,14 @@ void initGameRender()
     strcpy(joueurs[3].nom,"antoine");
     strcpy(joueurs[4].nom,"jack");
     joueurs[0].tete=5;
-    
+
     poignee[0].id = 17;
     poignee[1].id = 2;
     poignee[2].id = 16;
     poignee[3].id = 84;
     poignee[4].id = 0;
     poignee[5].id = 32;
-    table[0][0].id=86; 
+    table[0][0].id=86;
     table[0][1].id=4;
     table[1][0].id=65;
     table[2][0].id=45;

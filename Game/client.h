@@ -20,11 +20,11 @@ void reception();
 //emission
 void sendMsg(char *msg);
 void askList();
-void join();
+void join(char* str,int passwd);
 void sendQuit();
-void create();
+void create(char* str,int passwd);
 void startGame();
-void choice();
+void choice(int choice);
 
 int isNetInitialised();
 

@@ -37,9 +37,9 @@ void eventStat()
 static int renderinitialised = 0;
 
 void CStatMenu()
-    {
-        changeStep(menu);
-    }
+{
+    changeStep(menu);
+}
 void initStatRender()
 {
 
@@ -49,8 +49,8 @@ void initStatRender()
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
     choixBack = createButton("Return",100,500,8);
-    
-    
+
+
     choixBack.callback = &CStatMenu;
 
     do
@@ -62,7 +62,8 @@ void initStatRender()
         testname[j-1]=createText(nom,50+j*80,150,9);
         testvic[j-1]=createText(vics,50+j*80,210,9);
         testdef[j-1]=createText(defs,50+j*80,270,9);
-    } while(j<tailleStats && tailleStats<MAXSTAT);
+    }
+    while(j<tailleStats && tailleStats<MAXSTAT);
 
     loadStatFromFile();
     name = createText("Name:",50,150,10);
@@ -85,12 +86,14 @@ void renderStat()
     renderText(&name);
     renderText(&vic);
     renderText(&def);
-    do {
+    do
+    {
         renderText(&testname[j]);
         renderText(&testvic[j]);
         renderText(&testdef[j]);
         j++;
-    } while(j<10);
+    }
+    while(j<10);
 
 
     renderButton(&choixBack);
@@ -108,12 +111,14 @@ void freeStatRender()
     freeText(&name);
     freeText(&vic);
     freeText(&def);
-    do {
+    do
+    {
         freeText(&testname[j]);
         freeText(&testvic[j]);
         freeText(&testdef[j]);
         j++;
-    } while(j<10);
+    }
+    while(j<10);
     freeButton(&choixBack);
     freePicture(&Background); // Libération de la mémoire associée à la texture
 

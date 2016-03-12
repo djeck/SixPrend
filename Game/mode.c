@@ -5,13 +5,22 @@ static Button choixStart;
 static Button choixBack;
 static Picture Background;
 static Button choixConnect;
-static ChatBox chat;
 
 static Text ipAsk;
 static TextBox ipServer;
 
 static Text connecting; //message de connection
+
+static Text textCreate;
+static Button choixCreate;
+static TextBox salleName;
+
 static MultiText list;
+
+static ChatBox chat;
+
+
+
 
 /*
  * GETIP le joueur saisie de l'ip du serveur, premiere étape et on y retourne quant on change l'ip du serveur
@@ -26,14 +35,20 @@ void eventMode()
     SDL_Event event;
     while (SDL_PollEvent(&event))
     {
-	inputTextBox(&ipServer,&event);
-	inputButton(&choixQuit,&event);
-	inputButton(&choixBack,&event);
-	inputChatBox(&chat,&event);
-	if(modeStep==READY)
-	  inputButton(&choixStart,&event);
-	inputButton(&choixConnect,&event);
-        
+        inputTextBox(&ipServer,&event);
+        inputButton(&choixQuit,&event);
+        inputButton(&choixBack,&event);
+        if(modeStep == SALLE)
+        {
+            inputMultiText(&list,&event);
+            inputChatBox(&chat,&event);
+            inputTextBox(&salleName,&event);
+            inputButton(&choixCreate,&event);
+        }
+        if(modeStep==READY)
+            inputButton(&choixStart,&event);
+        inputButton(&choixConnect,&event);
+
         switch(event.type)
         {
         case SDL_QUIT:
@@ -45,92 +60,113 @@ void eventMode()
 
 static int renderinitialised = 0;
 
-void CData(Data* data) // confimation de la connection au serveur
+void CData(Data* data) // callback pour le thread de reception pour tout type de paquet de donnée
 {
-	if(data->dataType == CONN && data->car == CONN_OK)
-	{
-	  modeStep = SALLE;
-	  sprintf(chat.input.text,"! Connection established");
-	  chat.update = true; // sera mis a jour par le thread principale
-	  askList();
-	}
-	else if(data->dataType == MSG && strlen(data->tab)>1)
-	{
-	  printf("Message recu: <<%s>>\n",data->tab);
-	  sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
-	  chat.update = true;// sera mis a jour par le thread principale
-	}
+    if(data->dataType == CONN && data->car == CONN_OK) // connection établie avec success
+    {
+        modeStep = SALLE;
+        sprintf(chat.input.text,"! Connection established");
+        chat.update = true; // sera mis a jour par le thread principale
+        askList();
+    }
+    else if(data->dataType == MSG && strlen(data->tab)>1) // un message (non null) est reçu, on l'ajoute au chat
+    {
+        printf("Message recu: <<%s>>\n",data->tab);
+        sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
+        chat.update = true;// sera mis a jour par le thread principale
+    }
 }
-void CDtList(DataList* data) // callback datalist
+void CDtList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {
-printf("CList\n");
-char str[100];
-int i=0;
-while(sscanf(data->tab,"%s\n",str)==1 && i<NB_LINE)
+    printf("CList\n");
+    char str[100];
+    int i=0;
+    while(sscanf(data->tab,"%s\n",str)==1 && i<NB_LINE)
+    {
+        strcpy(list.text[i],str);
+        i++;
+        list.update=true;
+        list.initialised=true;
+    }
+}
+void CDtGame(DataGame* data) // callback datagame, si le thread de reception a une donnee de jeu
 {
-  strcpy(list.text[i],str);
-  i++;
-  list.update=true;
+    printf("CGame\n");
 }
-}
-void CDtGame(DataGame* data) // callback datagame
+void CQuit() // on demande à quitter
 {
-  printf("CGame\n");
+    changeStep(end);
 }
-    void CQuit()
-    {
-      changeStep(end);
-    }
-    
-    void CMenu()
-    {
-      changeStep(menu);
-    }
-    
-    void CGame()
-    {
-      changeStep(game);
-    }
-    
-    void CConnect()
-    {
-      modeStep=CONNECT;
-      printf("CConnect\n");
-      initialisationReseau(ipServer.text,&CData,&CDtList,&CDtGame);
-      reception();
-      printf("CConnect: done\n");
-    }
-    void CMsg(char* msg)
-    {
-      sendMsg(msg);
-    }
 
+void CMenu() // on clic sur le bouton retour menu
+{
+    changeStep(menu);
+}
+
+void CGame() // on demande à commancer le jeu
+{
+    changeStep(game);
+}
+
+void CConnect() // on clic sur le bouton connect
+{
+    modeStep=CONNECT;
+    printf("CConnect\n");
+    initialisationReseau(ipServer.text,&CData,&CDtList,&CDtGame);
+    reception();
+    printf("CConnect: done\n");
+    list.initialised=false; // par default la liste contient un message non valide comme nom de salle
+}
+void CMsg(char* msg) // on valide un message dans le chat (entrer)
+{
+    sendMsg(msg);
+}
+void CList(char* choix) // on clic sur une salle de la liste des salles
+{
+    printf("CList : choix = \"%s\"\n",choix);
+    join(choix,-1);
+}
+void CCreate() // l'utilisateur demande à creer la salle
+{
+    if(strlen(salleName.text)>0)
+    {
+        printf("CCreate: creation de la salle \"%s\"\n",salleName.text);
+        create(salleName.text,-1);
+    }
+}
 void initModeRender()
 {
     char ipText[100];
     strcpy(ipText,"127.0.0.1");
     Background = createPicture(BACKGROUNDPATH,0,0,1);
-    
+
     choixQuit = createButton("Exit",400,550,8);
     choixBack = createButton("Return",100,550,8);
     choixStart = createButton("Start game",100,450,8);
-    
+
     ipAsk = createText("Server IP",20,100,8);
     ipServer = createTextBox(ipText,150,100,15,30,15,true);
     choixConnect = createButton("Connect",450,100,8);
     chat = createChatBox(500,350);
-    
+
     connecting = createText("Connecting to server ...",100,300,8);
     list = createMultiText(50,150);
     strcpy(list.text[0],"No available room");
     list.update=true;
-    
+
+    textCreate = createText("create:",420,200,8);
+    salleName = createTextBox("",470,200,15,30,8,8);
+    choixCreate = createButton("valid",600,200,9);
+
+
+    choixCreate.callback = &CCreate;
     choixConnect.callback = &CConnect;
     chat.callback = &CMsg;
     choixQuit.callback = &CQuit;
     choixBack.callback = &CMenu;
     choixStart.callback = &CGame;
-    
+    list.callback = &CList;
+
     renderinitialised=1;
     modeStep=GETIP;
 }
@@ -139,10 +175,10 @@ void renderMode()
     if(renderinitialised==0)
         return;
     renderPicture(&Background);
-    
+
     renderText(&ipAsk);
     if(modeStep==CONNECT)
-      renderText(&connecting);
+        renderText(&connecting);
     renderTextBox(&ipServer);
     renderButton(&choixConnect);
     renderButton(&choixQuit);
@@ -150,8 +186,11 @@ void renderMode()
     renderButton(&choixStart);
     if(modeStep==SALLE)
     {
-      renderChatBox(&chat);
-      renderMultiText(&list);
+        renderChatBox(&chat);
+        renderMultiText(&list);
+        renderText(&textCreate);
+        renderTextBox(&salleName);
+        renderButton(&choixCreate);
     }
 }
 
@@ -164,6 +203,9 @@ void freeModeRender()
     }
     renderinitialised=0;
     freeRessourcesReseau();
+    freeText(&textCreate);
+    freeTextBox(&salleName);
+    freeButton(&choixCreate);
     freeButton(&choixConnect);
     freeButton(&choixQuit);// Libération de la mémoire associée aux textures
     freeTextBox(&ipServer);

@@ -25,7 +25,7 @@
 #define SCREEN_WIDTH 800 // largeur par default de la fenetre
 #define SCREEN_HEIGHT 480 // hauteur par default de la fenetre
 #define SIZESTR 21 // taille par default du nom
-#define FONTPATH "./media/sixty.fon" // fichier de fnnt
+#define FONTPATH "./media/arial.ttf" // fichier de fnnt
 #define FONTSIZE 256 // taille maximale chagé depuis le fichier de font
 #define CLIGNE 500
 

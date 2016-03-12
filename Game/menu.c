@@ -29,17 +29,17 @@ void eventMenu()
 static int renderinitialised = 0;
 
 void CQuitGame() // quit game callback
-    {
-      changeStep(end);
-    }
-    void CStat()
-    {
-        changeStep(stat);
-    }
-    void CMode()
-    {
-        changeStep(mode);
-    }
+{
+    changeStep(end);
+}
+void CStat()
+{
+    changeStep(stat);
+}
+void CMode()
+{
+    changeStep(mode);
+}
 void initMenuRender()
 {
 

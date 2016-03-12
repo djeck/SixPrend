@@ -6,7 +6,8 @@ MultiText createMultiText(int x,int y)
   MultiText box;
   int i;
   box.update = false;
-  
+  box.initialised = false;
+
   for(i=0;i<NB_LINE;i++)
   {
     strcpy(box.text[i],"");
@@ -34,6 +35,16 @@ void updateMultiText(MultiText* ptr)
   }
   ptr->update = false;
 }
+void inputMultiText(MultiText* ptr,SDL_Event *event)
+{
+    int i;
+  if(ptr->initialised && event->type == SDL_MOUSEBUTTONDOWN && event->button.button == SDL_BUTTON_LEFT )
+  {
+      for(i=0;i<NB_LINE;i++)
+       if(strlen(ptr->text[i])>0 && collisionWithMouse(ptr->messages[i].rect,event->button.x,event->button.y))
+            ptr->callback(ptr->text[i]);
+  }
+}
 void freeMultiText(MultiText *img)
 {
   int i;
@@ -49,6 +60,7 @@ void renderMultiText(MultiText *img)
   for(i=0;i<NB_LINE;i++)
   {
     renderText(&img->messages[i]);
-    SDL_RenderDrawRect(renderer,&img->messages[i].rect);
+    if(strlen(img->text[i])>0)
+        SDL_RenderDrawRect(renderer,&img->messages[i].rect);
   }
 }

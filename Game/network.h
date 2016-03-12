@@ -52,7 +52,7 @@
 #define GAME_ERROR 9
 
 /*
- * le client demande à commance la partie ou le serveur 
+ * le client demande à commance la partie ou le serveur
  * va transmettre les donnees pour un tour de table (de structure DataGame)
  */
 #define GAME_START 10
@@ -87,10 +87,10 @@ typedef enum {CONN=0,MSG=1,GAME=2} DataType;
 */
 typedef struct
 {
-		DataType dataType;
-		char car;
-		char tab[BUF_SIZE];
-		int from;
+    DataType dataType;
+    char car;
+    char tab[BUF_SIZE];
+    int from;
 } __attribute__ ((packed)) Data;
 
 /*
@@ -99,10 +99,10 @@ typedef struct
 	tab: nom des salles espacé par '\n'
 	end: vaut true si le client n'a pas à attendre d'autre données de ce type
 */
-typedef struct 
+typedef struct
 {
-		char tab[BUF_LIST];
-		bool end;
+    char tab[BUF_LIST];
+    bool end;
 } __attribute__ ((packed)) DataList;
 
 /*
@@ -110,11 +110,11 @@ typedef struct
 */
 typedef struct
 {
-		int table[4][6]; // les cartes sur la table, 4 ranges de 10 cartes maximum, vaut 0 si derniere carte de la rangée
-		char users[10][BUF_SIZE]; // nom de chaques joueurs
-		int turn[10]; // choix de chaque joueurs
-		int scores[10]; //scores de chaques joueur
-		int hand[10]; // main du joueur
+    int table[4][6]; // les cartes sur la table, 4 ranges de 10 cartes maximum, vaut 0 si derniere carte de la rangée
+    char users[10][BUF_SIZE]; // nom de chaques joueurs
+    int turn[10]; // choix de chaque joueurs
+    int scores[10]; //scores de chaques joueur
+    int hand[10]; // main du joueur
 } __attribute__ ((packed)) DataGame;
 
 #endif

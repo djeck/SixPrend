@@ -29,7 +29,8 @@ void init()
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    if(TTF_Init()==-1) {
+    if(TTF_Init()==-1)
+    {
         printf("init:TTF_Init: %s\n", TTF_GetError());
         exit(2);
     }
