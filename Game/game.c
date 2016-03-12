@@ -15,6 +15,60 @@ static Joueur joueurs[MAXJOUEUR]; // des donnees sur tout les joueurs
 static Text joueurNom[MAXJOUEUR];
 static Text joueurPoint[MAXJOUEUR];
 
+static Text waitInstruction;
+
+static Button playAgain;
+
+static ChatBox chat;
+
+static bool haveToChoose; // mis à jour par le thread de reception si le serveur attend une donnee du client
+static bool haveToUpPlayer; // dois mettre à jour les donnes des joueurs
+static bool endGame;
+
+void CGameData(Data* data) // callback pour le thread de reception pour tout type de paquet de donnée
+{
+    printf("CGameData: test\n");
+    if(data->dataType == MSG && strlen(data->tab)>1) // un message (non null) est reçu, on l'ajoute au chat
+    {
+        printf("Message recu: <<%s>>\n",data->tab);
+        sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
+        chat.update = true;// sera mis a jour par le thread principale
+    }
+    else if(data->dataType == GAME && data->car == GAME_CHOICE)
+    {
+        haveToChoose=true;
+    }
+    else if(data->dataType == GAME && data->car == END_GAME)
+    {
+        endGame=true;
+    }
+    else if(data->dataType == GAME && data->car == GAME_START)
+    {
+        endGame=false;
+    }
+    printData();
+}
+void CGameList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
+{
+    printf("CGameList : SHOULDN T APPEND\n");
+}
+void CGameGame(DataGame* data) // callback datagame, si le thread de reception a une donnee de jeu
+{
+    printf("CGameGame: DONNES RECU\n");
+    int i,z;
+    for(i=0; i<RANGEE; i++) // on met à jour la table
+        for(z=0; z<CPRANGEE; z++)
+            table[i][z].id=data->table[i][z];
+    for(i=0; i<MAXJOUEUR; i++)
+    {
+        strcpy(joueurs[i].nom,data->users[i]);
+        joueurs[i].tete=data->scores[i];
+    }
+    haveToUpPlayer=true;
+    for(i=0; i<HAND; i++)
+        poignee[i].id=data->hand[i];
+}
+
 //met à jour les données à afficher grâce au tableau joueurs[]
 void updateJoueur()
 {
@@ -40,6 +94,7 @@ void createJoueur()
         sprintf(buff,"%d",joueurs[i].tete);
         joueurPoint[i] =  createText(buff,POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17,10);  // mis à jour des points
     }
+    haveToUpPlayer=false; // done
 }
 
 // range les carte de la main
@@ -62,6 +117,8 @@ void ordonner()
 void CCard(int id)
 {
     printf("CCard: card id %d had been pressed\n",id);
+    haveToChoose=false;
+    choice(id);
 };
 void eventGame()
 {
@@ -70,21 +127,45 @@ void eventGame()
 
     while (SDL_PollEvent(&event))
     {
+        inputChatBox(&chat,&event);
         inputButton(&choixQuit,&event);
+        if(endGame)
+            inputButton(&playAgain,&event);
         inputButton(&choixBack,&event);
-        for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // on calcule les positons aux quelles on affichera chaque cartes de la main
-        {
-            eventCard(&event,&poignee[i],&CCard);
-        }
+        if(haveToChoose)
+            for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // on calcule les positons aux quelles on affichera chaque cartes de la main
+                eventCard(&event,&poignee[i],&CCard);
         switch(event.type)
         {
         case SDL_QUIT:
+            sendQuit();
             changeStep(end);
             break;
         }
     }
 }
 
+void CGameMsg(char* msg) // on valide un message dans le chat (entrer)
+{
+    sendMsg(msg);
+}
+
+void CQuitGame() // quit game callback
+{
+    sendQuit();
+    changeStep(end);
+
+}
+void CGameMenu()
+{
+    sendQuit();
+    changeStep(menu);
+
+}
+void CRestart()
+{
+    startGame();
+}
 static int renderinitialised = 0;
 
 
@@ -96,21 +177,25 @@ void initGameRender()
 
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
+    updateCallback(&CGameData,&CGameList,&CGameGame);
+
     choixQuit = createButton("Exit",400,520,8);
     choixBack = createButton("Return",100,500,8);
+    waitInstruction =createText("waiting for other player",300,300,8);
+    playAgain = createButton("Play again",300,350,6);
+
+    chat = createChatBox(500,350);
+
+    haveToChoose = true;
+    haveToUpPlayer = false;
+    endGame=false;
 
     initCard();
 
-    void CQuitGame() // quit game callback
-    {
-        changeStep(end);
-    };
-    void CMenu()
-    {
-        changeStep(menu);
-    };
+    chat.callback = &CGameMsg;
     choixQuit.callback = &CQuitGame;
-    choixBack.callback = &CMenu;
+    choixBack.callback = &CGameMenu;
+    playAgain.callback = &CRestart;
 
     int i,z;
     for(i=0; i<HAND; i++) // on s'assure que la main est bien vide
@@ -152,31 +237,10 @@ void initGameRender()
         joueurs[i].rect.x = POSJOUEUR_X;
         joueurs[i].rect.y = POSJOUEUR_Y + i*(SIZEJOUEUR);
     }
-
-    //pour test
-    nombreJoueur=5;
-    strcpy(joueurs[0].nom,"mark");
-    strcpy(joueurs[1].nom,"polo");
-    strcpy(joueurs[2].nom,"patrice");
-    strcpy(joueurs[3].nom,"antoine");
-    strcpy(joueurs[4].nom,"jack");
-    joueurs[0].tete=5;
-
-    poignee[0].id = 17;
-    poignee[1].id = 2;
-    poignee[2].id = 16;
-    poignee[3].id = 84;
-    poignee[4].id = 0;
-    poignee[5].id = 32;
-    table[0][0].id=86;
-    table[0][1].id=4;
-    table[1][0].id=65;
-    table[2][0].id=45;
-    table[3][0].id=34;
-    ordonner();
-    createJoueur();
+    //ordonner(); pour ranger les cartes
 
     renderinitialised=1;
+    setWait(false); // le thread de reception peut metre à jour les donnees
     printf("initGameRender: Fin");
 }
 void renderGame()
@@ -184,6 +248,8 @@ void renderGame()
     int i,z;
     if(renderinitialised==0)
         return;
+    if(haveToUpPlayer)
+        createJoueur();
     renderPicture(&Background);
     for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // pour toutes les cartes de la main tant que l'on en a pas d'invalide
         renderCard(&poignee[i]);
@@ -196,7 +262,11 @@ void renderGame()
         renderText(&joueurNom[i]);
         renderText(&joueurPoint[i]);
     }
-
+    if(!haveToChoose && !endGame)
+        renderText(&waitInstruction);
+    if(endGame)
+        renderButton(&playAgain);
+    renderChatBox(&chat);
     renderButton(&choixQuit);
     renderButton(&choixBack);
 }
@@ -216,7 +286,11 @@ void freeGameRender()
         freeText(&joueurNom[i]);
         freeText(&joueurPoint[i]);
     }
+    freeButton(&playAgain);
+    freeText(&waitInstruction);
     freeButton(&choixQuit);
+    freeRessourcesReseau();
+    freeChatBox(&chat);
     freeButton(&choixBack);
     freePicture(&Background); // Libération de la mémoire associée à la texture
 

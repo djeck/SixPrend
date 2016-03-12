@@ -28,7 +28,7 @@ static ChatBox chat;
  * SALLE le joueur choisi la salle à rejoindre ou à créer
  * READY tout choix ok, reste au client à cliquer sur game
  */
-enum {GETIP=0, CONNECT=1, SALLE=2,READY=3} modeStep;
+enum {GETIP=0, CONNECT=1, SALLE=2,READY=3,GO=4} modeStep;
 
 void eventMode()
 {
@@ -45,8 +45,12 @@ void eventMode()
             inputTextBox(&salleName,&event);
             inputButton(&choixCreate,&event);
         }
-        if(modeStep==READY)
+        else if(modeStep==READY)
+        {
             inputButton(&choixStart,&event);
+            inputChatBox(&chat,&event);
+        }
+
         inputButton(&choixConnect,&event);
 
         switch(event.type)
@@ -75,23 +79,45 @@ void CData(Data* data) // callback pour le thread de reception pour tout type de
         sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
         chat.update = true;// sera mis a jour par le thread principale
     }
+    else if(data->dataType == GAME && data->car == GAME_OK)
+    {
+        modeStep = READY;
+    }
+    else if(data->dataType == GAME && data->car == GAME_START)
+    {
+        printf("GAME_start recu, le thread principale va charger la page de jeu\n");
+        modeStep = GO;
+        setWait(true);
+    }
+    printData();
 }
 void CDtList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {
     printf("CList\n");
-    char str[100];
-    int i=0;
-    while(sscanf(data->tab,"%s\n",str)==1 && i<NB_LINE)
+    int compteur=0; // compte le nombre de ligne
+    int indice=0; // indice dans data->tab
+    int coresp=0;//indice correspondant dans list.text[compteur]
+    while(data->tab[indice]!='\0')//tant que l'on est pas à la fin de la chaine
     {
-        strcpy(list.text[i],str);
-        i++;
-        list.update=true;
-        list.initialised=true;
+        if(data->tab[indice]=='\n')
+        {
+            list.text[compteur][coresp]='\0';
+            compteur++;
+            coresp=0;
+        }
+        else if(coresp<100 && compteur < NB_LINE)
+        {
+            list.text[compteur][coresp]=data->tab[indice];
+            coresp++;
+        }
+            indice ++;
     }
+    list.update=true;
+    list.initialised=true;
 }
 void CDtGame(DataGame* data) // callback datagame, si le thread de reception a une donnee de jeu
 {
-    printf("CGame\n");
+    printf("CGame: SHOULDN'T APPEND\n");
 }
 void CQuit() // on demande à quitter
 {
@@ -105,7 +131,7 @@ void CMenu() // on clic sur le bouton retour menu
 
 void CGame() // on demande à commancer le jeu
 {
-    changeStep(game);
+    startGame();
 }
 
 void CConnect() // on clic sur le bouton connect
@@ -154,9 +180,9 @@ void initModeRender()
     strcpy(list.text[0],"No available room");
     list.update=true;
 
-    textCreate = createText("create:",420,200,8);
-    salleName = createTextBox("",470,200,15,30,8,8);
-    choixCreate = createButton("valid",600,200,9);
+    textCreate = createText("create:",400,200,8);
+    salleName = createTextBox("",500,200,15,30,8,8);
+    choixCreate = createButton("valid",650,200,9);
 
 
     choixCreate.callback = &CCreate;
@@ -174,17 +200,25 @@ void renderMode()
 {
     if(renderinitialised==0)
         return;
+
+    if(modeStep == GO)
+        changeStep(game); // synchronisation de tout les clients, depuis les données du serveur
+
     renderPicture(&Background);
 
     renderText(&ipAsk);
-    if(modeStep==CONNECT)
+    if(modeStep == CONNECT)
         renderText(&connecting);
     renderTextBox(&ipServer);
     renderButton(&choixConnect);
     renderButton(&choixQuit);
     renderButton(&choixBack);
-    renderButton(&choixStart);
-    if(modeStep==SALLE)
+    if(modeStep == READY)
+    {
+        renderButton(&choixStart);
+        renderChatBox(&chat);
+    }
+    else if(modeStep==SALLE)
     {
         renderChatBox(&chat);
         renderMultiText(&list);
@@ -202,7 +236,8 @@ void freeModeRender()
         return;
     }
     renderinitialised=0;
-    freeRessourcesReseau();
+    if(modeStep!=GO) // si on ne l'utilise pas apres
+        freeRessourcesReseau();
     freeText(&textCreate);
     freeTextBox(&salleName);
     freeButton(&choixCreate);

@@ -28,7 +28,7 @@ void eventMenu()
 
 static int renderinitialised = 0;
 
-void CQuitGame() // quit game callback
+void CGameQuit() // quit game callback
 {
     changeStep(end);
 }
@@ -50,7 +50,7 @@ void initMenuRender()
     choixQuit = createButton("Exit",100,270,5);
 
     choixJeu.callback = *CMode;
-    choixQuit.callback = *CQuitGame;
+    choixQuit.callback = *CGameQuit;
     choixStat.callback = *CStat;
 
     renderinitialised=1;

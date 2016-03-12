@@ -12,6 +12,7 @@
 
 //fonction de base
 void initialisationReseau(char *strip,void (*backData)(Data*),void (*backList)(DataList*),void (*backGame)(DataGame*));
+void updateCallback(void (*backData)(Data*),void (*backList)(DataList*),void (*backGame)(DataGame*));
 void freeRessourcesReseau();
 
 //reception début de la boucle (dans un nouveau SDL_thread
@@ -28,7 +29,8 @@ void choice(int choice);
 
 int isNetInitialised();
 
-
+void printData();
+void setWait(bool arg0);
 
 
 #endif
