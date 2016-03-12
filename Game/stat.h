@@ -16,7 +16,7 @@
 #include "../GUI/picture.h"
 
 #define MAXSTAT 100 // nombre de statistiques maximum lus depuis le fichier FILESTATS
-#define FILESTATS "./media/stats.dat"
+#define FILESTATS "./media/stats.txt"
 
 /*
  *La structure de statistique
