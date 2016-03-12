@@ -4,7 +4,7 @@
 	"Game/init.h"
 	"time.h"
 
-1457714243 c:\users\djeck\documents\github\sixprend\game\inc.h
+1457746018 c:\users\djeck\documents\github\sixprend\game\inc.h
 	<stdio.h>
 	<string.h>
 	<stdlib.h>
@@ -391,7 +391,7 @@
 	<SDL2/SDL_ttf.h>
 	<stdbool.h>
 
-1457713847 c:\users\djeck\documents\github\sixprend\game\client.h
+1457742986 c:\users\djeck\documents\github\sixprend\game\client.h
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -408,18 +408,17 @@
 	"begin_code.h"
 	"close_code.h"
 
-1457709553 c:\users\djeck\documents\github\sixprend\game\network.h
+1457742018 c:\users\djeck\documents\github\sixprend\game\network.h
 	<stdlib.h>
 	<stdio.h>
 	<SDL2/SDL.h>
 	<stdbool.h>
 
-1457713885 c:\users\djeck\documents\github\sixprend\gui\multitext.h
-	<stdbool.h>
-	<string.h>
+1457742402 c:\users\djeck\documents\github\sixprend\gui\multitext.h
+	"../Game/inc.h"
 	"text.h"
 
-1457714363 c:\users\djeck\documents\github\sixprend\game\stat.h
+1457728790 c:\users\djeck\documents\github\sixprend\game\stat.h
 	<SDL2/SDL_ttf.h>
 	<SDL2/SDL_events.h>
 	<string.h>
@@ -433,28 +432,28 @@
 	<SDL2/SDL_ttf.h>
 	"inc.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\client.c
+1457742785 source:c:\users\djeck\documents\github\sixprend\game\client.c
 	"client.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\game.c
+1457741976 source:c:\users\djeck\documents\github\sixprend\game\game.c
 	"game.h"
 
 1457709553 source:c:\users\djeck\documents\github\sixprend\game\inc.c
 	"inc.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\init.c
+1457741986 source:c:\users\djeck\documents\github\sixprend\game\init.c
 	"init.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\login.c
+1457741990 source:c:\users\djeck\documents\github\sixprend\game\login.c
 	"login.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\menu.c
+1457741994 source:c:\users\djeck\documents\github\sixprend\game\menu.c
 	"menu.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\mode.c
+1457744969 source:c:\users\djeck\documents\github\sixprend\game\mode.c
 	"mode.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\game\stat.c
+1457742005 source:c:\users\djeck\documents\github\sixprend\game\stat.c
 	"stat.h"
 
 1457709553 source:c:\users\djeck\documents\github\sixprend\gui\button.c
@@ -467,13 +466,13 @@
 	"../Game/inc.h"
 	"chatBox.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\gui\multitext.c
+1457742498 source:c:\users\djeck\documents\github\sixprend\gui\multitext.c
 	"multiText.h"
 
 1457709553 source:c:\users\djeck\documents\github\sixprend\gui\picture.c
 	"picture.h"
 
-1457709553 source:c:\users\djeck\documents\github\sixprend\gui\text.c
+1457742012 source:c:\users\djeck\documents\github\sixprend\gui\text.c
 	"../Game/inc.h"
 	"text.h"
 
