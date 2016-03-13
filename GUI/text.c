@@ -26,7 +26,7 @@ Text createText(char str[],int x,int y,int size)
 
     if(strlen(str)==0)
     {
-        printf("getText: chaine vide\n");
+        //printf("getText: chaine vide\n");
         stext = TTF_RenderText_Solid(font," ",color);
     }
     else

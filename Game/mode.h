@@ -10,7 +10,7 @@
 #include "../GUI/button.h"
 #include "../GUI/picture.h"
 #include "../GUI/chatBox.h"
-#include "client.h"
+#include "../Network/client.h"
 #include "../GUI/multiText.h"
 
 /**

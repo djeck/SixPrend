@@ -10,6 +10,7 @@ static Text ipAsk;
 static TextBox ipServer;
 
 static Text connecting; //message de connection
+static Button choixList;
 
 static Text textCreate;
 static Button choixCreate;
@@ -44,6 +45,7 @@ void eventMode()
             inputChatBox(&chat,&event);
             inputTextBox(&salleName,&event);
             inputButton(&choixCreate,&event);
+            inputButton(&choixList,&event);
         }
         else if(modeStep==READY)
         {
@@ -134,7 +136,10 @@ void CGame() // on demande à commancer le jeu
 {
     startGame();
 }
-
+void CUpList() // on demande à metre à jour les listes
+{
+    askList();
+}
 void CConnect() // on clic sur le bouton connect
 {
     modeStep=CONNECT;
@@ -184,8 +189,9 @@ void initModeRender()
     textCreate = createText("create:",400,200,8);
     salleName = createTextBox("",500,200,15,30,8,8);
     choixCreate = createButton("valid",650,200,9);
+    choixList = createButton("ask for list",550,240,11);
 
-
+    choixList.callback = &CUpList;
     choixCreate.callback = &CCreate;
     choixConnect.callback = &CConnect;
     chat.callback = &CMsg;
@@ -226,6 +232,7 @@ void renderMode()
         renderText(&textCreate);
         renderTextBox(&salleName);
         renderButton(&choixCreate);
+        renderButton(&choixList);
     }
 }
 
@@ -239,6 +246,7 @@ void freeModeRender()
     renderinitialised=0;
     if(modeStep!=GO) // si on ne l'utilise pas apres
         freeRessourcesReseau();
+    freeButton(&choixList);
     freeText(&textCreate);
     freeTextBox(&salleName);
     freeButton(&choixCreate);
