@@ -9,7 +9,6 @@ static Card table[RANGEE][CPRANGEE]; // chaque carte de la table, 0 dès la fin 
 
 static Card poignee[HAND]; // la position de chaque carte da la main pour l'y afficher à l'écran, 0 dès la fin de la main
 
-static int nombreJoueur; // nombre de joueur au total < MAXJOUEUR
 static Joueur joueurs[MAXJOUEUR]; // des donnees sur tout les joueurs
 
 static Text joueurNom[MAXJOUEUR];
@@ -27,10 +26,8 @@ static bool endGame;
 
 void CGameData(Data* data) // callback pour le thread de reception pour tout type de paquet de donnée
 {
-    printf("CGameData: test\n");
     if(data->dataType == MSG && strlen(data->tab)>1) // un message (non null) est reçu, on l'ajoute au chat
     {
-        printf("Message recu: <<%s>>\n",data->tab);
         sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
         chat.update = true;// sera mis a jour par le thread principale
     }
@@ -46,7 +43,7 @@ void CGameData(Data* data) // callback pour le thread de reception pour tout typ
     {
         endGame=false;
     }
-    printData(data);
+    //printData(data);
 }
 void CGameList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {
@@ -59,20 +56,21 @@ void CGameGame(DataGame* data) // callback datagame, si le thread de reception a
     for(i=0; i<RANGEE; i++) // on met à jour la table
         for(z=0; z<CPRANGEE; z++)
             table[i][z].id=data->table[i][z];
+
     for(i=0; i<MAXJOUEUR; i++)
     {
         strcpy(joueurs[i].nom,data->users[i]);
         joueurs[i].tete=data->scores[i];
     }
-    haveToUpPlayer=true;
     for(i=0; i<HAND; i++)
         poignee[i].id=data->hand[i];
+    haveToUpPlayer=true;
 }
 
 //met à jour les données à afficher grâce au tableau joueurs[]
 void updateJoueur()
 {
-    char buff[10];
+    char buff[100];
     int i;
     for(i=0; i<MAXJOUEUR; i++)
     {
@@ -80,21 +78,18 @@ void updateJoueur()
         sprintf(buff,"%d",joueurs[i].tete);
         updateText(&joueurPoint[i],buff); // mis à jour des points
     }
-
+    haveToUpPlayer=false; // done
 }
 
 //crée les données à afficher grâce au tableau joueurs[]
 void createJoueur()
 {
-    char buff[10];
     int i;
     for(i=0; i<MAXJOUEUR; i++)
     {
-        joueurNom[i] =  createText(joueurs[i].nom,POSJOUEUR_X-100,POSJOUEUR_Y + i*(SIZEJOUEUR),10); // mis a jour des noms des joueurs
-        sprintf(buff,"%d",joueurs[i].tete);
-        joueurPoint[i] =  createText(buff,POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17,10);  // mis à jour des points
+        joueurNom[i] =  createText("",POSJOUEUR_X-100,POSJOUEUR_Y + i*(SIZEJOUEUR),10); // mis a jour des noms des joueurs
+        joueurPoint[i] =  createText("",POSJOUEUR_X-80,POSJOUEUR_Y + i*(SIZEJOUEUR) + 17,10);  // mis à jour des points
     }
-    haveToUpPlayer=false; // done
 }
 
 // range les carte de la main
@@ -116,10 +111,9 @@ void ordonner()
 
 void CCard(int id)
 {
-    printf("CCard: card id %d had been pressed\n",id);
     haveToChoose=false;
     choice(id);
-};
+}
 void eventGame()
 {
     SDL_Event event;
@@ -171,9 +165,6 @@ static int renderinitialised = 0;
 
 void initGameRender()
 {
-    printf("initGameRender: début\n");
-
-    nombreJoueur=2;
 
     Background = createPicture(BACKGROUNDPATH,0,0,1);
 
@@ -232,16 +223,16 @@ void initGameRender()
 
     for(i=0; i<MAXJOUEUR; i++)
     {
-        strcpy(joueurs[i].nom,"unused");
+        strcpy(joueurs[i].nom,"");
         joueurs[i].tete=0;
         joueurs[i].rect.x = POSJOUEUR_X;
         joueurs[i].rect.y = POSJOUEUR_Y + i*(SIZEJOUEUR);
     }
     //ordonner(); pour ranger les cartes
 
+    createJoueur();
     renderinitialised=1;
     setWait(false); // le thread de reception peut metre à jour les donnees
-    printf("initGameRender: Fin");
 }
 void renderGame()
 {
@@ -249,7 +240,7 @@ void renderGame()
     if(renderinitialised==0)
         return;
     if(haveToUpPlayer)
-        createJoueur();
+        updateJoueur();
     renderPicture(&Background);
     for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // pour toutes les cartes de la main tant que l'on en a pas d'invalide
         renderCard(&poignee[i]);
@@ -257,10 +248,11 @@ void renderGame()
         for(z=0; z<CPRANGEE && table[i][z].id>0 && table[i][z].id<=104; z++)
             renderCard(&table[i][z]);
 
-    for(i=0; i<nombreJoueur; i++)
+    for(i=0; i<MAXJOUEUR; i++)
     {
         renderText(&joueurNom[i]);
-        renderText(&joueurPoint[i]);
+        if(joueurs[i].tete > 0)
+            renderText(&joueurPoint[i]);
     }
     if(!haveToChoose && !endGame)
         renderText(&waitInstruction);
