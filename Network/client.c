@@ -37,32 +37,41 @@ void initialisationReseau(char *strip,void (*backData)(Data*),void (*backList)(D
     printf("initialisationReseau: test\n");
     if(isNetInitialised())
     {
-        freeRessourcesReseau();
+        printf("initialisationReseau: réseau djà initialisé: libération des ressources\n");
+        sendQuit();
+        printf("Waiting for reception thread to reconnect\n");
+        int threadReturnValue;
+        SDL_WaitThread(threadRecept, &threadReturnValue);
+        printf("\nThread returned value: %d\n", threadReturnValue);
+        SDLNet_TCP_Close(sd);
     }
+    else
+    {
     if (SDLNet_Init() < 0)
     {
         printf("SDLNet_Init: %s\n", SDLNet_GetError());
         return;
     }
-
+    bufferLock = SDL_CreateMutex();
+    }
     /* Resolve the host we are connecting to */
     if (SDLNet_ResolveHost(&ip, strip, PORT) < 0)
     {
-        printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+        printf("Can't resolve host: %s\n", SDLNet_GetError());
         return;
     }
 
     /* Open a connection with the IP provided (listen on the host's port) */
     if (!(sd = SDLNet_TCP_Open(&ip)))
     {
-        printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+        printf("Can't open tcp connecting: %s\n", SDLNet_GetError());
         return;
     }
 
-    bufferLock = SDL_CreateMutex();
+
     if(!bufferLock)
     {
-        printf("initialisationReseau: can't create mutex\n");
+        printf("initialisationReseau: ERROR can't create mutex\n");
     }
     //canRecept = SDL_CreateCond();
     //canSend = SDL_CreateCond();
@@ -258,11 +267,11 @@ void freeRessourcesReseau()
     printf("Waiting for reception thread\n");
     SDL_WaitThread(threadRecept, &threadReturnValue);
     printf("\nThread returned value: %d\n", threadReturnValue);
+    SDLNet_TCP_Close(sd);
     SDL_DestroyMutex( bufferLock );
     //SDL_DestroyCond( canSend );
     //SDL_DestroyCond( canRecept );
 
-    SDLNet_TCP_Close(sd);
     SDLNet_Quit();
     networkinitialised=0;
 }
