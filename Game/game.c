@@ -26,6 +26,7 @@ static bool endGame;
 
 void CGameData(Data* data) // callback pour le thread de reception pour tout type de paquet de donnée
 {
+    int i;
     if(data->dataType == MSG && strlen(data->tab)>1) // un message (non null) est reçu, on l'ajoute au chat
     {
         sprintf(chat.input.text,"%2d) %s",data->from,data->tab);
@@ -38,6 +39,14 @@ void CGameData(Data* data) // callback pour le thread de reception pour tout typ
     else if(data->dataType == GAME && data->car == END_GAME)
     {
         endGame=true;
+        for(i=0; i<MAXJOUEUR; i++)
+        {
+            if(strcmp(joueurs[i].nom,getUsername())==0) // si c'est notre utilisateur
+            {
+                ajout_stat(joueurs[i].tete < 66);
+                return;
+            }
+        }
     }
     else if(data->dataType == GAME && data->car == GAME_START)
     {

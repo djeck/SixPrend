@@ -1,3 +1,9 @@
+/**
+ * \file stat.c
+ * \brief implémentation de l'affichage et gestions des statistiques
+ * \author Aubin Detrez et Zongwei WU
+ *
+ */
 #include "stat.h"
 
 static Button choixBack;
@@ -11,10 +17,11 @@ static Text testdef[10]; // les défaites de chaque joueur
 
 /*
  * la variable de structure Statistique
+ * usage limité au fichier
  */
 static Statistique stats[MAXSTAT];
 /*
- * le taille de tableau
+ * le taille du tableau
  */
 static int tailleStats;
 
@@ -36,6 +43,11 @@ void eventStat()
 
 static int renderinitialised = 0;
 
+/**
+ * \fn void CStatMenu()
+ * \brief callback pour se diriger vers le menu
+ * appelé par le bouton par le bouton lors d'un clic
+ */
 void CStatMenu()
 {
     changeStep(menu);
