@@ -303,6 +303,10 @@ void printData(Data* data)
             printf("CONN_JOIN ne devrais pas etre envoyé au client\n");
         else if(data->car == CONN_CREATE)
             printf("CONN_CREATE ne devrais pas etre envoyé au client\n");
+        else if(data->car == SWITCH)
+            printf("SWITCH le serveur va envoyer des datalists\n");
+        else if(data->car == CONN_QUIT)
+            printf("CONN_QUIT le serveur dit au client de quitter\n");
         else
             printf("donnees de nature inconnue\n");
     }
@@ -327,6 +331,8 @@ void printData(Data* data)
             printf("END_TURN fin du tour, apprêté vous à recevoir les donnees du jeu\n");
         else if(data->car == END_GAME)
             printf("END_GAME fin du jeu, attend game_start pour recommancer\n");
+        else if(data->car == SWITCH)
+            printf("SWITCH le serveur va envoyer des dataGames\n");
         else
             printf("donnees de nature inconnue\n");
     }

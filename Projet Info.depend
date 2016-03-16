@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1457714099 source:c:\users\djeck\documents\github\sixprend\main.c
+1458042364 source:c:\users\djeck\documents\github\sixprend\main.c
 	"Game/inc.h"
 	"Game/init.h"
 	"time.h"
@@ -347,7 +347,7 @@
 	"../GUI/picture.h"
 	"../GUI/text.h"
 
-1457814563 c:\users\djeck\documents\github\sixprend\gui\picture.h
+1457980127 c:\users\djeck\documents\github\sixprend\gui\picture.h
 	"../Game/inc.h"
 
 1457815274 c:\users\djeck\documents\github\sixprend\gui\text.h
@@ -365,9 +365,8 @@
 1457810405 c:\users\djeck\documents\github\sixprend\gui\button.h
 	"../Game/inc.h"
 
-1457809641 c:\users\djeck\documents\github\sixprend\game\game.h
+1458043823 c:\users\djeck\documents\github\sixprend\game\game.h
 	"inc.h"
-	"../GUI/button.h"
 	"../GUI/card.h"
 	"../GUI/text.h"
 	"../GUI/picture.h"
@@ -434,7 +433,7 @@
 1457817880 source:c:\users\djeck\documents\github\sixprend\game\client.c
 	"client.h"
 
-1457892527 source:c:\users\djeck\documents\github\sixprend\game\game.c
+1458043730 source:c:\users\djeck\documents\github\sixprend\game\game.c
 	"game.h"
 
 1457709553 source:c:\users\djeck\documents\github\sixprend\game\inc.c
@@ -449,7 +448,7 @@
 1457789196 source:c:\users\djeck\documents\github\sixprend\game\menu.c
 	"menu.h"
 
-1457866827 source:c:\users\djeck\documents\github\sixprend\game\mode.c
+1457974399 source:c:\users\djeck\documents\github\sixprend\game\mode.c
 	"mode.h"
 
 1457891913 source:c:\users\djeck\documents\github\sixprend\game\stat.c
@@ -961,7 +960,7 @@
 	"Game/init.h"
 	"time.h"
 
-1457969292 source:c:\users\djeck\documents\github\sixprend\network\client.c
+1457974543 source:c:\users\djeck\documents\github\sixprend\network\client.c
 	"client.h"
 
 1457817302 c:\users\djeck\documents\github\sixprend\network\client.h
@@ -973,9 +972,16 @@
 	<SDL2/SDL_timer.h>
 	"network.h"
 
-1457808700 c:\users\djeck\documents\github\sixprend\network\network.h
+1458043675 c:\users\djeck\documents\github\sixprend\network\network.h
 	<stdlib.h>
 	<stdio.h>
 	<SDL2/SDL.h>
 	<stdbool.h>
+
+1458144058 c:\users\djeck\documents\github\sixprend\gui\animcard.h
+	"../Game/inc.h"
+	"card.h"
+
+1458143689 source:c:\users\djeck\documents\github\sixprend\gui\animcard.c
+	"animCard.h"
 

@@ -1,6 +1,6 @@
 /**
  * \file picture.h
- * \brief Composant de l'interface graphique ustilisateur: l'image
+ * \brief Composant de l'interface graphique utilisateur: l'image
  * \author Aubin Detrez
  */
 #ifndef PICTURE_H

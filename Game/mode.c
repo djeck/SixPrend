@@ -92,7 +92,8 @@ void CData(Data* data) // callback pour le thread de reception pour tout type de
         modeStep = GO;
         setWait(true);
     }
-    printData(data);
+    else
+        printData(data);
 }
 void CDtList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {

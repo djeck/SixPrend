@@ -1,6 +1,6 @@
 *.dll
-*.cbp
-SixPrend.depend
 *.exe
 *.o
+doc
 Projet-Info.rar
+.gitignore~

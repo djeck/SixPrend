@@ -13,8 +13,8 @@
 #define GAME_H
 
 #include "inc.h"
-#include "../GUI/button.h"
 #include "../GUI/card.h"
+//#include "../GUI/animCard.h"
 #include "../GUI/text.h"
 #include "../GUI/picture.h"
 

@@ -5,14 +5,16 @@ static Button choixBack;
 
 static Picture Background;
 
-static Card table[RANGEE][CPRANGEE]; // chaque carte de la table, 0 dès la fin d'une rangee
-
 static Card poignee[HAND]; // la position de chaque carte da la main pour l'y afficher à l'écran, 0 dès la fin de la main
+
+static Card table[RANGEE][CPRANGEE]; // chaque carte de la table, 0 dès la fin d'une rangee
 
 static Joueur joueurs[MAXJOUEUR]; // des donnees sur tout les joueurs
 
 static Text joueurNom[MAXJOUEUR];
 static Text joueurPoint[MAXJOUEUR];
+
+//static AnimCard cartesJoue;
 
 static Text waitInstruction;
 
@@ -22,6 +24,7 @@ static ChatBox chat;
 
 static bool haveToChoose; // mis à jour par le thread de reception si le serveur attend une donnee du client
 static bool haveToUpPlayer; // dois mettre à jour les donnes des joueurs
+static bool cardIsMoving; // animation en cour
 static bool endGame;
 
 void CGameData(Data* data) // callback pour le thread de reception pour tout type de paquet de donnée
@@ -52,7 +55,8 @@ void CGameData(Data* data) // callback pour le thread de reception pour tout typ
     {
         endGame=false;
     }
-    //printData(data);
+    else
+        printData(data);
 }
 void CGameList(DataList* data) // callback datalist, si le thread de reception a une liste de salle de jeu disponible
 {
@@ -189,6 +193,7 @@ void initGameRender()
     haveToChoose = true;
     haveToUpPlayer = false;
     endGame=false;
+    cardIsMoving = false;
 
     initCard();
 

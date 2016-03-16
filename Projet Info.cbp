@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Projet Info" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="Projet Info" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="SDL2/i686-w64-mingw32/include" />
+				</Compiler>
+				<Linker>
+					<Add library="SDL2/lib/x64/libmingw32.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2main.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2.dll.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_ttf.dll.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_ttf.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_image.dll.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_image.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_mixer.dll.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_mixer.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_net.dll.a" />
+					<Add library="SDL2/i686-w64-mingw32/lib/libSDL2_net.a" />
+					<Add directory="SDL2/i686-w64-mingw32/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Projet Info" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add directory="SDL2/i686-w64-mingw32/include" />
+		</Compiler>
+		<Linker>
+			<Add library="libmingw32.a" />
+			<Add library="SDL2/i686-w64-mingw32/lib/libSDL2main.a" />
+			<Add library="SDL2/i686-w64-mingw32/lib/libSDL2.dll.a" />
+			<Add directory="SDL2/i686-w64-mingw32/lib" />
+		</Linker>
+		<Unit filename="GUI/animCard.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/animCard.h" />
+		<Unit filename="GUI/button.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/button.h" />
+		<Unit filename="GUI/card.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/card.h" />
+		<Unit filename="GUI/chatBox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/chatBox.h" />
+		<Unit filename="GUI/multiText.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/multiText.h" />
+		<Unit filename="GUI/picture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/picture.h" />
+		<Unit filename="GUI/text.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/text.h" />
+		<Unit filename="GUI/textBox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="GUI/textBox.h" />
+		<Unit filename="Game/game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/game.h" />
+		<Unit filename="Game/inc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/inc.h" />
+		<Unit filename="Game/init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/init.h" />
+		<Unit filename="Game/login.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/login.h" />
+		<Unit filename="Game/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/menu.h" />
+		<Unit filename="Game/mode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/mode.h" />
+		<Unit filename="Game/stat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Game/stat.h" />
+		<Unit filename="Network/client.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Network/client.h" />
+		<Unit filename="Network/network.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="media/1.bmp" />
+		<Unit filename="media/10.bmp" />
+		<Unit filename="media/100.bmp" />
+		<Unit filename="media/101.bmp" />
+		<Unit filename="media/102.bmp" />
+		<Unit filename="media/103.bmp" />
+		<Unit filename="media/104.bmp" />
+		<Unit filename="media/11.bmp" />
+		<Unit filename="media/12.bmp" />
+		<Unit filename="media/13.bmp" />
+		<Unit filename="media/14.bmp" />
+		<Unit filename="media/15.bmp" />
+		<Unit filename="media/16.bmp" />
+		<Unit filename="media/17.bmp" />
+		<Unit filename="media/18.bmp" />
+		<Unit filename="media/19.bmp" />
+		<Unit filename="media/2.bmp" />
+		<Unit filename="media/20.bmp" />
+		<Unit filename="media/21.bmp" />
+		<Unit filename="media/22.bmp" />
+		<Unit filename="media/23.bmp" />
+		<Unit filename="media/24.bmp" />
+		<Unit filename="media/25.bmp" />
+		<Unit filename="media/26.bmp" />
+		<Unit filename="media/27.bmp" />
+		<Unit filename="media/28.bmp" />
+		<Unit filename="media/29.bmp" />
+		<Unit filename="media/3.bmp" />
+		<Unit filename="media/30.bmp" />
+		<Unit filename="media/31.bmp" />
+		<Unit filename="media/32.bmp" />
+		<Unit filename="media/33.bmp" />
+		<Unit filename="media/34.bmp" />
+		<Unit filename="media/35.bmp" />
+		<Unit filename="media/36.bmp" />
+		<Unit filename="media/37.bmp" />
+		<Unit filename="media/38.bmp" />
+		<Unit filename="media/39.bmp" />
+		<Unit filename="media/4.bmp" />
+		<Unit filename="media/40.bmp" />
+		<Unit filename="media/41.bmp" />
+		<Unit filename="media/42.bmp" />
+		<Unit filename="media/43.bmp" />
+		<Unit filename="media/44.bmp" />
+		<Unit filename="media/45.bmp" />
+		<Unit filename="media/46.bmp" />
+		<Unit filename="media/47.bmp" />
+		<Unit filename="media/48.bmp" />
+		<Unit filename="media/49.bmp" />
+		<Unit filename="media/5.bmp" />
+		<Unit filename="media/50.bmp" />
+		<Unit filename="media/51.bmp" />
+		<Unit filename="media/52.bmp" />
+		<Unit filename="media/53.bmp" />
+		<Unit filename="media/54.bmp" />
+		<Unit filename="media/55.bmp" />
+		<Unit filename="media/56.bmp" />
+		<Unit filename="media/57.bmp" />
+		<Unit filename="media/58.bmp" />
+		<Unit filename="media/59.bmp" />
+		<Unit filename="media/6.bmp" />
+		<Unit filename="media/60.bmp" />
+		<Unit filename="media/61.bmp" />
+		<Unit filename="media/62.bmp" />
+		<Unit filename="media/63.bmp" />
+		<Unit filename="media/64.bmp" />
+		<Unit filename="media/65.bmp" />
+		<Unit filename="media/66.bmp" />
+		<Unit filename="media/67.bmp" />
+		<Unit filename="media/68.bmp" />
+		<Unit filename="media/69.bmp" />
+		<Unit filename="media/7.bmp" />
+		<Unit filename="media/70.bmp" />
+		<Unit filename="media/71.bmp" />
+		<Unit filename="media/72.bmp" />
+		<Unit filename="media/73.bmp" />
+		<Unit filename="media/74.bmp" />
+		<Unit filename="media/75.bmp" />
+		<Unit filename="media/76.bmp" />
+		<Unit filename="media/77.bmp" />
+		<Unit filename="media/78.bmp" />
+		<Unit filename="media/79.bmp" />
+		<Unit filename="media/8.bmp" />
+		<Unit filename="media/80.bmp" />
+		<Unit filename="media/81.bmp" />
+		<Unit filename="media/82.bmp" />
+		<Unit filename="media/83.bmp" />
+		<Unit filename="media/84.bmp" />
+		<Unit filename="media/85.bmp" />
+		<Unit filename="media/86.bmp" />
+		<Unit filename="media/87.bmp" />
+		<Unit filename="media/88.bmp" />
+		<Unit filename="media/89.bmp" />
+		<Unit filename="media/9.bmp" />
+		<Unit filename="media/90.bmp" />
+		<Unit filename="media/91.bmp" />
+		<Unit filename="media/92.bmp" />
+		<Unit filename="media/93.bmp" />
+		<Unit filename="media/94.bmp" />
+		<Unit filename="media/95.bmp" />
+		<Unit filename="media/96.bmp" />
+		<Unit filename="media/97.bmp" />
+		<Unit filename="media/98.bmp" />
+		<Unit filename="media/99.bmp" />
+		<Unit filename="media/arial.ttf" />
+		<Unit filename="media/background.bmp" />
+		<Unit filename="media/login.txt" />
+		<Unit filename="media/sixty.fon" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

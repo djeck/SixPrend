@@ -78,8 +78,12 @@
  * le server declare fin du jeu (un joueur est arrive à 66 points) le serveur attend un GAME_START pour repartir
  */
 #define END_GAME 13
-#define SWITCH 14 // changement de type de donnees, selon DataType
-#define CONN_QUIT 15 // quitter proprement
+
+// changement de type de donnees, selon DataType
+#define SWITCH 14
+
+// quitter proprement
+#define CONN_QUIT 15
 
 /**	Les types de donnée	**/
 
@@ -104,7 +108,7 @@ typedef struct
     DataType dataType; /*!< type de donnée concerné*/
     char car;           /*!< information complementaire sur la nature des données*/
     char tab[BUF_SIZE]; /*!< buffer pour des chaines de caractére*/
-    int from;           /*!< source d'un message ou mot de passe pour rejoindre une salle*/
+    int32_t from;           /*!< source d'un message ou mot de passe pour rejoindre une salle*/
 } __attribute__ ((packed)) Data;
 
 /**
@@ -115,7 +119,7 @@ typedef struct
 typedef struct
 {
     char tab[BUF_LIST]; /*!< nom des salles espacé par '\n'*/
-    bool end; /*!< true si le client n'a pas à attendre d'autre données de ce type*/
+    _Bool end; /*!< true si le client n'a pas à attendre d'autre données de ce type*/
 } __attribute__ ((packed)) DataList;
 
 /**
@@ -124,11 +128,11 @@ typedef struct
  */
 typedef struct
 {
-    int table[4][6]; /*!< les cartes sur la table, 4 ranges de 10 cartes maximum, vaut 0 si derniere carte de la rangée */
+    int32_t table[4][6]; /*!< les cartes sur la table, 4 ranges de 10 cartes maximum, vaut 0 si derniere carte de la rangée */
     char users[10][BUF_SIZE]; /*!< nom de chaques joueurs */
-    int turn[10]; /*!< choix de chaque joueurs */
-    int scores[10]; /*!< scores de chaques joueur */
-    int hand[10]; /*!< main du joueur */
+    int32_t turn[10]; /*!< choix de chaque joueurs */
+    int32_t scores[10]; /*!< scores de chaques joueur */
+    int32_t hand[10]; /*!< main du joueur */
 } __attribute__ ((packed)) DataGame;
 
 #endif
