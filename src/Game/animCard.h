@@ -11,7 +11,7 @@
 #include "../GUI/card.h"
 
 #define VITESSE 1000.0f // temps en millisecond pour terminer
-#define K 5.0f
+#define K 2.0f
 
 
 /**

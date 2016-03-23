@@ -18,7 +18,7 @@
 	"mode.h"
 	"stat.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
 	"SDL_stdinc.h"
 	"SDL_assert.h"
@@ -49,12 +49,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_main.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_main.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_stdinc.h
 	"SDL_config.h"
 	<sys/types.h>
 	<stdio.h>
@@ -83,34 +83,34 @@
 	<stdlib.h>
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_config.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_config.h
 	"SDL_platform.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_platform.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_platform.h
 	"AvailabilityMacros.h"
 	"TargetConditionals.h"
 	<winapifamily.h>
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\begin_code.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\begin_code.h
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\close_code.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\close_code.h
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_assert.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_assert.h
 	"SDL_config.h"
 	"begin_code.h"
 	<signal.h>
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_atomic.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_atomic.h
 	"SDL_stdinc.h"
 	"SDL_platform.h"
 	"begin_code.h"
 	<mbarrier.h>
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_audio.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_audio.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_endian.h"
@@ -120,24 +120,24 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_error.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_error.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_endian.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_endian.h
 	"SDL_stdinc.h"
 	<endian.h>
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_mutex.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_mutex.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_thread.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_thread.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_atomic.h"
@@ -146,18 +146,18 @@
 	<process.h>
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_rwops.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_rwops.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_clipboard.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_cpuinfo.h
 	"SDL_stdinc.h"
 	<intrin.h>
 	<intrin.h>
@@ -169,7 +169,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_events.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_events.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -183,7 +183,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_video.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_video.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -191,12 +191,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_pixels.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_pixels.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_rect.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_rect.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_pixels.h"
@@ -204,7 +204,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_surface.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_surface.h
 	"SDL_stdinc.h"
 	"SDL_pixels.h"
 	"SDL_rect.h"
@@ -213,11 +213,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_blendmode.h
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_keyboard.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_keycode.h"
@@ -225,27 +225,27 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_keycode.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_keycode.h
 	"SDL_stdinc.h"
 	"SDL_scancode.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_scancode.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_scancode.h
 	"SDL_stdinc.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_mouse.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_mouse.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_joystick.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_joystick.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_gamecontroller.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_rwops.h"
@@ -253,11 +253,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_quit.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_quit.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_gesture.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_gesture.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
@@ -265,60 +265,60 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_touch.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_touch.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_filesystem.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_haptic.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_haptic.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"SDL_joystick.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_hints.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_hints.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_loadso.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_loadso.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_log.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_log.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_messagebox.h
 	"SDL_stdinc.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_power.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_power.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_render.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_render.h
 	"SDL_stdinc.h"
 	"SDL_rect.h"
 	"SDL_video.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_system.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_system.h
 	"SDL_stdinc.h"
 	"SDL_keyboard.h"
 	"SDL_render.h"
@@ -326,18 +326,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_timer.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_timer.h
 	"SDL_stdinc.h"
 	"SDL_error.h"
 	"begin_code.h"
 	"close_code.h"
 
-1451764693 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_version.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_version.h
 	"SDL_stdinc.h"
 	"begin_code.h"
 	"close_code.h"
 
-1454362933 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
@@ -399,7 +399,7 @@
 	<SDL2/SDL_timer.h>
 	"network.h"
 
-1451807846 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_net.h
+1458736146 c:\users\djeck\documents\github\sixprend\sdl2\i686-w64-mingw32\include\sdl2\sdl_net.h
 	<stdint.h>
 	"SDL.h"
 	"SDL_endian.h"
@@ -984,4 +984,158 @@
 
 1458143689 source:c:\users\djeck\documents\github\sixprend\gui\animcard.c
 	"animCard.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\animcard.c
+	"animCard.h"
+
+1458758931 c:\users\djeck\documents\github\sixprend\src\game\animcard.h
+	"../Network/network.h"
+	"../GUI/card.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\network\network.h
+	<stdlib.h>
+	<stdio.h>
+	<SDL2/SDL.h>
+	<stdbool.h>
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\card.h
+	"../Game/inc.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\inc.h
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<math.h>
+	<stdbool.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	"login.h"
+	"menu.h"
+	"game.h"
+	"mode.h"
+	"stat.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\login.h
+	"inc.h"
+	"../GUI/picture.h"
+	"../GUI/text.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\picture.h
+	"../Game/inc.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\text.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\menu.h
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_events.h>
+	<string.h>
+	"../GUI/picture.h"
+	"../GUI/button.h"
+	"inc.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\button.h
+	"../Game/inc.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\game.h
+	"../GUI/card.h"
+	"animCard.h"
+	"../GUI/text.h"
+	"../GUI/picture.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\mode.h
+	"../GUI/button.h"
+	"../GUI/picture.h"
+	"../GUI/chatBox.h"
+	"../Network/client.h"
+	"../GUI/multiText.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\chatbox.h
+	"text.h"
+	"textBox.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\textbox.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_ttf.h>
+	<stdbool.h>
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\network\client.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	<SDL2/SDL_net.h>
+	<SDL2/SDL_thread.h>
+	<SDL2/SDL_timer.h>
+	"network.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\gui\multitext.h
+	"../Game/inc.h"
+	"text.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\stat.h
+	<SDL2/SDL_ttf.h>
+	<SDL2/SDL_events.h>
+	<string.h>
+	"login.h"
+	"../GUI/button.h"
+	"../GUI/text.h"
+	"../GUI/picture.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\game.c
+	"game.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\inc.c
+	"inc.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\init.c
+	"init.h"
+
+1458736120 c:\users\djeck\documents\github\sixprend\src\game\init.h
+	<SDL2/SDL_ttf.h>
+	"inc.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\login.c
+	"login.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\menu.c
+	"menu.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\mode.c
+	"mode.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\game\stat.c
+	"stat.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\button.c
+	"button.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\card.c
+	"card.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\chatbox.c
+	"../Game/inc.h"
+	"chatBox.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\multitext.c
+	"multiText.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\picture.c
+	"picture.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\text.c
+	"../Game/inc.h"
+	"text.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\gui\textbox.c
+	"../Game/inc.h"
+	"textBox.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\main.c
+	"Game/inc.h"
+	"Game/init.h"
+	"time.h"
+
+1458736120 source:c:\users\djeck\documents\github\sixprend\src\network\client.c
+	"client.h"
 
