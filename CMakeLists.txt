@@ -6,10 +6,10 @@ include_directories(${SDL2_INCLUDE_DIR})
 file(
         GLOB_RECURSE
         source_files
-        GUI/*
-	Network/*
-        Game/*
-        main.c
+        src/GUI/*
+		src/Network/*
+        src/Game/*
+        src/main.c
 )
 
 add_executable(sixquiprend ${source_files})
