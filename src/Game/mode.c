@@ -6,6 +6,7 @@ static Button choixBack;
 static Picture Background;
 static Button choixConnect;
 static Button choixIA;
+static Button choixHalt;
 
 static Text ipAsk;
 static TextBox ipServer;
@@ -47,12 +48,13 @@ void eventMode()
             inputTextBox(&salleName,&event);
             inputButton(&choixCreate,&event);
             inputButton(&choixList,&event);
+            inputButton(&choixHalt,&event);
         }
         else if(modeStep==READY)
         {
             inputButton(&choixStart,&event);
             inputChatBox(&chat,&event);
-	    inputButton(&choixIA,&event);
+	        inputButton(&choixIA,&event);
         }
 
         inputButton(&choixConnect,&event);
@@ -175,6 +177,11 @@ void CCIA()
    strcpy(chat.input.text,"! ai added");
    chat.update = true; // sera mis a jour par le thread principale
 }
+void CHalt()
+{
+    sendMsg("/shutdown");
+}
+
 void initModeRender()
 {
     char ipText[100];
@@ -185,6 +192,7 @@ void initModeRender()
     choixBack = createButton("Return",100,550,8);
     choixStart = createButton("Start game",100,450,8);
     choixIA = createButton("Add IA",200,300,8);
+    choixHalt = createButton("Shutdown",200,250,10);
 
     ipAsk = createText("Server IP",20,100,8);
     ipServer = createTextBox(ipText,150,100,15,30,15,true);
@@ -209,6 +217,7 @@ void initModeRender()
     choixBack.callback = &CMenu;
     choixStart.callback = &CGame;
     choixIA.callback = &CCIA;
+    choixHalt.callback = &CHalt;
     list.callback = &CList;
 
     renderinitialised=1;
@@ -235,10 +244,11 @@ void renderMode()
     {
         renderButton(&choixStart);
         renderChatBox(&chat);
-	renderButton(&choixIA);
+        renderButton(&choixIA);
     }
     else if(modeStep==SALLE)
     {
+        renderButton(&choixHalt);
         renderChatBox(&chat);
         renderMultiText(&list);
         renderText(&textCreate);
@@ -268,6 +278,7 @@ void freeModeRender()
     freeText(&ipAsk);
     freeText(&connecting);
     freeButton(&choixIA);
+    freeButton(&choixHalt);
     freeButton(&choixBack);
     freeButton(&choixStart);
     freePicture(&Background);

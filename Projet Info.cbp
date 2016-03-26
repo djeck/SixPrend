@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="Projet Info" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Projet Info" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -53,74 +53,6 @@
 			<Add library="SDL2/i686-w64-mingw32/lib/libSDL2.dll.a" />
 			<Add directory="SDL2/i686-w64-mingw32/lib" />
 		</Linker>
-		<Unit filename="GUI/animCard.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/animCard.h" />
-		<Unit filename="GUI/button.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/button.h" />
-		<Unit filename="GUI/card.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/card.h" />
-		<Unit filename="GUI/chatBox.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/chatBox.h" />
-		<Unit filename="GUI/multiText.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/multiText.h" />
-		<Unit filename="GUI/picture.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/picture.h" />
-		<Unit filename="GUI/text.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/text.h" />
-		<Unit filename="GUI/textBox.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="GUI/textBox.h" />
-		<Unit filename="Game/game.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/game.h" />
-		<Unit filename="Game/inc.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/inc.h" />
-		<Unit filename="Game/init.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/init.h" />
-		<Unit filename="Game/login.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/login.h" />
-		<Unit filename="Game/menu.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/menu.h" />
-		<Unit filename="Game/mode.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/mode.h" />
-		<Unit filename="Game/stat.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Game/stat.h" />
-		<Unit filename="Network/client.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Network/client.h" />
-		<Unit filename="Network/network.h" />
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="media/1.bmp" />
 		<Unit filename="media/10.bmp" />
 		<Unit filename="media/100.bmp" />
@@ -229,6 +161,76 @@
 		<Unit filename="media/background.bmp" />
 		<Unit filename="media/login.txt" />
 		<Unit filename="media/sixty.fon" />
+		<Unit filename="src/GUI/button.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/button.h" />
+		<Unit filename="src/GUI/card.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/card.h" />
+		<Unit filename="src/GUI/chatBox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/chatBox.h" />
+		<Unit filename="src/GUI/multiText.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/multiText.h" />
+		<Unit filename="src/GUI/picture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/picture.h" />
+		<Unit filename="src/GUI/text.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/text.h" />
+		<Unit filename="src/GUI/textBox.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GUI/textBox.h" />
+		<Unit filename="src/Game/animCard.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/animCard.h" />
+		<Unit filename="src/Game/client.hpp" />
+		<Unit filename="src/Game/game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/game.h" />
+		<Unit filename="src/Game/inc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/inc.h" />
+		<Unit filename="src/Game/init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/init.h" />
+		<Unit filename="src/Game/login.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/login.h" />
+		<Unit filename="src/Game/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/menu.h" />
+		<Unit filename="src/Game/mode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/mode.h" />
+		<Unit filename="src/Game/stat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/stat.h" />
+		<Unit filename="src/Network/client.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Network/client.h" />
+		<Unit filename="src/Network/network.h" />
+		<Unit filename="src/Network/network.hpp" />
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
