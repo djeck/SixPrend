@@ -23,6 +23,8 @@ void eventMenu()
         case SDL_KEYUP:
             break;
         }
+        if(event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+            printf("%d - %d\n",event.button.x,event.button.y);
     }
 }
 

@@ -71,9 +71,9 @@ void initStatRender()
         sprintf(vics,"%d",stats[j].nb_vic);
         sprintf(defs,"%d",stats[j].nb_def);
         j++;
-        testname[j-1]=createText(nom,50+j*80,150,9);
-        testvic[j-1]=createText(vics,50+j*80,210,9);
-        testdef[j-1]=createText(defs,50+j*80,270,9);
+        testname[j-1]=createText(nom,70+j*80,150,9);
+        testvic[j-1]=createText(vics,70+j*80,210,9);
+        testdef[j-1]=createText(defs,70+j*80,270,9);
     }
     while(j<tailleStats && tailleStats<MAXSTAT);
 

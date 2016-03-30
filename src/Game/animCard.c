@@ -11,7 +11,7 @@ static Card mvCard; // moving card
 
 static Card newTable[RANGEE][CPRANGEE]; // chaque carte de la prochaine table, 0 dès la fin d'une rangee
 
-static int cardSet[10]; // les dix cartes choisient par les joueurs
+static int cardSet[2][10]; // les dix cartes choisient par les joueurs, tableau en 0 pour les cartes, tableau en [1] pour le rangées on sont posséses les cartes
 
 static int curseur; // indicatif dans cardSet de la carte manipulée
 
@@ -31,6 +31,10 @@ static Uint32 timer;
 
 int xi,yi,xf,yf; // position initiales et finales de la carte
 
+bool isAnimating()
+{
+  return isMoving;
+}
 
 
 /**
@@ -129,7 +133,7 @@ static void resetTables()
      int min=0,i;
      for(i=0;i<10;i++)
      {
-         if(cardSet[i]>0 && (cardSet[min]<=0 || cardSet[i]<cardSet[min]))
+         if(cardSet[0][i]>0 && (cardSet[0][min]<=0 || cardSet[0][i]<cardSet[0][min]))
             min=i;
      }
      return min;
@@ -143,7 +147,10 @@ static void resetTables()
  {
      int i;
      for(i=0;i<10;i++)
-        cardSet[i]=0;
+     {
+        cardSet[0][i]=0;
+        cardSet[1][i]=0;
+     }
 
  }
  /**
@@ -268,9 +275,9 @@ static int finRg(int rg)
  static void upMvCard()
  {
     int val = getMinCardSet();
-    if(cardSet[val]>0 && cardSet[val]<=104) // valide
+    if(cardSet[0][val]>0 && cardSet[0][val]<=104) // valide
     {
-        mvCard.id = cardSet[val];
+        mvCard.id = cardSet[0][val];
         curseur = val;
         xi = posPlayer[curseur].x;
         yi = posPlayer[curseur].y;
@@ -299,11 +306,11 @@ static int finRg(int rg)
 	    mvCard.rect.y=yi;
 	    printf("upMvCard: going to %d/%d to %d/%d\n",xi,yi,xf,yf);
         timer = SDL_GetTicks();
-        cardSet[curseur]=0;
+        cardSet[0][curseur]=0;
     }
     else
     {
-        printf("upMvCard: moving stopped because getMinCardSet returned %d\n",cardSet[val]);
+        printf("upMvCard: moving stopped because getMinCardSet returned %d\n",cardSet[0][val]);
         isMoving=false;
         compareTable();
     }
@@ -392,8 +399,9 @@ void updateAnimCard(DataGame* data)
                 newTable[i][z].id=data->table[i][z];
         for(i=0;i<10;i++) // cardSet <- data.tour
     	{
-            cardSet[i] = data->turn[i];
-	        printf("%d ",cardSet[i]);
+            cardSet[0][i] = data->turn[i];
+            cardSet[1][i] = data->place[i]; // rangée où doit être posée la carte
+	        printf("%d -> %dieme rangee\n",cardSet[0][i],cardSet[1][i]+1);
 	    }
 	printf("\n");
         isMoving = true;

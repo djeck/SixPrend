@@ -36,6 +36,12 @@ void renderAnimCard();
  * \brief libére les ressources chargées dans initAnimCard
  */
 void destroyAnimCard();
+/**
+ * \fn bool isAnimating()
+ * \brief retourn si les animatons sont en cours
+ * \return true si les animations sont en cours
+ */
+bool isAnimating();
 
 #endif
 

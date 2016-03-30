@@ -20,6 +20,7 @@ static void (*mCGame)(DataGame*);   /* callback pour les données de jeu */
 static SDL_Thread *threadRecept; // thread de réception
 
 static SDL_mutex *bufferLock = NULL;
+bool isQuitting;
 /*
  * fait patienter le thread de réception jusqu'à ce que le thread de réception
  * jusqu'à ce que le thread principale puisse traiter les retours (callback valide)
@@ -34,6 +35,7 @@ void initialisationReseau(char *strip,void (*backData)(Data*),void (*backList)(D
     mCData = backData;
     mCList= backList;
     mCGame= backGame;
+    isQuitting=false;
     printf("initialisationReseau: test\n");
     if(isNetInitialised())
     {
@@ -242,6 +244,10 @@ void choice(int choice)
 }
 void sendQuit()
 {
+    if(!isQuitting)
+        isQuitting=true;
+    else
+        return;
     Data data;
     if(networkinitialised!=1)
         return;

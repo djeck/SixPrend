@@ -136,8 +136,8 @@ void eventGame()
         if(endGame)
             inputButton(&playAgain,&event);
         inputButton(&choixBack,&event);
-        if(haveToChoose)
-            for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++) // on calcule les positons aux quelles on affichera chaque cartes de la main
+        if(haveToChoose && !isAnimating())
+            for(i=0; i<HAND && poignee[i].id>0 && poignee[i].id<=104; i++)
                 eventCard(&event,&poignee[i],&CCard);
         switch(event.type)
         {
